@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jeeplus.modules.app.dao.ClApiInfoDao">
+
+	<resultMap id="ClApiInfoResultMap" type="ClApiInfo">
+		<result property="APIINF_SEQ" column="APIINF_SEQ" />
+		<result property="USR_CDE" column="USR_CDE" />
+		<result property="USR_TEL" column="USR_TEL" />
+		<result property="INTERFACE_NAME" column="INTERFACE_NAME" />
+		<result property="SERVICE_NAME" column="SERVICE_NAME" />
+		<result property="INVOKE_DT" column="INVOKE_DT" />
+		<result property="TIME_SPAN" column="TIME_SPAN" />
+		<result property="PARAMS" column="PARAMS" />
+		<result property="STATUS" column="STATUS" />
+		<result property="RESULT" column="RESULT" />
+	</resultMap>
+	
+	
+	<resultMap id="ClLiveFailCntMap" type="ClLiveFailCnt">
+		<result property="RESULT" column="RESULT" />
+		<result property="CNT" column="CNT" />
+	</resultMap>
+	
+	<sql id="ClApiInfoColumns">
+		a.APIINF_SEQ,
+		a.USR_CDE,
+		a.USR_TEL,
+		a.INTERFACE_NAME,
+		a.SERVICE_NAME,
+		a.INVOKE_DT,
+		a.TIME_SPAN,
+		a.PARAMS,
+		a.STATUS,
+		a.RESULT
+	</sql>
+
+	
+	<!-- 根据用户标识获得用户 对象-->
+	<select id="getByUsrCode" resultMap="ClApiInfoResultMap" parameterType="java.lang.String">
+		SELECT
+		<include refid="ClApiInfoColumns" />
+		FROM CL_APIINFO a
+		WHERE a.USR_CDE = #{USR_CDE}
+	</select>
+	
+	<select id="cntByUsrApiNameDT" resultType="int" parameterType="java.util.HashMap">
+		SELECT
+		count(1)
+		FROM CL_APIINFO a
+		WHERE a.USR_CDE = #{USR_CDE} and a.SERVICE_NAME = #{SERVICE_NAME} and a.INVOKE_DT BETWEEN #{START_DT} and #{END_DT} <!-- and a.STATUS = 'SUCCESS' -->
+	</select>
+	
+	<select id="cntByTelApiNameDT" resultType="int" parameterType="java.util.HashMap">
+		SELECT
+		count(1)
+		FROM CL_APIINFO a
+		WHERE a.USR_TEL = #{USR_TEL} and a.SERVICE_NAME = #{SERVICE_NAME} and a.INVOKE_DT BETWEEN #{START_DT} and #{END_DT} <!-- and a.STATUS = 'SUCCESS' -->
+	</select>
+	
+	<select id="cntByUsrApiName" resultType="int" parameterType="java.util.HashMap">
+		SELECT
+		count(1)
+		FROM CL_APIINFO a
+		WHERE a.USR_CDE = #{USR_CDE} and a.SERVICE_NAME = #{SERVICE_NAME} <!-- and a.STATUS = 'SUCCESS'  -->
+	</select>
+	
+	<select id="cntByTelApiName" resultType="int" parameterType="java.util.HashMap">
+		SELECT
+		count(1)
+		FROM CL_APIINFO a
+		WHERE a.USR_TEL = #{USR_TEL} and a.SERVICE_NAME = #{SERVICE_NAME} <!-- and a.STATUS = 'SUCCESS' -->
+	</select>
+	
+	<select id="getLiveFieldTypeAndCnt" resultMap="ClLiveFailCntMap" parameterType="java.lang.String">
+		select RESULT,COUNT(RESULT) as CNT from CL_APIINFO 
+		where SERVICE_NAME = 'LIVEVERIFY' and USR_CDE = #{USR_CDE} and `STATUS` = 'FAIL' and RESULT IN ('id_attacked','mask','screen_replay','synthetic_face','face_replaced','not_self')
+	</select>
+	
+	<!-- 根据用户标识获得用户 对象-->
+	<select id="findDxCompensateFail" resultMap="ClApiInfoResultMap">
+		SELECT
+		<include refid="ClApiInfoColumns" />
+		FROM CL_APIINFO a
+		WHERE a.SERVICE_NAME = 'transToDxCompensate' and a.STATUS = 'fail'
+	</select>
+	
+
+	<!-- 插入用户 -->
+	<insert id="insert">
+		INSERT INTO CL_APIINFO(
+		USR_CDE,
+		USR_TEL,
+		INTERFACE_NAME,
+		SERVICE_NAME,
+		INVOKE_DT,
+		TIME_SPAN,
+		PARAMS,
+		STATUS,
+		RESULT
+		) VALUES (
+		#{USR_CDE},
+		#{USR_TEL},
+		#{INTERFACE_NAME},
+		#{SERVICE_NAME},
+		#{INVOKE_DT},
+		#{TIME_SPAN},
+		#{PARAMS},
+		#{STATUS},
+		#{RESULT}
+		)
+	</insert>
+
+
+</mapper>

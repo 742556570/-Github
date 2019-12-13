@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jeeplus.modules.app.dao.ClUsrLmtamtDao">
+  <resultMap id="BaseResultMap" type="com.jeeplus.modules.app.entity.ClUsrLmtamt">
+    <id column="USR_CDE" jdbcType="VARCHAR" property="usrCde" />
+    <result column="CREDIT_AMOUNT" jdbcType="DECIMAL" property="creditAmount" />
+    <result column="USED_AMOUNT" jdbcType="DECIMAL" property="usedAmount" />
+    <result column="REPAY_AMOUNT" jdbcType="DECIMAL" property="repayAmount" />
+    <result column="MDF_DT" jdbcType="TIMESTAMP" property="mdfDt" />
+    <result column="ADM_USR" jdbcType="VARCHAR" property="admUsr" />
+    <result column="ADM_DETAIL" jdbcType="VARCHAR" property="admDetail" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    USR_CDE, CREDIT_AMOUNT, USED_AMOUNT, REPAY_AMOUNT, MDF_DT, ADM_USR, ADM_DETAIL
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from CL_USR_LMTAMT
+    where USR_CDE = #{usrCde,jdbcType=VARCHAR}
+  </select>
+  
+  
+  
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from CL_USR_LMTAMT
+    where USR_CDE = #{usrCde,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.jeeplus.modules.app.entity.ClUsrLmtamt">
+    insert into CL_USR_LMTAMT (USR_CDE, CREDIT_AMOUNT, USED_AMOUNT, 
+      REPAY_AMOUNT, MDF_DT, ADM_USR, 
+      ADM_DETAIL)
+    values (#{usrCde,jdbcType=VARCHAR}, #{creditAmount,jdbcType=DECIMAL}, #{usedAmount,jdbcType=DECIMAL}, 
+      #{repayAmount,jdbcType=DECIMAL}, #{mdfDt,jdbcType=TIMESTAMP}, #{admUsr,jdbcType=VARCHAR}, 
+      #{admDetail,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.jeeplus.modules.app.entity.ClUsrLmtamt">
+    insert into CL_USR_LMTAMT
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="usrCde != null">
+        USR_CDE,
+      </if>
+      <if test="creditAmount != null">
+        CREDIT_AMOUNT,
+      </if>
+      <if test="usedAmount != null">
+        USED_AMOUNT,
+      </if>
+      <if test="repayAmount != null">
+        REPAY_AMOUNT,
+      </if>
+      <if test="mdfDt != null">
+        MDF_DT,
+      </if>
+      <if test="admUsr != null">
+        ADM_USR,
+      </if>
+      <if test="admDetail != null">
+        ADM_DETAIL,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="usrCde != null">
+        #{usrCde,jdbcType=VARCHAR},
+      </if>
+      <if test="creditAmount != null">
+        #{creditAmount,jdbcType=DECIMAL},
+      </if>
+      <if test="usedAmount != null">
+        #{usedAmount,jdbcType=DECIMAL},
+      </if>
+      <if test="repayAmount != null">
+        #{repayAmount,jdbcType=DECIMAL},
+      </if>
+      <if test="mdfDt != null">
+        #{mdfDt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="admUsr != null">
+        #{admUsr,jdbcType=VARCHAR},
+      </if>
+      <if test="admDetail != null">
+        #{admDetail,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.jeeplus.modules.app.entity.ClUsrLmtamt">
+    update CL_USR_LMTAMT
+    <set>
+      <if test="creditAmount != null">
+        CREDIT_AMOUNT = #{creditAmount,jdbcType=DECIMAL},
+      </if>
+      <if test="usedAmount != null">
+        USED_AMOUNT = #{usedAmount,jdbcType=DECIMAL},
+      </if>
+      <if test="repayAmount != null">
+        REPAY_AMOUNT = #{repayAmount,jdbcType=DECIMAL},
+      </if>
+      <if test="mdfDt != null">
+        MDF_DT = #{mdfDt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="admUsr != null">
+        ADM_USR = #{admUsr,jdbcType=VARCHAR},
+      </if>
+      <if test="admDetail != null">
+        ADM_DETAIL = #{admDetail,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where USR_CDE = #{usrCde,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.jeeplus.modules.app.entity.ClUsrLmtamt">
+    update CL_USR_LMTAMT
+    set CREDIT_AMOUNT = #{creditAmount,jdbcType=DECIMAL},
+      USED_AMOUNT = #{usedAmount,jdbcType=DECIMAL},
+      REPAY_AMOUNT = #{repayAmount,jdbcType=DECIMAL},
+      MDF_DT = #{mdfDt,jdbcType=TIMESTAMP},
+      ADM_USR = #{admUsr,jdbcType=VARCHAR},
+      ADM_DETAIL = #{admDetail,jdbcType=VARCHAR}
+    where USR_CDE = #{usrCde,jdbcType=VARCHAR}
+  </update>
+  
+  
+</mapper>

@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jeeplus.modules.app.dao.ClPrdInfoDao">
+
+	<resultMap id="ClPrdInfoResultMap" type="ClPrdInfo">
+		<result property="PRD_SEQ" column="PRD_SEQ" />
+		<result property="PRD_CDE" column="PRD_CDE" />
+		<result property="PRD_NAME" column="PRD_NAME" />
+		<result property="PRD_MEMO" column="PRD_MEMO" />
+		<result property="PRD_TYPE" column="PRD_TYPE" />
+		<result property="MIN_LOAN_AMT" column="MIN_LOAN_AMT" />
+		<result property="MAX_LOAN_AMT" column="MAX_LOAN_AMT" />
+		<result property="PAY_TERM" column="PAY_TERM" />
+		<result property="REPAY_MODE" column="REPAY_MODE" />
+		<result property="GL_RAT_BASE" column="GL_RAT_BASE" />
+		<result property="GL_DUE_DAY_OPT" column="GL_DUE_DAY_OPT" />
+		<result property="INT_RAT" column="INT_RAT" />
+		<result property="INT_RAT_ED" column="INT_RAT_ED" />
+		<result property="GL_OD_RATE" column="GL_OD_RATE" />
+		<result property="GL_OD_MIN_AMT" column="GL_OD_MIN_AMT" />
+		<result property="GL_OD_COMM_PART" column="GL_OD_COMM_PART" />
+		<result property="PREMIUM_RATE" column="PREMIUM_RATE" />
+		<result property="POLICY_AMT" column="POLICY_AMT" />
+		<result property="OVER_FEE_AMT" column="OVER_FEE_AMT" />
+		<result property="FEE_AMT" column="FEE_AMT" />
+		<result property="CAP_CDE" column="CAP_CDE" />
+		<result property="CRT_DT" column="CRT_DT" />
+		<result property="CRT_USR" column="CRT_USR" />
+		<result property="MDF_DT" column="MDF_DT" />
+		<result property="MDF_USR" column="MDF_USR" />
+	</resultMap>
+	
+	<sql id="ClPrdInfoColumns">
+		a.PRD_SEQ,
+		a.PRD_CDE,
+		a.PRD_NAME,
+		a.PRD_MEMO,
+		a.PRD_TYPE,
+		a.MIN_LOAN_AMT,
+		a.MAX_LOAN_AMT,
+		a.PAY_TERM,
+		a.REPAY_MODE,
+		a.GL_RAT_BASE,
+		a.GL_DUE_DAY_OPT,
+		a.INT_RAT,
+		a.INT_RAT_ED,
+		a.GL_OD_RATE,
+		a.GL_OD_MIN_AMT,
+		a.GL_OD_COMM_PART,
+		a.PREMIUM_RATE,
+		a.POLICY_AMT,
+		a.OVER_FEE_AMT,
+		a.FEE_AMT,
+		a.CAP_CDE,
+		a.CRT_DT,
+		a.CRT_USR,
+		a.MDF_DT,
+		a.MDF_USR
+	</sql>
+
+
+	<!-- 根据用户标识获得用户 对象-->
+	<select id="getAllPrdInfo" resultMap="ClPrdInfoResultMap" >
+		SELECT
+		<include refid="ClPrdInfoColumns" />
+		FROM CL_PRD_INFO a
+	</select>
+
+
+	<!-- 根据手机号获得用户 -->
+	<select id="getByPrdSeq" resultMap="ClPrdInfoResultMap" parameterType="java.lang.Integer">
+		SELECT
+		<include refid="ClPrdInfoColumns" />
+		FROM CL_PRD_INFO a
+		WHERE a.PRD_SEQ = #{PRD_SEQ}
+	</select>
+	
+	<!-- 根据手机号获得用户 -->
+	<select id="getByPrdCde" resultMap="ClPrdInfoResultMap" parameterType="java.lang.String">
+		SELECT
+		<include refid="ClPrdInfoColumns" />
+		FROM CL_PRD_INFO a
+		WHERE a.PRD_CDE = #{PRD_CDE}
+	</select>
+
+
+
+	<!-- 插入用户 -->
+	<insert id="insert">
+		INSERT INTO CL_PRD_INFO(
+		PRD_SEQ,
+		PRD_CDE,
+		PRD_NAME,
+		PRD_MEMO,
+		PRD_TYPE,
+		MIN_LOAN_AMT,
+		MAX_LOAN_AMT,
+		PAY_TERM,
+		REPAY_MODE,
+		GL_RAT_BASE,
+		GL_DUE_DAY_OPT,
+		INT_RAT,
+		INT_RAT_ED,
+		GL_OD_RATE,
+		GL_OD_MIN_AMT,
+		GL_OD_COMM_PART,
+		PREMIUM_RATE,
+		POLICY_AMT,
+		OVER_FEE_AMT,
+		FEE_AMT,
+		CAP_CDE,
+		CRT_DT,
+		CRT_USR,
+		MDF_DT,
+		MDF_USR
+		) VALUES (
+		#{PRD_SEQ},
+		#{PRD_CDE},
+		#{PRD_NAME},
+		#{PRD_MEMO},
+		#{PRD_TYPE},
+		#{MIN_LOAN_AMT},
+		#{MAX_LOAN_AMT},
+		#{PAY_TERM},
+		#{REPAY_MODE},
+		#{GL_RAT_BASE},
+		#{GL_DUE_DAY_OPT},
+		#{INT_RAT},
+		#{INT_RAT_ED},
+		#{GL_OD_RATE},
+		#{GL_OD_MIN_AMT},
+		#{GL_OD_COMM_PART},
+		#{PREMIUM_RATE},
+		#{POLICY_AMT},
+		#{OVER_FEE_AMT},
+		#{FEE_AMT},
+		#{CAP_CDE},
+		#{CRT_DT},
+		#{CRT_USR},
+		#{MDF_DT},
+		#{MDF_USR}
+		)
+	</insert>
+</mapper>

@@ -1,0 +1,273 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration scan="true" scanPeriod="60 second" debug="false">
+	<property resource="config.properties" />
+ 	<property name="LOG_HOME" value="${log.home}" />
+    <!-- 控制台日志 -->
+    <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+
+		<encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+			<charset>UTF-8</charset>
+			<immediateFlush>true</immediateFlush>
+			<pattern>[%level][%d{yyyy-MM-dd HH:mm:ss.SSS}][%thread][%logger{35}] - %msg%n</pattern>
+		</encoder>
+    </appender>
+
+    <!-- 文件日志 -->  
+    <appender name="SQLDEBUG" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <File>${LOG_HOME}/SQL_DEBUG.log</File>
+        <filter class="ch.qos.logback.classic.filter.LevelFilter">
+            <!-- LevelFilter: 级别过滤器，根据日志级别进行过滤 -->
+            <level>DEBUG</level>
+            <onMatch>ACCEPT</onMatch>
+            <onMismatch>DENY</onMismatch>
+        </filter>
+
+		<encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+			<charset>UTF-8</charset>
+			<immediateFlush>true</immediateFlush>
+			<pattern>[%level][%d{yyyy-MM-dd HH:mm:ss.SSS}][%thread][%logger{35}] - %msg%n</pattern>
+		</encoder>
+
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>${LOG_HOME}/SQL_DEBUG_%d{yyyy-MM-dd}.log</fileNamePattern>
+            <maxHistory>90</maxHistory>
+            <TimeBasedFileNamingAndTriggeringPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
+                <maxFileSize>100MB</maxFileSize>
+            </TimeBasedFileNamingAndTriggeringPolicy>
+        </rollingPolicy>
+    </appender >
+
+    <!-- <appender name="ASINFO" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <File>${LOG_HOME}/AS_INFO.log</File>
+        <filter class="ch.qos.logback.classic.filter.ThresholdFilter">
+            <level>INFO</level>
+        </filter>
+		<encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+			<charset>UTF-8</charset>
+			<immediateFlush>true</immediateFlush>
+			<pattern>%msg%n</pattern>
+		</encoder>
+
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>${LOG_HOME}/AS_INFO_%d{yyyy-MM-dd}.log</fileNamePattern>
+            <maxHistory>90</maxHistory>
+            <TimeBasedFileNamingAndTriggeringPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
+                <maxFileSize>100MB</maxFileSize>
+            </TimeBasedFileNamingAndTriggeringPolicy>
+        </rollingPolicy>
+    </appender > -->
+    
+    <appender name="BIZINFO" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <File>${LOG_HOME}/BIZ_INFO.log</File>
+
+        <!-- ThresholdFilter:临界值过滤器，过滤掉 TRACE 和 DEBUG 级别的日志 -->
+        <filter class="ch.qos.logback.classic.filter.ThresholdFilter">
+            <level>INFO</level>
+        </filter>
+		<encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+			<charset>UTF-8</charset>
+			<immediateFlush>true</immediateFlush>
+			<pattern>%msg%n</pattern>
+		</encoder>
+
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <!-- 每天生成一个日志文件，保存30天的日志文件
+            - 如果隔一段时间没有输出日志，前面过期的日志不会被删除，只有再重新打印日志的时候，会触发删除过期日志的操作。
+            -->
+            <fileNamePattern>${LOG_HOME}/BIZ_INFO_%d{yyyy-MM-dd}.log</fileNamePattern>
+            <maxHistory>90</maxHistory>
+            <TimeBasedFileNamingAndTriggeringPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
+                <maxFileSize>100MB</maxFileSize>
+            </TimeBasedFileNamingAndTriggeringPolicy>
+        </rollingPolicy>
+    </appender >
+   <appender name="THIRDNFO" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <File>${LOG_HOME}/THIRD_INFO.log</File>
+
+        <!-- ThresholdFilter:临界值过滤器，过滤掉 TRACE 和 DEBUG 级别的日志 -->
+        <filter class="ch.qos.logback.classic.filter.ThresholdFilter">
+            <level>INFO</level>
+        </filter>
+		<encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+			<charset>UTF-8</charset>
+			<immediateFlush>true</immediateFlush>
+			<pattern>%msg%n</pattern>
+		</encoder>
+
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <!-- 每天生成一个日志文件，保存30天的日志文件
+            - 如果隔一段时间没有输出日志，前面过期的日志不会被删除，只有再重新打印日志的时候，会触发删除过期日志的操作。
+            -->
+            <fileNamePattern>${LOG_HOME}/THIRD_INFO_%d{yyyy-MM-dd}.log</fileNamePattern>
+            <maxHistory>90</maxHistory>
+            <TimeBasedFileNamingAndTriggeringPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
+                <maxFileSize>100MB</maxFileSize>
+            </TimeBasedFileNamingAndTriggeringPolicy>
+        </rollingPolicy>
+    </appender >
+
+    <appender name="ERROR1" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>error.log</file>
+        <encoder>
+            <Pattern>[%level][%d{yyyy-MM-dd HH:mm:ss.SSS}][%thread][%logger{35}] - %msg%n</Pattern>
+            <charset>UTF-8</charset>
+        </encoder>
+        <rollingPolicy class="ch.qos.logback.core.rolling.FixedWindowRollingPolicy">
+            <fileNamePattern>error.%d{yyyy-MM}(%i).log.zip</fileNamePattern>
+            <minIndex>1</minIndex>
+            <maxIndex>3</maxIndex>
+            <timeBasedFileNamingAndTriggeringPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
+                <maxFileSize>100MB</maxFileSize>
+            </timeBasedFileNamingAndTriggeringPolicy>
+            <maxHistory>30</maxHistory>
+        </rollingPolicy>
+    </appender>
+
+<!-- 	<appender name="ERROR" class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<file>D:/logs/APPSERVER_ERROR.log</file>
+		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+			<maxHistory>30</maxHistory>
+			<fileNamePattern>D:/logs//APPSERVER_ERROR_%d{yyyy-MM-dd}_%i.zip
+			</fileNamePattern>
+			<timeBasedFileNamingAndTriggeringPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
+				<maxFileSize>200MB</maxFileSize>
+			</timeBasedFileNamingAndTriggeringPolicy>
+			<maxHistory>30</maxHistory>
+		</rollingPolicy>
+		<encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+			<charset>UTF-8</charset>
+			<immediateFlush>true</immediateFlush>
+			<pattern>[%level][%d{yyyy-MM-dd HH:mm:ss.SSS}][%thread][%logger{35}] - %msg%n</pattern>
+		</encoder>
+		<filter class="ch.qos.logback.classic.filter.LevelFilter">只打印ERROR日志
+			<level>ERROR</level>
+			<onMatch>ACCEPT</onMatch>
+			<onMismatch>DENY</onMismatch>
+		</filter>
+	</appender> -->
+	
+	<!-- <appender name="bizKafkaAppender" class="com.github.danielwegener.logback.kafka.KafkaAppender">
+		<encoder
+			class="com.github.danielwegener.logback.kafka.encoding.PatternLayoutKafkaMessageEncoder">
+			<layout class="ch.qos.logback.classic.PatternLayout">
+				<pattern>%msg</pattern>
+			</layout>
+		</encoder>
+		<topic>app.bizlog</topic>
+		<keyingStrategy
+			class="com.github.danielwegener.logback.kafka.keying.HostNameKeyingStrategy" />
+		<deliveryStrategy
+			class="com.github.danielwegener.logback.kafka.delivery.BlockingDeliveryStrategy">
+			<timeout>2000</timeout>
+		</deliveryStrategy>
+		<producerConfig>bootstrap.servers=172.17.9.9:6667,172.17.9.10:6667,172.17.9.11:6667</producerConfig>
+		
+        <producerConfig>buffer.memory=5242880</producerConfig>
+		<producerConfig>request.timeout.ms=2000</producerConfig>
+		<producerConfig>max.block.ms=2000</producerConfig>
+		<producerConfig>compression.type=none</producerConfig>
+		<producerConfig>client.id=${HOSTNAME}-${CONTEXT_NAME}-logback-bizlog</producerConfig>
+		
+		<appender-ref ref="BIZINFO"/>
+	</appender>
+	
+	<appender name="thirdKafkaAppender" class="com.github.danielwegener.logback.kafka.KafkaAppender">
+		<encoder
+			class="com.github.danielwegener.logback.kafka.encoding.PatternLayoutKafkaMessageEncoder">
+			<layout class="ch.qos.logback.classic.PatternLayout">
+				<pattern>%msg</pattern>
+			</layout>
+		</encoder>
+		<topic>app.thirdapilog</topic>
+		<keyingStrategy
+			class="com.github.danielwegener.logback.kafka.keying.HostNameKeyingStrategy" />
+		<deliveryStrategy
+			class="com.github.danielwegener.logback.kafka.delivery.BlockingDeliveryStrategy">
+			<timeout>2000</timeout>
+		</deliveryStrategy>
+		<producerConfig>bootstrap.servers=172.17.9.9:6667,172.17.9.10:6667,172.17.9.11:6667</producerConfig>
+		
+        <producerConfig>acks=0</producerConfig>
+        <producerConfig>buffer.memory=5242880</producerConfig>
+        <producerConfig>linger.ms=1000</producerConfig>
+		<producerConfig>request.timeout.ms=2000</producerConfig>
+		<producerConfig>max.block.ms=2000</producerConfig>
+		<producerConfig>compression.type=none</producerConfig>
+		<producerConfig>client.id=${HOSTNAME}-${CONTEXT_NAME}-logback-thirdapilog</producerConfig>
+		
+		<appender-ref ref="THIRDNFO"/>
+	</appender>
+	
+		<appender name="asKafkaAppender" class="com.github.danielwegener.logback.kafka.KafkaAppender">
+		<encoder
+			class="com.github.danielwegener.logback.kafka.encoding.PatternLayoutKafkaMessageEncoder">
+			<layout class="ch.qos.logback.classic.PatternLayout">
+				<pattern>%msg</pattern>
+			</layout>
+		</encoder>
+		<topic>app.asapilog</topic>
+		<keyingStrategy
+			class="com.github.danielwegener.logback.kafka.keying.HostNameKeyingStrategy" />
+		<deliveryStrategy
+			class="com.github.danielwegener.logback.kafka.delivery.BlockingDeliveryStrategy">
+			<timeout>2000</timeout>
+		</deliveryStrategy>
+        
+		<producerConfig>bootstrap.servers=172.17.9.9:6667,172.17.9.10:6667,172.17.9.11:6667</producerConfig>
+		<producerConfig>buffer.memory=5242880</producerConfig>
+		<producerConfig>request.timeout.ms=2000</producerConfig>
+		<producerConfig>max.block.ms=2000</producerConfig>
+		<producerConfig>compression.type=none</producerConfig>
+		<producerConfig>client.id=${HOSTNAME}-${CONTEXT_NAME}-logback-asapilog</producerConfig>
+        
+		<appender-ref ref="ASINFO"/>
+	</appender> -->
+	
+ 	<logger name="ch.qos.logback" />	
+ 	
+ 	<!-- log to kafka appender -->
+   <!--  <logger name="com.jeeplus.modules.sys.monitor.BizMonitorLogger" level="INFO" additivity="false">
+        <appender-ref ref="bizKafkaAppender"/>
+    </logger>
+    <logger name="com.jeeplus.modules.app.amrsft.AmrsftApi" level="INFO" additivity="false">
+        <appender-ref ref="asKafkaAppender"/>
+    </logger>  
+    
+    <logger name="com.jeeplus.modules.app.thrdapi.dahan.SmsApi" level="INFO" additivity="false">
+        <appender-ref ref="thirdKafkaAppender"/>
+    </logger>
+    <logger name="com.jeeplus.modules.app.thrdapi.geo.GeoApi" level="INFO" additivity="false">
+        <appender-ref ref="thirdKafkaAppender"/>
+    </logger>
+    <logger name="com.jeeplus.modules.app.thrdapi.lianlianpay.LianlianPayApi" level="INFO" additivity="false">
+        <appender-ref ref="thirdKafkaAppender"/>
+    </logger>
+    <logger name="com.jeeplus.modules.app.thrdapi.msyd.MsydApi" level="INFO" additivity="false">
+        <appender-ref ref="thirdKafkaAppender"/>
+    </logger> 
+    <logger name="com.jeeplus.modules.app.thrdapi.ocr.cloudwalk.CwApi" level="INFO" additivity="false">
+        <appender-ref ref="thirdKafkaAppender"/>
+    </logger>    -->             
+
+    
+	<logger name="dao" level="DEBUG" additivity="false">
+         <appender-ref ref="SQLDEBUG" />
+    </logger>
+
+	
+    <logger name="jdbc.sqltiming" level="DEBUG"/>
+    <logger name="com.ibatis" level="DEBUG" />
+    <logger name="com.ibatis.common.jdbc.SimpleDataSource" level="DEBUG" />
+    <logger name="com.ibatis.common.jdbc.ScriptRunner" level="DEBUG" />
+    <logger name="com.ibatis.sqlmap.engine.impl.SqlMapClientDelegate" level="DEBUG" />
+    <logger name="java.sql.Connection" level="DEBUG" />
+    <logger name="java.sql.Statement" level="DEBUG" />
+    <logger name="java.sql.PreparedStatement" level="DEBUG" />
+    <logger name="java.sql.ResultSet" level="DEBUG" />
+    
+    <root level="INFO">
+        <appender-ref ref="STDOUT"/>
+        <appender-ref ref="com.ibatis" />
+        <appender-ref ref="ERROR"/>
+    </root>
+</configuration>

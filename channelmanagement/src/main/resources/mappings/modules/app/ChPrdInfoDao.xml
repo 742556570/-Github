@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jeeplus.modules.app.dao.ChPrdInfoDao">
+
+	<resultMap id="ChPrdInfoResultMap" type="ChPrdInfo">
+		<result property="PRD_SEQ" column="PRD_SEQ" />
+		<result property="PRD_CDE" column="PRD_CDE" />
+		<result property="PRD_NAME" column="PRD_NAME" />
+		<result property="PRD_MEMO" column="PRD_MEMO" />
+		<result property="PRD_CDE_SUP" column="PRD_CDE_SUP" />
+		<result property="PRD_NAME_SUP" column="PRD_NAME_SUP" />
+		<result property="MIN_LOAN_AMT" column="MIN_LOAN_AMT" />
+		<result property="MAX_LOAN_AMT" column="MAX_LOAN_AMT" />
+		<result property="PAY_TERM" column="PAY_TERM" />
+	</resultMap>
+	
+	<sql id="ChPrdInfoColumns">
+		a.PRD_SEQ,
+		a.PRD_CDE,
+		a.PRD_NAME,
+		a.PRD_MEMO,
+		a.PRD_CDE_SUP,
+		a.PRD_NAME_SUP,
+		a.MIN_LOAN_AMT,
+		a.MAX_LOAN_AMT,
+		a.PAY_TERM
+	</sql>
+
+
+	<!-- 根据用户标识获得用户 对象-->
+	<select id="getAllPrdInfo" resultMap="ChPrdInfoResultMap" >
+		SELECT
+		<include refid="ChPrdInfoColumns" />
+		FROM CH_PRD_INFO a
+	</select>
+
+
+	
+
+	<!-- 插入用户 -->
+	<insert id="insert">
+		INSERT INTO CH_PRD_INFO(
+		PRD_SEQ,
+		PRD_CDE,
+		PRD_NAME,
+		PRD_MEMO,
+		PRD_CDE_SUP,
+		PRD_NAME_SUP,
+		MIN_LOAN_AMT,
+		MAX_LOAN_AMT,
+		PAY_TERM
+		) VALUES (
+		#{PRD_SEQ},
+		#{PRD_CDE},
+		#{PRD_NAME},
+		#{PRD_MEMO},
+		#{PRD_CDE_SUP},
+		#{PRD_NAME_SUP},
+		#{MIN_LOAN_AMT},
+		#{MAX_LOAN_AMT},
+		#{PAY_TERM}
+		)
+	</insert>
+</mapper>

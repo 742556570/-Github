@@ -1,0 +1,30 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:cache="http://www.springframework.org/schema/cache"
+	xmlns:p="http://www.springframework.org/schema/p"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans 
+http://www.springframework.org/schema/beans/spring-beans.xsd
+http://www.springframework.org/schema/cache
+http://www.springframework.org/schema/cache/spring-cache.xsd"
+	default-destroy-method="close" default-lazy-init="false">
+	<bean name="genericObjectPoolConfig" class="org.apache.commons.pool2.impl.GenericObjectPoolConfig">
+		<property name="maxWaitMillis" value="-1" />
+		<property name="minIdle" value="0" />
+		<property name="maxIdle" value="300" /> <!-- 最大能够保持idel状态的对象数  -->
+		<property name="maxTotal" value="10000" /> <!-- 最大分配的对象数 -->
+	</bean>
+	<bean id="jedisCluster" name="jedisCluster" class="com.jeeplus.common.utils.JedisClusterFactory">
+		<property name="connectionTimeout" value="3000" />
+		<property name="soTimeout" value="3000" />
+		<property name="maxRedirections" value="5" />
+		<property name="genericObjectPoolConfig" ref="genericObjectPoolConfig" />
+		<property name="jedisClusterNodes">
+			<set>
+				<value>172.17.9.15:7000</value>
+				<value>172.17.9.16:7000</value>
+				<value>172.17.9.17:7000</value>
+			</set>
+		</property>
+	</bean>
+
+</beans>

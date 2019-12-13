@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>帮助中心</title>
+    <meta content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0,user-scalable=no" name="viewport" />
+    <meta name="format-detection" content="telephone=no"/>
+    <meta name="apple-mobile-web-app-status-bar-style"  />
+	<link rel="stylesheet" type="text/css" href="css/common.css">
+	<script src="js/jquery.min.js"></script>
+      <script src="js/jQueryRotate3.js"></script>
+
+	<script type="text/javascript">
+		var json = "[{\"title\":\"关于阳光保呗\",\"question\":\"\",\"answer\":\"\"},{\"title\":\"\",\"question\":\"“阳光保呗”是什么？\",\"answer\":\"“阳光保呗”是阳光产险提供的一款线上个人借款信用保证保险产品。符合阳光产险核保标准的用户，通过阳光保呗APP在线申请，可获得最高20万元的承保额度。\"},{\"title\":\"\",\"question\":\"“阳光保呗”提供现金吗？\",\"answer\":\"是的，您在“阳光保呗”APP中申请的个人消费贷款，将以现金的形式发放到您已绑定银行卡中。您通过“阳光保呗”投保的个人消费贷款，金融机构将贷款以现金形式发放至您绑定的银行卡中。\"},{\"title\":\"注册与账户\",\"question\":\"\",\"answer\":\"\"},{\"title\":\"\",\"question\":\"“阳光保呗”安全吗？\",\"answer\":\"请您放心，您在“阳光保呗”APP中所填写的个人信息已全程加密。阳光保呗为您提供全面的安全保障服务，并持续监测和保护您的账户安全。\"},{\"title\":\"\",\"question\":\"如何注册阳光保呗账号？\",\"answer\":\"您可通过安卓应用市场或专属客服推送的链接下载阳光保呗APP，输入您的手机号进行注册。\"},{\"title\":\"\",\"question\":\"是否可以注册多个帐号？\",\"answer\":\"不可以，为确保您的信息真实且安全，您的注册账号已关联身份信息，一个注册账号仅对应一个身份信息。\"},{\"title\":\"\",\"question\":\"验证码收不到，怎么办？\",\"answer\":\"建议您首先查看移动网络信号是否正常；其次请检查短信垃圾箱，确保验证码短信未被手机自动拦截；如仍未收到，请在1分钟后再次点击发送验证码即可。\"},{\"title\":\"\",\"question\":\"如果账号被盗，骗子会以我的名义把钱借走吗？\",\"answer\":\"不会，我们有严格的身份核实流程和风控体系。即使账号被盗，骗子无法通过人脸识别，无法使用您的账户信息及资产，您的账户仍然安全。建议您此时立即联系客服解决账户被盗问题。\"},{\"title\":\"借款与还款\",\"question\":\"\",\"answer\":\"\"},{\"title\":\"\",\"question\":\"申请保险产品需要哪些资料？\",\"answer\":\"阳光保呗APP申请个人消费贷款保证保险，不需要提供任何纸质资料，只需按照APP提示在联网的手机上完成操作即可。请注意，填写完整、真实的个人信息，有助于提高投保贷款的审核通过率和额度。\"},{\"title\":\"\",\"question\":\"可以绑定哪些银行卡？\",\"answer\":\"目前支持的银行卡如下：工商银行、光大银行、建设银行、兴业银行、浦发银行、广发银行。其他银行卡暂不支持，感谢您的理解与支持。\"},{\"title\":\"\",\"question\":\"收款银行卡信息提交时提示“银行预留信息不一致”怎么办？\",\"answer\":\"请注意，此处需要绑定您本人的银行卡，确保您的个人信息、身份证号与银行卡开卡时所填写的姓名和身份证号一致。同时，银行预留手机号是银行卡开通快捷支付时提供的手机号，非开卡时填写的手机号，如有问题，建议联系您的发卡行咨询。\"},{\"title\":\"\",\"question\":\"投保的贷款审核需要多久？\",\"answer\":\"正常情况下，您完成授信后半小时内即可获得本次投保贷款的审核结果。同时，审核结果将以短信形式通知您，请注意查收。\"},{\"title\":\"\",\"question\":\"我投保的贷款审核未通过，怎么办？\",\"answer\":\"投保贷款审核的结果，取决于您提交的授信资料是否真实、完整、准确。若此次审核未通过，建议您在30天后再次授权并提交审核。\"},{\"title\":\"\",\"question\":\"投保的贷款能借多少钱、多长时间？\",\"answer\":\"具体的授信额度和贷款期限与您的信用情况有关。您的信用状况良好，最高授信额度为20万元。投保的贷款期限从3个月~12个月不等，建议您在实际申请完成后查询。\"},{\"title\":\"\",\"question\":\"审核通过获得的额度可以更改吗？\",\"answer\":\"投保贷款额度由系统根据您的信用评估自动分配，人工无法修改。您可根据您的需要进行投保及贷款提现。\"},{\"title\":\"\",\"question\":\"是否可以取消投保的贷款申请？\",\"answer\":\"已提现的投保贷款申请不可撤回。如您目前不需要投保贷款，请勿操作提现。\"},{\"title\":\"\",\"question\":\"已投保的贷款什么时候可到账？\",\"answer\":\"正常情况下，您对已投保的贷款确定提现后1个工作日内贷款到账。请注意查收。\"},{\"title\":\"\",\"question\":\"为什么会投保贷款失败？\",\"answer\":\"因资金方或银行金融机构的系统升级，或您绑定的银行卡信息有误或已注销，均可能导致投保贷款失败。请您稍后重新发起提现操作，或联系客服咨询。\"},{\"title\":\"\",\"question\":\"投保贷款已到账，是否能取消？\",\"answer\":\"投保的贷款到账后无法取消投保贷款，请您按照还款计划及时还款。\"},{\"title\":\"\",\"question\":\"“阳光保呗”的投保贷款提现收取哪些费用？\",\"answer\":\"阳光保呗作为个人消费贷款信用保证保险提供方，在您发起投保贷款的提现后将针对您的已投保的贷款生成还款计划，还款计划包含您的本次贷款本金、利息和相关保费等。具体费用您可在投保贷款时生成的《贷款合同借款协议》中查看。\"},{\"title\":\"\",\"question\":\"如何还款？\",\"answer\":\"您只需在还款到期日前一天，确保已绑定的银行卡中资金足够归还当期应还钱款，系统会在还款日当天自动扣除。\"},{\"title\":\"\",\"question\":\"不按时还款会有什么影响？\",\"answer\":\"因您个人原因未按时还款造成逾期的，根据合同约定我们有权向您收取应付而未付保费、理赔款项、违约金等；同时逾期记录将上报央行征信系统。为避免影响您的个人征信记录，请按时足额还款。\"},{\"title\":\"\",\"question\":\"已逾期，如何还款？\",\"answer\":\"请将待还款（含违约金）存入已绑定的银行卡中，系统将会自动扣除相应钱款。\"}]";
+
+            var preTimeStamp = 0;
+
+		$(document).ready(function(){
+			var datas = window.JSON.parse(json);
+			for (var i = 0; i < datas.length; i++) {
+				if(datas[i].title != null && datas[i].title.length != 0){
+					var title = "<div class=\"bgf5\" style=\"display: inline-block; vertical-align: middle; width: 100%;\"><img class=\"marginLeft10 marginRight5\" style=\"width: 0.2rem; height: 1.2rem; margin-bottom: -2px;\" src=\"img\\icon_orange.png\"><span class=\"font11 color666 helperPadding\" style=\"display: inline-block;\">" + datas[i].title +"</span></div>";
+					$("#content").append(title);
+				}else{
+					var qa = "<div><div class=\"underLine questionClick\" style=\"position: relative;\"><p class=\"font10 color666 questionPadding10\">" + datas[i].question + "</p><img id=\"qImg" + i + "\"" + "style=\"width: 0.9rem; height: 0.6rem; position: absolute; right: 0%; top: 50%; margin-top: -0.3rem; margin-right: 1rem;\" src=\"img\\arrow_detail.png\"></div><div id=\"answer" + i + "\"" + "style=\"display: none\"><P class=\"font9 color999 question answerPadding bgfff underLine lineHeight16\" style=\"margin-top: 1px;\">" + datas[i].answer + "</P></div></div>";
+					$("#content").append(qa);
+
+
+				}
+			}
+
+                  //使用一个共同的class标记点击事件
+                  $(".questionClick").click(function(){
+                        //点击事件的间隔时间为300ms
+                        if($.now() - preTimeStamp > 300){
+                              preTimeStamp = $.now();
+                              var i = $(this).parent().index();
+                  
+                              var angle = $("#qImg" + i).getRotateAngle();
+                              if(angle == 180){
+                                    $("#qImg" + i).rotate({
+                                          duration:300,
+                                          angle: 180,
+                                          animateTo:0
+                                    });
+                              }else{
+                                    $("#qImg" + i).rotate({
+                                          duration:300,
+                                          angle: 0,
+                                          animateTo:180
+                                    });
+                              }
+
+                              $("#answer" + i).animate({
+                                    height: 'toggle'
+                              }, 300);
+                        }
+
+                        
+                        
+                  });
+
+            
+		});
+
+	</script>
+</head>
+
+<body>
+	<div id="content">
+ 		<!-- <div class="padding10">
+                  <div style="width: 0.2rem; height: 1rem; background: #ff0000; float: left"></div>
+			<p id="xx" class="font12 color666 bgf5 padding10">关于阳光现贷</p>
+		</div>
+		
+            <div>
+		<div id="question" class="underLine" style="position: relative;">
+			<p class="font10 color333 questionPadding10">"阳光现贷"折这是的发生的范德萨发的是什么</p>
+			<img style="width: 0.5rem; height: 1rem; position: absolute; right: 0%; top: 50%; margin-top: -0.5rem; margin-right: 1rem;" src="img\arrow_detail.png">
+		</div>
+
+            <span id="answer" style="display: none">
+                  <P class="font8 color666 question answerPadding bgfff underLine" style="margin-top: 1px;">“阳光现贷”是什么</P>
+            </span>
+            </div> -->
+
+	</div>
+</body>
+</html>

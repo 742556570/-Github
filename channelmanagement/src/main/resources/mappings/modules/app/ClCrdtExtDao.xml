@@ -1,0 +1,173 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jeeplus.modules.app.dao.ClCrdtExtDao">
+
+	<resultMap id="ClCrdtExtResultMap" type="ClCrdtExt">
+		<result property="CRDTEXT_SEQ" column="CRDTEXT_SEQ" />
+		<result property="USR_APPSEQ" column="USR_APPSEQ" />
+		<result property="USR_CDE" column="USR_CDE" />
+		<result property="PRD_CDE" column="PRD_CDE" />
+		<result property="ADJ_AMT_MIN" column="ADJ_AMT_MIN" />
+		<result property="ADJ_AMT_MAX" column="ADJ_AMT_MAX" />
+		<result property="ADJ_AMT" column="ADJ_AMT" />
+		<result property="ADJ_RAT" column="ADJ_RAT" />
+		<result property="CRDTEXT_DT" column="CRDTEXT_DT" />
+		<result property="STATUS" column="STATUS" />
+		<result property="ST_CDE" column="ST_CDE" />
+		<result property="CRDTEXT_TYPE" column="CRDTEXT_TYPE" />
+		<result property="DETAIL" column="DETAIL" />
+		<result property="ADM_USR" column="ADM_USR" />
+		<result property="CRT_DT" column="CRT_DT" />
+		<result property="MDF_DT" column="MDF_DT" />
+		<result property="IS_EFF" column="IS_EFF" />
+	</resultMap>
+	
+	<sql id="ClCrdtExtColumns">
+		a.CRDTEXT_SEQ,
+		a.USR_APPSEQ,
+		a.USR_CDE,
+		a.PRD_CDE,
+		a.ADJ_AMT_MIN,
+		a.ADJ_AMT_MAX,
+		a.ADJ_AMT,
+		a.ADJ_RAT,
+		a.CRDTEXT_DT,
+		a.STATUS,
+		a.ST_CDE,
+		a.CRDTEXT_TYPE,
+		a.DETAIL,
+		a.ADM_USR,
+		a.CRT_DT,
+		a.MDF_DT,
+		a.IS_EFF
+	</sql>
+
+
+	<select id="getClCrdtExtBySeq" resultMap="ClCrdtExtResultMap" parameterType="java.lang.String">
+		SELECT
+		<include refid="ClCrdtExtColumns" />
+		FROM CL_CRDTEXT a WHERE a.CRDTEXT_SEQ = #{CRDTEXT_SEQ} and IS_EFF = 'true'
+	</select>
+
+
+	<!-- 根据用户标识获得用户 对象-->
+	<select id="getClCrdtExtByUsrCde" resultMap="ClCrdtExtResultMap" parameterType="java.lang.String">
+		SELECT
+		<include refid="ClCrdtExtColumns" />
+		FROM CL_CRDTEXT a WHERE a.USR_CDE = #{USR_CDE} and IS_EFF = 'true'
+	</select>
+	
+	
+	<select id="getClCrdtExtByPolicyNo" resultMap="ClCrdtExtResultMap" parameterType="java.lang.String">
+		SELECT
+		<include refid="ClCrdtExtColumns" />
+		FROM CL_CRDTEXT a WHERE a.USR_APPSEQ = #{USR_APPSEQ} and IS_EFF = 'true'
+	</select>
+	
+	<select id="getClCrdtExtBySts" resultMap="ClCrdtExtResultMap" parameterType="java.lang.String">
+		SELECT
+		<include refid="ClCrdtExtColumns" />
+		FROM CL_CRDTEXT a WHERE a.STATUS = #{STATUS} and IS_EFF = 'true'
+	</select>
+	
+	
+	<select id="cntClCrdtExtByUsrCde" resultType="int" parameterType="java.lang.String">
+		SELECT
+		count(1)
+		FROM CL_CRDTEXT a WHERE a.USR_CDE = #{USR_CDE} and IS_EFF = 'true'
+	</select>
+
+
+
+	<!-- 插入用户 -->
+	<insert id="insert">
+		INSERT INTO CL_CRDTEXT(
+		USR_CDE,
+		USR_APPSEQ,
+		PRD_CDE,
+		ADJ_AMT_MIN,
+		ADJ_AMT_MAX,
+		ADJ_AMT,
+		ADJ_RAT,
+		CRDTEXT_DT,
+		STATUS,
+		ST_CDE,
+		CRDTEXT_TYPE,
+		DETAIL,
+		ADM_USR,
+		CRT_DT,
+		MDF_DT,
+		IS_EFF
+		) VALUES (
+		#{USR_CDE},
+		#{USR_APPSEQ},
+		#{PRD_CDE},
+		#{ADJ_AMT_MIN},
+		#{ADJ_AMT_MAX},
+		#{ADJ_AMT},
+		#{ADJ_RAT},
+		#{CRDTEXT_DT},
+		#{STATUS},
+		#{ST_CDE},
+		#{CRDTEXT_TYPE},
+		#{DETAIL},
+		#{ADM_USR},
+		#{CRT_DT},
+		#{MDF_DT},
+		#{IS_EFF}
+		)
+	</insert>
+	
+
+	<update id="updateByAppSeq">
+		UPDATE CL_CRDTEXT SET USR_CDE = USR_CDE
+		<if test="PRD_CDE != null and PRD_CDE != ''">
+			,PRD_CDE = #{PRD_CDE}
+		</if>
+		<if test="ADJ_AMT_MIN != null">
+			,ADJ_AMT_MIN = #{ADJ_AMT_MIN}
+		</if>
+		<if test="ADJ_AMT_MAX != null">
+			,ADJ_AMT_MAX = #{ADJ_AMT_MAX}
+		</if>
+		<if test="ADJ_AMT != null">
+			,ADJ_AMT = #{ADJ_AMT}
+		</if>
+		<if test="ADJ_RAT != null ">
+			,ADJ_RAT = #{ADJ_RAT}
+		</if>
+		<if test="CRDTEXT_DT != null and CRDTEXT_DT != ''">
+			,CRDTEXT_DT = #{CRDTEXT_DT}
+		</if>
+		<if test="STATUS != null and STATUS != ''">
+			,STATUS = #{STATUS}
+		</if>
+		<if test="ST_CDE != null and ST_CDE != ''">
+			,ST_CDE = #{ST_CDE}
+		</if>
+		<if test="CRDTEXT_TYPE != null and CRDTEXT_TYPE != ''">
+			,CRDTEXT_TYPE = #{CRDTEXT_TYPE}
+		</if>
+		<if test="DETAIL != null and DETAIL != ''">
+			,DETAIL = #{DETAIL}
+		</if>
+		<if test="ADM_USR != null and ADM_USR != ''">
+			,ADM_USR = #{ADM_USR}
+		</if>
+		<if test="CRT_DT != null and CRT_DT != ''">
+			,CRT_DT = #{CRT_DT}
+		</if>
+		<if test="MDF_DT != null and MDF_DT != ''">
+			,MDF_DT = #{MDF_DT}
+		</if>
+		<if test="ADM_USR != null and ADM_USR != ''">
+			,ADM_USR = #{ADM_USR}
+		</if>
+		<if test="IS_EFF != null and IS_EFF != ''">
+			,IS_EFF = #{IS_EFF}
+		</if>
+		WHERE USR_APPSEQ = #{USR_APPSEQ}
+	</update>
+
+
+</mapper>

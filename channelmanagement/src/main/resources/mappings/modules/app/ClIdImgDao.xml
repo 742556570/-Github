@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jeeplus.modules.app.dao.ClIdImgDao">
+
+	<resultMap id="ClIdImgResultMap" type="ClIdImg">
+		<result property="IMG_SEQ" column="IMG_SEQ" />
+		<result property="IMG_TRDNO" column="IMG_TRDNO" />
+		<result property="USR_CDE" column="USR_CDE" />
+		<result property="IMG_PATH_LC" column="IMG_PATH_LC" />
+		<result property="IMG_TYPE" column="IMG_TYPE" />
+		<result property="CRT_DT" column="CRT_DT" />
+		<result property="IMG_FEATURE" column="IMG_FEATURE" />
+	</resultMap>
+	
+	<sql id="ClIdImgColumns">
+		a.IMG_SEQ,
+		a.IMG_TRDNO,
+		a.USR_CDE,
+		a.IMG_PATH_LC,
+		a.IMG_TYPE,
+		a.IMG_FEATURE,
+		a.CRT_DT
+	</sql>
+
+	
+	<!-- 根据用户标识获得用户 对象-->
+	<select id="getByUsrCode" resultMap="ClIdImgResultMap" parameterType="java.lang.String">
+		SELECT
+		<include refid="ClIdImgColumns" />
+		FROM CL_IDIMG a
+		WHERE a.USR_CDE = #{USR_CDE}
+	</select>
+	
+	<select id="getByUsrTrdNo" resultMap="ClIdImgResultMap" parameterType="java.util.HashMap">
+		SELECT
+		<include refid="ClIdImgColumns" />
+		FROM CL_IDIMG a
+		WHERE a.USR_CDE = #{USR_CDE} and a.IMG_TRDNO = #{IMG_TRDNO} 
+	</select>
+	
+	<select id="getByUsrTrdNoImgType" resultMap="ClIdImgResultMap" parameterType="java.util.HashMap">
+		SELECT
+		<include refid="ClIdImgColumns" />
+		FROM CL_IDIMG a
+		WHERE a.USR_CDE = #{USR_CDE} and a.IMG_TRDNO = #{IMG_TRDNO} and a.IMG_TYPE = #{IMG_TYPE}
+	</select>
+	
+	
+
+	<!-- 插入用户 -->
+	<insert id="insert">
+		INSERT INTO CL_IDIMG(
+		IMG_TRDNO,
+		USR_CDE,
+		IMG_PATH_LC,
+		IMG_TYPE,
+		CRT_DT
+		) VALUES (
+		#{IMG_TRDNO},
+		#{USR_CDE},
+		#{IMG_PATH_LC},
+		#{IMG_TYPE},
+		#{CRT_DT}
+		)
+	</insert>
+	
+	
+	<update id="update4FeatureByTrdno">
+		UPDATE CL_IDIMG SET USR_CDE = USR_CDE
+		<if test="IMG_FEATURE != null and IMG_FEATURE != ''">
+			,IMG_FEATURE = #{IMG_FEATURE}
+		</if>
+		WHERE IMG_TRDNO = #{IMG_TRDNO}
+	</update>
+
+
+</mapper>

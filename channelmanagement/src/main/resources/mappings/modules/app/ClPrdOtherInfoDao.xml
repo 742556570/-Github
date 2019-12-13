@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jeeplus.modules.app.dao.ClPrdOtherInfoDao">
+  <resultMap id="ClPrdOtherInfoResultMap" type="ClPrdOtherInfo">
+    <result column="PRD_CDE" jdbcType="VARCHAR" property="prdCde" />
+    <result column="KIND_CDE" jdbcType="VARCHAR" property="kindCde" />
+    <result column="KIND_NAME" jdbcType="VARCHAR" property="kindName" />
+    <result column="SUM_AMOUNT" jdbcType="VARCHAR" property="sumAmount" />
+    <result column="BUSINESS_NATURE" jdbcType="VARCHAR" property="businessNature" />
+    <result column="SECURE_CDE" jdbcType="VARCHAR" property="secureCde" />
+    <result column="SECURE_NAME" jdbcType="VARCHAR" property="secureName" />
+    <result column="CHANNEL_CDE" jdbcType="VARCHAR" property="channelCde" />
+    <result column="CHANNEL_NAM" jdbcType="VARCHAR" property="channelNam" />
+    <result column="HANDLER1_CDE" jdbcType="VARCHAR" property="handler1Cde" />
+    <result column="OPERATOR_CDE" jdbcType="VARCHAR" property="operatorCde" />
+    <result column="COM_CED" jdbcType="VARCHAR" property="comCed" />
+    <result column="MAKE_COM" jdbcType="VARCHAR" property="makeCom" />
+    <result column="CRT_DT" jdbcType="VARCHAR" property="crtDt" />
+    <result column="CRT_USR" jdbcType="VARCHAR" property="crtUsr" />
+    <result column="MDF_DT" jdbcType="VARCHAR" property="mdfDt" />
+    <result column="MDF_USR" jdbcType="VARCHAR" property="mdfUsr" />
+    <result column="DISPLAY_RATE" jdbcType="DECIMAL" property="displayRate" />
+  </resultMap>
+  
+  <sql id="ClPrdBasicInfoColumns">
+    bank_id, suitable_store, support_channel, syn_sys, suitable_store_id, support_channel_id, 
+    syn_sys_id, src_sys
+  </sql>
+  
+  <insert id="insert" parameterType="ClPrdOtherInfo">
+    insert into cl_prd_other_info (PRD_CDE, KIND_CDE, KIND_NAME, 
+      SUM_AMOUNT, BUSINESS_NATURE, SECURE_CDE, 
+      SECURE_NAME, CHANNEL_CDE, CHANNEL_NAM, 
+      HANDLER1_CDE, OPERATOR_CDE, COM_CED, 
+      MAKE_COM, CRT_DT, CRT_USR, 
+      MDF_DT, MDF_USR)
+    values (#{prdCde,jdbcType=VARCHAR}, #{kindCde,jdbcType=VARCHAR}, #{kindName,jdbcType=VARCHAR}, 
+      #{sumAmount,jdbcType=VARCHAR}, #{businessNature,jdbcType=VARCHAR}, #{secureCde,jdbcType=VARCHAR}, 
+      #{secureName,jdbcType=VARCHAR}, #{channelCde,jdbcType=VARCHAR}, #{channelNam,jdbcType=VARCHAR}, 
+      #{handler1Cde,jdbcType=VARCHAR}, #{operatorCde,jdbcType=VARCHAR}, #{comCed,jdbcType=VARCHAR}, 
+      #{makeCom,jdbcType=VARCHAR}, #{crtDt,jdbcType=VARCHAR}, #{crtUsr,jdbcType=VARCHAR}, 
+      #{mdfDt,jdbcType=VARCHAR}, #{mdfUsr,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="ClPrdOtherInfo">
+    insert into cl_prd_other_info
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="prdCde != null">
+        PRD_CDE,
+      </if>
+      <if test="kindCde != null">
+        KIND_CDE,
+      </if>
+      <if test="kindName != null">
+        KIND_NAME,
+      </if>
+      <if test="sumAmount != null">
+        SUM_AMOUNT,
+      </if>
+      <if test="businessNature != null">
+        BUSINESS_NATURE,
+      </if>
+      <if test="secureCde != null">
+        SECURE_CDE,
+      </if>
+      <if test="secureName != null">
+        SECURE_NAME,
+      </if>
+      <if test="channelCde != null">
+        CHANNEL_CDE,
+      </if>
+      <if test="channelNam != null">
+        CHANNEL_NAM,
+      </if>
+      <if test="handler1Cde != null">
+        HANDLER1_CDE,
+      </if>
+      <if test="operatorCde != null">
+        OPERATOR_CDE,
+      </if>
+      <if test="comCed != null">
+        COM_CED,
+      </if>
+      <if test="makeCom != null">
+        MAKE_COM,
+      </if>
+      <if test="crtDt != null">
+        CRT_DT,
+      </if>
+      <if test="crtUsr != null">
+        CRT_USR,
+      </if>
+      <if test="mdfDt != null">
+        MDF_DT,
+      </if>
+      <if test="mdfUsr != null">
+        MDF_USR,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="prdCde != null">
+        #{prdCde,jdbcType=VARCHAR},
+      </if>
+      <if test="kindCde != null">
+        #{kindCde,jdbcType=VARCHAR},
+      </if>
+      <if test="kindName != null">
+        #{kindName,jdbcType=VARCHAR},
+      </if>
+      <if test="sumAmount != null">
+        #{sumAmount,jdbcType=VARCHAR},
+      </if>
+      <if test="businessNature != null">
+        #{businessNature,jdbcType=VARCHAR},
+      </if>
+      <if test="secureCde != null">
+        #{secureCde,jdbcType=VARCHAR},
+      </if>
+      <if test="secureName != null">
+        #{secureName,jdbcType=VARCHAR},
+      </if>
+      <if test="channelCde != null">
+        #{channelCde,jdbcType=VARCHAR},
+      </if>
+      <if test="channelNam != null">
+        #{channelNam,jdbcType=VARCHAR},
+      </if>
+      <if test="handler1Cde != null">
+        #{handler1Cde,jdbcType=VARCHAR},
+      </if>
+      <if test="operatorCde != null">
+        #{operatorCde,jdbcType=VARCHAR},
+      </if>
+      <if test="comCed != null">
+        #{comCed,jdbcType=VARCHAR},
+      </if>
+      <if test="makeCom != null">
+        #{makeCom,jdbcType=VARCHAR},
+      </if>
+      <if test="crtDt != null">
+        #{crtDt,jdbcType=VARCHAR},
+      </if>
+      <if test="crtUsr != null">
+        #{crtUsr,jdbcType=VARCHAR},
+      </if>
+      <if test="mdfDt != null">
+        #{mdfDt,jdbcType=VARCHAR},
+      </if>
+      <if test="mdfUsr != null">
+        #{mdfUsr,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  
+  <select id="getOtherInfoByPrdCde" parameterType="java.lang.String" resultMap="ClPrdOtherInfoResultMap">
+    select 
+    <include refid="ClPrdBasicInfoColumns" />
+    from CL_PRD_OTHER_INFO
+    where PRD_CDE = #{prdCde,jdbcType=VARCHAR}
+  </select>
+</mapper>

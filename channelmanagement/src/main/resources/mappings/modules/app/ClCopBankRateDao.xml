@@ -1,0 +1,213 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jeeplus.modules.app.dao.ClCopBankRateDao">
+  <resultMap id="ClCopBankRateResultMap" type="ClCopBankRate">
+    <id column="cop_bank_no" jdbcType="VARCHAR" property="copBankNo" />
+    <result column="rate_per" jdbcType="VARCHAR" property="ratePer" />
+    <result column="rate_type" jdbcType="VARCHAR" property="rateType" />
+    <result column="base_rate" jdbcType="DECIMAL" property="baseRate" />
+    <result column="float_type" jdbcType="VARCHAR" property="floatType" />
+    <result column="float_rate" jdbcType="DECIMAL" property="floatRate" />
+    <result column="loan_int_rate" jdbcType="DECIMAL" property="loanIntRate" />
+    <result column="rate_gutr" jdbcType="VARCHAR" property="rateGutr" />
+    <result column="rate_state" jdbcType="VARCHAR" property="rateState" />
+    <result column="last_chg_dt" jdbcType="VARCHAR" property="lastChgDt" />
+    <result column="last_chg_usr" jdbcType="VARCHAR" property="lastChgUsr" />
+    <result column="od_int_rate" jdbcType="DECIMAL" property="odIntRate" />
+    <result column="cop_repay_day" jdbcType="DECIMAL" property="copRepayDay" />
+    <result column="cop_pay_day" jdbcType="DECIMAL" property="copPayDay" />
+    <result column="bel_type" jdbcType="VARCHAR" property="belType" />
+  </resultMap>
+  <sql id="ClCopBankRateColumns">
+    cop_bank_no, rate_per, rate_type, base_rate, float_type, float_rate, loan_int_rate, 
+    rate_gutr, rate_state, last_chg_dt, last_chg_usr, od_int_rate, cop_repay_day, cop_pay_day, 
+    bel_type
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="ClCopBankRateResultMap">
+    select 
+    <include refid="ClCopBankRateColumns" />
+    from cl_cop_bank_rate
+    where cop_bank_no = #{copBankNo,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from cl_cop_bank_rate
+    where cop_bank_no = #{copBankNo,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="ClCopBankRate">
+    insert into cl_cop_bank_rate (cop_bank_no, rate_per, rate_type, 
+      base_rate, float_type, float_rate, 
+      loan_int_rate, rate_gutr, rate_state, 
+      last_chg_dt, last_chg_usr, od_int_rate, 
+      cop_repay_day, cop_pay_day, bel_type
+      )
+    values (#{copBankNo,jdbcType=VARCHAR}, #{ratePer,jdbcType=VARCHAR}, #{rateType,jdbcType=VARCHAR}, 
+      #{baseRate,jdbcType=DECIMAL}, #{floatType,jdbcType=VARCHAR}, #{floatRate,jdbcType=DECIMAL}, 
+      #{loanIntRate,jdbcType=DECIMAL}, #{rateGutr,jdbcType=VARCHAR}, #{rateState,jdbcType=VARCHAR}, 
+      #{lastChgDt,jdbcType=VARCHAR}, #{lastChgUsr,jdbcType=VARCHAR}, #{odIntRate,jdbcType=DECIMAL}, 
+      #{copRepayDay,jdbcType=DECIMAL}, #{copPayDay,jdbcType=DECIMAL}, #{belType,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="ClCopBankRate">
+    insert into cl_cop_bank_rate
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="copBankNo != null">
+        cop_bank_no,
+      </if>
+      <if test="ratePer != null">
+        rate_per,
+      </if>
+      <if test="rateType != null">
+        rate_type,
+      </if>
+      <if test="baseRate != null">
+        base_rate,
+      </if>
+      <if test="floatType != null">
+        float_type,
+      </if>
+      <if test="floatRate != null">
+        float_rate,
+      </if>
+      <if test="loanIntRate != null">
+        loan_int_rate,
+      </if>
+      <if test="rateGutr != null">
+        rate_gutr,
+      </if>
+      <if test="rateState != null">
+        rate_state,
+      </if>
+      <if test="lastChgDt != null">
+        last_chg_dt,
+      </if>
+      <if test="lastChgUsr != null">
+        last_chg_usr,
+      </if>
+      <if test="odIntRate != null">
+        od_int_rate,
+      </if>
+      <if test="copRepayDay != null">
+        cop_repay_day,
+      </if>
+      <if test="copPayDay != null">
+        cop_pay_day,
+      </if>
+      <if test="belType != null">
+        bel_type,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="copBankNo != null">
+        #{copBankNo,jdbcType=VARCHAR},
+      </if>
+      <if test="ratePer != null">
+        #{ratePer,jdbcType=VARCHAR},
+      </if>
+      <if test="rateType != null">
+        #{rateType,jdbcType=VARCHAR},
+      </if>
+      <if test="baseRate != null">
+        #{baseRate,jdbcType=DECIMAL},
+      </if>
+      <if test="floatType != null">
+        #{floatType,jdbcType=VARCHAR},
+      </if>
+      <if test="floatRate != null">
+        #{floatRate,jdbcType=DECIMAL},
+      </if>
+      <if test="loanIntRate != null">
+        #{loanIntRate,jdbcType=DECIMAL},
+      </if>
+      <if test="rateGutr != null">
+        #{rateGutr,jdbcType=VARCHAR},
+      </if>
+      <if test="rateState != null">
+        #{rateState,jdbcType=VARCHAR},
+      </if>
+      <if test="lastChgDt != null">
+        #{lastChgDt,jdbcType=VARCHAR},
+      </if>
+      <if test="lastChgUsr != null">
+        #{lastChgUsr,jdbcType=VARCHAR},
+      </if>
+      <if test="odIntRate != null">
+        #{odIntRate,jdbcType=DECIMAL},
+      </if>
+      <if test="copRepayDay != null">
+        #{copRepayDay,jdbcType=DECIMAL},
+      </if>
+      <if test="copPayDay != null">
+        #{copPayDay,jdbcType=DECIMAL},
+      </if>
+      <if test="belType != null">
+        #{belType,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="ClCopBankRate">
+    update cl_cop_bank_rate
+    <set>
+      <if test="ratePer != null">
+        rate_per = #{ratePer,jdbcType=VARCHAR},
+      </if>
+      <if test="rateType != null">
+        rate_type = #{rateType,jdbcType=VARCHAR},
+      </if>
+      <if test="baseRate != null">
+        base_rate = #{baseRate,jdbcType=DECIMAL},
+      </if>
+      <if test="floatType != null">
+        float_type = #{floatType,jdbcType=VARCHAR},
+      </if>
+      <if test="floatRate != null">
+        float_rate = #{floatRate,jdbcType=DECIMAL},
+      </if>
+      <if test="loanIntRate != null">
+        loan_int_rate = #{loanIntRate,jdbcType=DECIMAL},
+      </if>
+      <if test="rateGutr != null">
+        rate_gutr = #{rateGutr,jdbcType=VARCHAR},
+      </if>
+      <if test="rateState != null">
+        rate_state = #{rateState,jdbcType=VARCHAR},
+      </if>
+      <if test="lastChgDt != null">
+        last_chg_dt = #{lastChgDt,jdbcType=VARCHAR},
+      </if>
+      <if test="lastChgUsr != null">
+        last_chg_usr = #{lastChgUsr,jdbcType=VARCHAR},
+      </if>
+      <if test="odIntRate != null">
+        od_int_rate = #{odIntRate,jdbcType=DECIMAL},
+      </if>
+      <if test="copRepayDay != null">
+        cop_repay_day = #{copRepayDay,jdbcType=DECIMAL},
+      </if>
+      <if test="copPayDay != null">
+        cop_pay_day = #{copPayDay,jdbcType=DECIMAL},
+      </if>
+      <if test="belType != null">
+        bel_type = #{belType,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where cop_bank_no = #{copBankNo,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="ClCopBankRate">
+    update cl_cop_bank_rate
+    set rate_per = #{ratePer,jdbcType=VARCHAR},
+      rate_type = #{rateType,jdbcType=VARCHAR},
+      base_rate = #{baseRate,jdbcType=DECIMAL},
+      float_type = #{floatType,jdbcType=VARCHAR},
+      float_rate = #{floatRate,jdbcType=DECIMAL},
+      loan_int_rate = #{loanIntRate,jdbcType=DECIMAL},
+      rate_gutr = #{rateGutr,jdbcType=VARCHAR},
+      rate_state = #{rateState,jdbcType=VARCHAR},
+      last_chg_dt = #{lastChgDt,jdbcType=VARCHAR},
+      last_chg_usr = #{lastChgUsr,jdbcType=VARCHAR},
+      od_int_rate = #{odIntRate,jdbcType=DECIMAL},
+      cop_repay_day = #{copRepayDay,jdbcType=DECIMAL},
+      cop_pay_day = #{copPayDay,jdbcType=DECIMAL},
+      bel_type = #{belType,jdbcType=VARCHAR}
+    where cop_bank_no = #{copBankNo,jdbcType=VARCHAR}
+  </update>
+</mapper>

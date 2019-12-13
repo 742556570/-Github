@@ -1,0 +1,281 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jeeplus.modules.app.dao.ChUsrApplyDao">
+  <resultMap id="BaseResultMap" type="com.jeeplus.modules.app.entity.ChUsrApply">
+    <id column="APPL_SEQ"  property="applSeq" />
+    <result column="APPL_CDE"  property="applCde" />
+    <result column="CHANNEL_CDE"  property="channelCde" />
+    <result column="CHANNEL_NAME"  property="channelName" />
+    <result column="CUST_CITY_CDE"  property="custCityCde" />
+    <result column="USR_CDE"  property="usrCde" />
+    <result column="CUST_CITY_NAME"  property="custCityName" />
+    <result column="CUST_NAME"  property="custName" />
+    <result column="CUST_TEL"  property="custTel" />
+    <result column="CUST_CHANNEL_CDE"  property="custChannelCde" />
+    <result column="CUST_CHANNEL_NAME"  property="custChannelName" />
+    <result column="CUST_SEC_CHANNEL_CDE"  property="custSecChannelCde" />
+    <result column="CUST_SEC_CHANNEL_NAME"  property="custSecChannelName" />
+    <result column="CRT_DT"  property="crtDt" />
+    <result column="CUST_PRODUCT_CDE"  property="custProductCde" />
+    <result column="CUST_PRODUCT_NAME"  property="custProductName" />
+    <result column="CUST_SEC_PRODUCT_CDE"  property="custSecProductCde" />
+    <result column="CUST_SEC_PRODUCT_NAME"  property="custSecProductName" />
+    <result column="DX_DATE"  property="dxDate" />
+    <result column="DX_STATUS"  property="dxStatus" />
+  </resultMap>
+  
+  <resultMap id="DonationResultMap" type="com.jeeplus.modules.app.entity.ChDonationInfo">
+    <id column="DO_SEQ"  property="doSeq" />
+    <result column="DO_CDE"  property="doCde" />
+    <result column="DO_NAME"  property="doName" />
+    <result column="DO_TYPE"  property="doType" />
+    <result column="DO_BGSWLPTQC"  property="doBGSWLPTQC" />
+    <result column="DO_BGSWLPTJC"  property="doBGSWLPTJC" />
+    <result column="DO_BGSWLPTWZDZ"  property="doBGSWLPTWZDZ" />
+    <result column="DO_HZBXJGMC"  property="doHZBXJGMC" />
+    <result column="DO_BGSWLPTBAXX"  property="doBGSWLPTBAXX" />
+    <result column="DO_WLPTBASJ"  property="doWLPTBASJ" />
+    <result column="DO_YWHZFW"  property="doYWHZFW" />
+    <result column="DO_YWHZQSSJ"  property="doYWHZQSSJ" />
+    <result column="DO_YWHZZZSJ"  property="doYWHZZZSJ" />
+    <result column="STATUS"  property="status" />
+    <result column="DO_LINK"  property="doLink" />
+  </resultMap>
+  
+  <resultMap id="KeyWordtMap" type="com.jeeplus.modules.app.entity.ChKeyword">
+    <result column="KEYWORD"  property="keyWord" />
+    <result column="CITY_SHORTNAME"  property="cityShortName" />
+    <result column="CITY_NAME"  property="cityName" />
+    <result column="DATE"  property="date" />
+    <result column="CHANNEL_NAME"  property="channelName" />
+    <result column="CHANNEL_CDE"  property="channelCde" />
+    <result column="DEVICE"  property="device" />
+    <result column="KEYWORD_PARAMETER"  property="keyWordParameter" />
+  </resultMap>
+  
+  <sql id="Key_Word_List">
+
+    KEYWORD, CITY_SHORTNAME, CITY_NAME, DATE, CHANNEL_NAME,CHANNEL_CDE, DEVICE, KEYWORD_PARAMETER
+
+  </sql>
+  
+  <sql id="Base_Column_List">
+
+    APPL_SEQ, APPL_CDE, CHANNEL_CDE, CHANNEL_NAME, CUST_CITY_CDE,USR_CDE, CUST_CITY_NAME, CUST_NAME,CUST_TEL,CUST_CHANNEL_CDE,CUST_CHANNEL_NAME,CUST_SEC_CHANNEL_CDE, CUST_SEC_CHANNEL_NAME, 
+    CRT_DT, CUST_PRODUCT_CDE, CUST_PRODUCT_NAME, CUST_SEC_PRODUCT_CDE, CUST_SEC_PRODUCT_NAME,DX_DATE,DX_STATUS,YGYJ_USR_CDE
+
+  </sql>
+  
+  <sql id="Donation_Column_List">
+
+    DO_SEQ, DO_CDE, DO_NAME, DO_TYPE, DO_BGSWLPTQC,DO_BGSWLPTJC, DO_BGSWLPTWZDZ, DO_HZBXJGMC,DO_BGSWLPTBAXX,DO_WLPTBASJ,
+    DO_YWHZFW, DO_YWHZQSSJ, DO_YWHZZZSJ, STATUS, DO_LINK
+
+  </sql>
+
+  <insert id="insert" parameterType="com.jeeplus.modules.app.entity.ChUsrApply">
+    insert into CH_USR_APPLY ( APPL_CDE, 
+    CHANNEL_CDE, 
+    CHANNEL_NAME, 
+    CUST_CITY_CDE,
+    USR_CDE, 
+    CUST_CITY_NAME, 
+    CUST_NAME,
+    CUST_TEL,
+    CUST_CHANNEL_CDE,
+    CUST_CHANNEL_NAME,
+    CUST_SEC_CHANNEL_CDE, 
+    CUST_SEC_CHANNEL_NAME, 
+    CRT_DT, 
+    CUST_PRODUCT_CDE, 
+    CUST_PRODUCT_NAME, 
+    CUST_SEC_PRODUCT_CDE, 
+    CUST_SEC_PRODUCT_NAME,YGYJ_USR_CDE)
+    values ( #{applCde,jdbcType=VARCHAR}, 
+      #{channelCde,jdbcType=VARCHAR}, 
+      #{channelName,jdbcType=VARCHAR},
+      #{custCityCde,jdbcType=VARCHAR},
+      #{usrCde,jdbcType=VARCHAR}, 
+      #{custCityName,jdbcType=VARCHAR}, 
+      #{custName,jdbcType=VARCHAR},
+      #{custTel,jdbcType=VARCHAR}, 
+      #{custChannelCde,jdbcType=VARCHAR}, 
+      #{custChannelName,jdbcType=VARCHAR}, 
+      #{custSecChannelCde,jdbcType=VARCHAR}, 
+      #{custSecChannelName,jdbcType=VARCHAR}, 
+      #{crtDt,jdbcType=VARCHAR}, 
+      #{custProductCde,jdbcType=VARCHAR}, 
+      #{custProductName,jdbcType=VARCHAR}, 
+      #{custSecProductCde,jdbcType=VARCHAR}, 
+      #{custSecProductName,jdbcType=VARCHAR},
+      #{ygyjUsrCde,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.jeeplus.modules.app.entity.ChUsrApply">
+    insert into CH_USR_APPLY
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="applSeq != null">
+        APPL_SEQ,
+      </if>
+      <if test="applCde != null">
+        APPL_CDE,
+      </if>
+      <if test="channelCde != null">
+        CHANNEL_CDE,
+      </if>
+      <if test="channelName != null">
+        CHANNEL_NAME,
+      </if>
+      <if test="custCityCde != null">
+        CUST_CITY_CDE,
+      </if>
+      <if test="usrCde != null">
+      	USR_CDE,
+      </if>
+      <if test="custCityName != null">
+        CUST_CITY_NAME,
+      </if>
+      <if test="custName != null">
+        CUST_NAME,
+      </if>
+      <if test="custTel != null">
+        CUST_TEL,
+      </if>
+      <if test="custChannelCde != null">
+        CUST_CHANNEL_CDE,
+      </if>
+      <if test="custChannelName != null">
+        CUST_CHANNEL_NAME,
+      </if>
+      <if test="custSecChannelCde != null">
+        CUST_SEC_CHANNEL_CDE,
+      </if>
+      <if test="custSecChannelName != null">
+        CUST_SEC_CHANNEL_NAME,
+      </if>
+      <if test="crtDt != null">
+        CRT_DT,
+      </if>
+      <if test="custProductCde != null">
+        CUST_PRODUCT_CDE,
+      </if>
+      <if test="custSecProductCde != null">
+        CUST_SEC_PRODUCT_CDE,
+      </if>
+      <if test="custSecProductName != null">
+        CUST_SEC_PRODUCT_NAME,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="applSeq != null">
+        #{applSeq,jdbcType=INTEGER},
+      </if>
+      <if test="applCde != null">
+        #{applCde,jdbcType=VARCHAR},
+      </if>
+      <if test="channelCde != null">
+        #{channelCde,jdbcType=VARCHAR},
+      </if>
+      <if test="channelName != null">
+        #{channelName,jdbcType=VARCHAR},
+      </if>
+      <if test="custCityCde != null">
+      	#{custCityCde,jdbcType=VARCHAR},
+      </if>
+      <if test="usrCde != null">
+        #{usrCde,jdbcType=VARCHAR},
+      </if>
+      <if test="custCityName != null">
+      	#{custCityName,jdbcType=VARCHAR},
+      </if>
+      <if test="custName != null">
+        #{custName,jdbcType=VARCHAR},
+      </if>
+      <if test="custTel != null">
+        #{custTel,jdbcType=VARCHAR},
+      </if>
+      <if test="custChannelCde != null">
+         #{custChannelCde,jdbcType=VARCHAR},
+      </if>
+      <if test="custChannelName != null">
+        #{custChannelName,jdbcType=VARCHAR},
+      </if>
+      <if test="crtDt != null">
+        #{crtDt,jdbcType=VARCHAR},
+      </if>
+      <if test="custProductCde != null">
+        #{custProductCde,jdbcType=VARCHAR},
+      </if>
+      <if test="custProductName != null">
+        #{custProductName,jdbcType=VARCHAR},
+      </if>
+      <if test="custSecProductCde != null">
+        #{custSecProductCde,jdbcType=VARCHAR},
+      </if>
+      <if test="custSecProductName != null">
+        #{custSecProductName,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  
+  <select id="getAChUsrApplyCount" resultType="int" parameterType="java.util.HashMap">
+		SELECT 
+		COUNT(1) todayCnt
+		FROM CH_USR_APPLY a 
+		WHERE a.cust_tel =  #{custTel} 
+	</select>
+	
+	<select id="getAChUsrApplyDx"  parameterType="java.util.HashMap" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from CH_USR_APPLY
+    where DATE_FORMAT(CRT_DT, "%Y-%m-%d %H:%i:%s") &gt;= #{startTime}
+    and  DATE_FORMAT(CRT_DT, "%Y-%m-%d %H:%i:%s") &lt;= #{endTime}
+    and DX_DATE is null
+  
+  </select>
+  
+  <update id="updateDxInfo" parameterType="java.util.HashMap">
+		UPDATE CH_USR_APPLY SET
+		<if test="DX_DATE != null and DX_DATE != ''">
+			DX_DATE = #{DX_DATE}
+		</if>
+		<if test="DX_STATUS != null and DX_STATUS != ''">
+			,DX_STATUS = #{DX_STATUS}
+		</if>
+		WHERE APPL_CDE = #{APPL_CDE}
+	</update>
+	
+	<select id="transToDxCompensate"  resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from CH_USR_APPLY
+    where DX_STATUS = '失败'
+  
+  </select>
+  
+  	<select id="transToDxCompensateHand"  resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from CH_USR_APPLY
+    where DX_STATUS = '失败' or (DX_STATUS is null and DX_DATE is null)
+  
+  </select>
+  
+  <select id="getDonationInfo"  parameterType="java.util.HashMap" resultMap="DonationResultMap">
+    select 
+    <include refid="Donation_Column_List" />
+    from ch_donation_info
+    where DO_CDE = #{doCde}
+    and  DO_TYPE = #{doType}
+  </select>
+  
+  <select id="getKeyWord"  parameterType="java.util.HashMap" resultMap="KeyWordtMap">
+    select 
+    <include refid="Key_Word_List" />
+    from ch_keyword
+    where KEYWORD_PARAMETER like CONCAT('%',#{keyWordParameter,jdbcType=VARCHAR},'%')
+  </select>
+  
+  
+  
+</mapper>

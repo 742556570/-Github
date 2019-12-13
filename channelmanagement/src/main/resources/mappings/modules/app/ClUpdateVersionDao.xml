@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jeeplus.modules.app.dao.ClUpdateVersionDao">
+  <resultMap id="BaseResultMap" type="com.jeeplus.modules.app.entity.ClUpdateVersion">
+    <id column="VERSION_SEQ" jdbcType="INTEGER" property="versionSeq" />
+    <result column="CHANNEL" jdbcType="VARCHAR" property="channel" />
+    <result column="DATA_SOURCE" jdbcType="VARCHAR" property="dataSource" />
+    <result column="VERSION" jdbcType="VARCHAR" property="version" />
+    <result column="URL" jdbcType="VARCHAR" property="url" />
+    <result column="DESC" jdbcType="VARCHAR" property="desc" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    VERSION_SEQ, CHANNEL, DATA_SOURCE, VERSION, URL
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.util.HashMap" resultMap="BaseResultMap">
+    select 
+    VERSION_SEQ, CHANNEL, DATA_SOURCE, VERSION, URL
+    from CL_UPDATE_VERSION
+    where 1=1 AND CHANNEL = #{CHANNEL} and DATA_SOURCE = #{DATASOURCE}  
+
+  </select>
+ 
+</mapper>

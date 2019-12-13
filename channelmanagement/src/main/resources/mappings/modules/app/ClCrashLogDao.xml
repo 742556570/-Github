@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jeeplus.modules.app.dao.ClCrashLogDao">
+
+	<resultMap id="ClCrashLogResultMap" type="ClCrashLog">
+		<result property="LOG_ID" column="LOG_ID" />
+		<result property="PLATFORM" column="PLATFORM" />
+		<result property="BRAND" column="BRAND" />
+		<result property="MODEL" column="MODEL" />
+		<result property="DISPLAY" column="DISPLAY" />
+		<result property="OS_VERSION" column="OS_VERSION" />
+		<result property="APP_VERSION" column="APP_VERSION" />
+		<result property="CRT_DT" column="CRT_DT" />
+		<result property="CRASH_LOG" column="CRASH_LOG" />
+	</resultMap>
+	
+	
+	<sql id="ClCrashLogColumns">
+		a.LOG_ID,
+		a.PLATFORM,
+		a.BRAND,
+		a.MODEL,
+		a.DISPLAY,
+		a.OS_VERSION,
+		a.APP_VERSION,
+		a.CRT_DT,
+		a.CRASH_LOG
+	</sql>
+	
+	<select id="getAll" resultMap="ClCrashLogResultMap" >
+		SELECT
+		<include refid="ClCrashLogColumns" />
+		FROM CL_CRASGLOG a
+	</select>
+
+	
+	<!-- 根据用户标识获得用户 对象-->
+	<select id="getByCondition" resultMap="ClCrashLogResultMap">
+		SELECT
+		<include refid="ClCrashLogColumns" />
+		FROM CL_CRASGLOG a
+		WHERE 1 = 1 
+		<if test="PLATFORM != null and PLATFORM != ''">
+			AND PLATFORM = #{PLATFORM}
+		</if> 
+		<if test="BRAND != null and BRAND != ''">
+			AND BRAND = #{BRAND}
+		</if> 
+		<if test="MODEL != null and MODEL != ''">
+			AND MODEL = #{MODEL}
+		</if> 
+		<if test="DISPLAY != null and DISPLAY != ''">
+			AND DISPLAY = #{DISPLAY}
+		</if> 
+		<if test="OS_VERSION != null and OS_VERSION != ''">
+			AND OS_VERSION = #{OS_VERSION}
+		</if> 
+		<if test="APP_VERSION != null and APP_VERSION != ''">
+			AND APP_VERSION = #{APP_VERSION}
+		</if> 
+		<if test="CRT_DT != null and CRT_DT != ''">
+			AND CRT_DT like '%#{CRT_DT}%'
+		</if> 
+	</select>
+	
+
+	<!-- 插入用户 -->
+	<insert id="insert">
+		INSERT INTO CL_CRASGLOG(
+		PLATFORM,
+		BRAND,
+		MODEL,
+		DISPLAY,
+		OS_VERSION,
+		APP_VERSION,
+		CRT_DT,
+		CRASH_LOG
+		) VALUES (
+		#{PLATFORM},
+		#{BRAND},
+		#{MODEL},
+		#{DISPLAY},
+		#{OS_VERSION},
+		#{APP_VERSION},
+		#{CRT_DT},
+		#{CRASH_LOG}
+		)
+	</insert>
+
+
+</mapper>

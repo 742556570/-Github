@@ -1,0 +1,332 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jeeplus.modules.app.dao.ClBnkCrdDao">
+
+	<resultMap id="ClBnkCrdResultMap" type="ClBnkCrd">
+		<result property="BCRD_SEQ" column="BCRD_SEQ" />
+		<result property="USR_CDE" column="USR_CDE" />
+		<result property="APPL_BANK_NAME" column="APPL_BANK_NAME" />
+		<result property="BNK_CODE" column="BNK_CODE" />
+		<result property="APPL_AC_BANK" column="APPL_AC_BANK" />
+		<result property="ET_BNK_ADDR" column="ET_BNK_ADDR" />
+		<result property="CARDTYPE" column="CARDTYPE" />
+		<result property="APPL_CARD_NO" column="APPL_CARD_NO" />
+		<result property="EPR_DT" column="EPR_DT" />
+		<result property="SGN_CDE" column="SGN_CDE" />
+		<result property="APPL_AC_NAM" column="APPL_AC_NAM" />
+		<result property="APPL_ID_NO" column="APPL_ID_NO" />
+		<result property="USR_TEL" column="USR_TEL" />
+		<result property="STATUS" column="STATUS" />
+		<result property="IS_DEF" column="IS_DEF" />
+		<result property="IS_DEL" column="IS_DEL" />
+		<result property="WGHT" column="WGHT" />
+		<result property="IS_BIND" column="IS_BIND" />
+		<result property="BIND_DT" column="BIND_DT" />
+		<result property="BIND_IP" column="BIND_IP" />
+		<result property="BIND_CDE" column="BIND_CDE" />
+		<result property="MDF_DT" column="MDF_DT" />
+		<result property="IS_BINDFOTIC" column="IS_BINDFOTIC" />
+	</resultMap>
+	
+	<sql id="ClBnkCrdColumns">
+		a.BCRD_SEQ,
+		a.USR_CDE,
+		a.APPL_BANK_NAME,
+		a.BNK_CODE,
+		a.APPL_AC_BANK,
+		a.ET_BNK_ADDR,
+		a.CARDTYPE,
+		a.APPL_CARD_NO,
+		a.EPR_DT,
+		a.SGN_CDE,
+		a.APPL_AC_NAM,
+		a.APPL_ID_NO,
+		a.USR_TEL,
+		a.STATUS,
+		a.IS_DEF,
+		a.IS_DEL,
+		a.WGHT,
+		a.IS_BIND,
+		a.BIND_DT,
+		a.BIND_IP,
+		a.BIND_CDE,
+		a.MDF_DT,
+		a.IS_BINDFOTIC
+	</sql>
+
+	
+	<!-- 根据用户标识获得用户 对象-->
+	<select id="getByUsrCode" resultMap="ClBnkCrdResultMap" parameterType="java.lang.String">
+		SELECT
+		<include refid="ClBnkCrdColumns" />
+		FROM CL_BANKCARD a
+		WHERE a.USR_CDE = #{USR_CDE} and a.IS_DEL = '0'
+	</select>
+	
+	
+	<!--支持用户多银行卡不允许被使用-->
+	<!--<select id="getOneByUsrCode" resultMap="ClBnkCrdResultMap" parameterType="java.lang.String">
+		SELECT
+		<include refid="ClBnkCrdColumns" />
+		FROM CL_BANKCARD a
+		WHERE a.USR_CDE = #{USR_CDE} and a.IS_DEL = '0'
+	</select>-->
+	
+	
+	
+	<select id="getUsrDefaultBnkCrdWithOutSts" resultMap="ClBnkCrdResultMap" parameterType="java.lang.String">
+		SELECT
+		<include refid="ClBnkCrdColumns" />
+		FROM CL_BANKCARD a
+		WHERE a.USR_CDE = #{USR_CDE} and a.IS_DEF = '1' and a.IS_DEL = '0' and a.STATUS = '1'
+	</select>
+	
+	<select id="getUsrDefaultCardByUsrCode" resultMap="ClBnkCrdResultMap" parameterType="java.lang.String">
+		SELECT
+		<include refid="ClBnkCrdColumns" />
+		FROM CL_BANKCARD a
+		WHERE a.USR_CDE = #{USR_CDE} and a.IS_DEF = '1' and a.IS_DEL = '0' and a.STATUS = '1' and (a.IS_BIND = '0' or a.IS_BINDFOTIC = '2')
+	</select>
+	
+	<select id="getUsrOldCardByUsrCode" resultMap="ClBnkCrdResultMap" parameterType="java.lang.String">
+		SELECT
+		<include refid="ClBnkCrdColumns" />
+		FROM CL_BANKCARD a
+		WHERE a.USR_CDE = #{USR_CDE} and a.IS_DEF = '1' and a.IS_DEL = '0' and a.STATUS = '1' and a.WGHT = '-1' and a.IS_BIND = '0'
+	</select>
+	
+	<select id="getByUsrCodeAndCardNum" resultMap="ClBnkCrdResultMap" parameterType="java.util.HashMap">
+		SELECT
+		<include refid="ClBnkCrdColumns" />
+		FROM CL_BANKCARD a
+		WHERE a.USR_CDE = #{USR_CDE} and a.APPL_CARD_NO = #{APPL_CARD_NO} and a.IS_DEL = '0'
+	</select>
+	
+	<select id="cntByUsrCodeAndCardNum" resultType="int" parameterType="java.util.HashMap">
+		select count(1) as cnt from CL_BANKCARD a WHERE a.USR_CDE = #{USR_CDE} and a.APPL_CARD_NO = #{APPL_CARD_NO} and a.IS_BIND='2' and a.IS_DEL = '0'
+	</select>
+	
+	<select id="cntByUsrCode" resultType="int" parameterType="java.lang.String">
+		select count(1) as cnt from CL_BANKCARD a WHERE a.USR_CDE = #{USR_CDE} and a.IS_BIND='2' and a.IS_DEL = '0'
+	</select>
+
+
+	<!-- 插入用户 -->
+	<insert id="insert">
+		INSERT INTO CL_BANKCARD(
+		BCRD_SEQ,
+		USR_CDE,
+		APPL_BANK_NAME,
+		BNK_CODE,
+		APPL_AC_BANK,
+		ET_BNK_ADDR,
+		CARDTYPE,
+		APPL_CARD_NO,
+		EPR_DT,
+		SGN_CDE,
+		APPL_AC_NAM,
+		APPL_ID_NO,
+		USR_TEL,
+		STATUS,
+		IS_DEF,
+		IS_DEL,
+		WGHT,
+		IS_BIND,
+		BIND_DT,
+		BIND_IP,
+		BIND_CDE,
+		MDF_DT,
+		IS_BINDFOTIC
+		) VALUES (
+		#{BCRD_SEQ},
+		#{USR_CDE},
+		#{APPL_BANK_NAME},
+		#{BNK_CODE},
+		#{APPL_AC_BANK},
+		#{ET_BNK_ADDR},
+		#{CARDTYPE},
+		#{APPL_CARD_NO},
+		#{EPR_DT},
+		#{SGN_CDE},
+		#{APPL_AC_NAM},
+		#{APPL_ID_NO},
+		#{USR_TEL},
+		#{STATUS},
+		#{IS_DEF},
+		#{IS_DEL},
+		#{WGHT},
+		#{IS_BIND},
+		#{BIND_DT},
+		#{BIND_IP},
+		#{BIND_CDE},
+		#{MDF_DT},
+		#{IS_BINDFOTIC}
+		)
+	</insert>
+	
+	<select id="getOneByBankNo" resultMap="ClBnkCrdResultMap" parameterType="java.lang.String">
+		SELECT
+		<include refid="ClBnkCrdColumns" />
+		FROM CL_BANKCARD a
+		WHERE a.APPL_CARD_NO = #{APPL_CARD_NO} and a.IS_DEL = '0'
+	</select>
+	
+	<select id="getOneByBankNoWithOutSts" resultMap="ClBnkCrdResultMap" parameterType="java.lang.String">
+		SELECT
+		<include refid="ClBnkCrdColumns" />
+		FROM CL_BANKCARD a
+		WHERE a.APPL_CARD_NO = #{APPL_CARD_NO}
+	</select>
+	
+	
+	<select id="getOneByBankNoAndBinded4FoticBind" resultMap="ClBnkCrdResultMap" parameterType="java.lang.String">
+		SELECT
+		<include refid="ClBnkCrdColumns" />
+		FROM CL_BANKCARD a
+		WHERE a.APPL_CARD_NO = #{APPL_CARD_NO} and (a.IS_BINDFOTIC = '2' or a.IS_BIND = '0') and a.IS_DEL = '0'
+	</select>
+	
+		<select id="getOneByBankNoAndBindedWFCCBBind" resultMap="ClBnkCrdResultMap" parameterType="java.lang.String">
+		SELECT
+		<include refid="ClBnkCrdColumns" />
+		FROM CL_BANKCARD a
+		WHERE a.APPL_CARD_NO = #{APPL_CARD_NO} and  a.IS_BIND = '0' and a.IS_DEL = '0'
+	</select>
+	
+	
+	<update id="updateBankCardApply" parameterType="java.util.HashMap">
+	  	 update CL_BANKCARD set BIND_IP = #{BIND_IP}, IS_BINDFOTIC = #{IS_BINDFOTIC},BIND_CDE=#{BIND_CDE} where APPL_CARD_NO = #{APPL_CARD_NO}
+	</update>
+	<update id="updateBankIsBind" parameterType="java.util.HashMap">
+	  	 update CL_BANKCARD set IS_BINDFOTIC = #{IS_BINDFOTIC} where APPL_CARD_NO = #{APPL_CARD_NO}
+	</update>
+
+
+	<update id="updateBankRePre" parameterType="java.util.HashMap">
+	  	 UPDATE CL_BANKCARD SET USR_CDE = USR_CDE
+	  	 ,IS_BIND = '-1'
+	  	 ,BIND_IP = ''
+	  	 ,BIND_CDE = ''
+		<if test="APPL_BANK_NAME != null and APPL_BANK_NAME != ''">
+			,APPL_BANK_NAME = #{APPL_BANK_NAME}
+		</if>
+		<if test="BNK_CODE != null and BNK_CODE != ''">
+			,BNK_CODE = #{BNK_CODE}
+		</if>
+		<if test="APPL_AC_BANK != null and APPL_AC_BANK != ''">
+			,APPL_AC_BANK = #{APPL_AC_BANK}
+		</if>
+		<if test="ET_BNK_ADDR != null and ET_BNK_ADDR != ''">
+			,ET_BNK_ADDR = #{ET_BNK_ADDR}
+		</if>
+		<if test="CARDTYPE != null and CARDTYPE != ''">
+			,CARDTYPE = #{CARDTYPE}
+		</if>
+		<if test="APPL_CARD_NO != null and APPL_CARD_NO != ''">
+			,APPL_CARD_NO = #{APPL_CARD_NO}
+		</if>
+		<if test="EPR_DT != null and EPR_DT != ''">
+			,EPR_DT = #{EPR_DT}
+		</if>
+		<if test="SGN_CDE != null and SGN_CDE != ''">
+			,SGN_CDE = #{SGN_CDE}
+		</if>
+		<if test="APPL_AC_NAM != null and APPL_AC_NAM != ''">
+			,APPL_AC_NAM = #{APPL_AC_NAM}
+		</if>
+		<if test="APPL_ID_NO != null and APPL_ID_NO != ''">
+			,APPL_ID_NO = #{APPL_ID_NO}
+		</if>
+		<if test="USR_TEL != null and USR_TEL != ''">
+			,USR_TEL = #{USR_TEL}
+		</if>
+		<if test="STATUS != null and STATUS != ''">
+			,STATUS = #{STATUS}
+		</if>
+		<if test="IS_DEF != null and IS_DEF != ''">
+			,IS_DEF = #{IS_DEF}
+		</if>
+		<if test="IS_DEL != null and IS_DEL != ''">
+			,IS_DEL = #{IS_DEL}
+		</if>
+		<if test="WGHT != null and WGHT != ''">
+			,WGHT = #{WGHT}
+		</if>
+		<if test="BIND_DT != null and BIND_DT != ''">
+			,BIND_DT = #{BIND_DT}
+		</if>
+		<if test="IS_BINDFOTIC != null and IS_BINDFOTIC != ''">
+			,IS_BINDFOTIC = #{IS_BINDFOTIC}
+		</if>
+		WHERE BCRD_SEQ = #{BCRD_SEQ}
+	</update>
+
+	<update id="updateBySEQSelective">
+		UPDATE CL_BANKCARD SET USR_CDE = USR_CDE
+		<if test="APPL_BANK_NAME != null and APPL_BANK_NAME != ''">
+			,APPL_BANK_NAME = #{APPL_BANK_NAME}
+		</if>
+		<if test="BNK_CODE != null and BNK_CODE != ''">
+			,BNK_CODE = #{BNK_CODE}
+		</if>
+		<if test="APPL_AC_BANK != null and APPL_AC_BANK != ''">
+			,APPL_AC_BANK = #{APPL_AC_BANK}
+		</if>
+		<if test="ET_BNK_ADDR != null and ET_BNK_ADDR != ''">
+			,ET_BNK_ADDR = #{ET_BNK_ADDR}
+		</if>
+		<if test="CARDTYPE != null and CARDTYPE != ''">
+			,CARDTYPE = #{CARDTYPE}
+		</if>
+		<if test="APPL_CARD_NO != null and APPL_CARD_NO != ''">
+			,APPL_CARD_NO = #{APPL_CARD_NO}
+		</if>
+		<if test="EPR_DT != null and EPR_DT != ''">
+			,EPR_DT = #{EPR_DT}
+		</if>
+		<if test="SGN_CDE != null and SGN_CDE != ''">
+			,SGN_CDE = #{SGN_CDE}
+		</if>
+		<if test="APPL_AC_NAM != null and APPL_AC_NAM != ''">
+			,APPL_AC_NAM = #{APPL_AC_NAM}
+		</if>
+		<if test="APPL_ID_NO != null and APPL_ID_NO != ''">
+			,APPL_ID_NO = #{APPL_ID_NO}
+		</if>
+		<if test="USR_TEL != null and USR_TEL != ''">
+			,USR_TEL = #{USR_TEL}
+		</if>
+		<if test="STATUS != null and STATUS != ''">
+			,STATUS = #{STATUS}
+		</if>
+		<if test="IS_DEF != null and IS_DEF != ''">
+			,IS_DEF = #{IS_DEF}
+		</if>
+		<if test="IS_DEL != null and IS_DEL != ''">
+			,IS_DEL = #{IS_DEL}
+		</if>
+		<if test="WGHT != null and WGHT != ''">
+			,WGHT = #{WGHT}
+		</if>
+		<if test="IS_BIND != null and IS_BIND != ''">
+			,IS_BIND = #{IS_BIND}
+		</if>
+		<if test="BIND_DT != null and BIND_DT != ''">
+			,BIND_DT = #{BIND_DT}
+		</if>
+		<if test="BIND_IP != null and BIND_IP != ''">
+			,BIND_IP = #{BIND_IP}
+		</if>
+		<if test="BIND_CDE != null and BIND_CDE != ''">
+			,BIND_CDE = #{BIND_CDE}
+		</if>
+		<if test="IS_BINDFOTIC != null and IS_BINDFOTIC != ''">
+			,IS_BINDFOTIC = #{IS_BINDFOTIC}
+		</if>
+		WHERE BCRD_SEQ = #{BCRD_SEQ}
+	</update>
+	
+	<delete id="deleteByCardNo" parameterType="java.lang.String">
+		delete from CL_BANKCARD where APPL_CARD_NO = #{APPL_CARD_NO}
+	</delete>
+</mapper>

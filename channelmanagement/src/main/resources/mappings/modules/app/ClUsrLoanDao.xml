@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jeeplus.modules.app.dao.ClUsrLoanDao">
+	<resultMap id="BaseResultMap" type="com.jeeplus.modules.app.entity.ClUsrLoan">
+		<id column="LOAN_SEQ" jdbcType="INTEGER" property="loanSeq" />
+		<result column="USR_CDE" jdbcType="VARCHAR" property="usrCde" />
+		<result column="APPL_CDE" jdbcType="VARCHAR" property="applCde" />
+		<result column="POLICY_NO" jdbcType="VARCHAR" property="policyNo" />
+		<result column="LOAN_ACNO" jdbcType="VARCHAR" property="loanAcno" />
+		<result column="LOAN_AMT" jdbcType="DECIMAL" property="loanAmt" />
+		<result column="LOAN_TERM" jdbcType="VARCHAR" property="loanTerm" />
+		<result column="RETU_KIND" jdbcType="VARCHAR" property="retuKind" />
+		<result column="BEGIN_DT" jdbcType="TIMESTAMP" property="beginDt" />
+		<result column="END_DT" jdbcType="TIMESTAMP" property="endDt" />
+		<result column="S_TERM" jdbcType="VARCHAR" property="sTerm" />
+		<result column="S_DATE" jdbcType="TIMESTAMP" property="sDate" />
+		<result column="BAL" jdbcType="VARCHAR" property="bal" />
+		<result column="ACC_FLAG" jdbcType="VARCHAR" property="accFlag" />
+		<result column="MDF_DT" jdbcType="TIMESTAMP" property="mdfDt" />
+	</resultMap>
+	<sql id="Base_Column_List">
+		LOAN_SEQ, USR_CDE, APPL_CDE, POLICY_NO, LOAN_ACNO, LOAN_AMT, LOAN_TERM,
+		RETU_KIND,
+		BEGIN_DT, END_DT, S_TERM, S_DATE, BAL, ACC_FLAG, MDF_DT
+	</sql>
+	<select id="getLoanOrderPolicy" parameterType="java.lang.String"
+		resultType="int">
+		select
+		count(1)
+		from CL_USR_LOAN
+		where POLICY_NO = #{POLICY_NO}
+	</select>
+	
+	
+	<select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from CL_USR_LOAN
+		where POLICY_NO = #{POLICY_NO}
+	</select>
+	
+	<select id="getByUsrCde" parameterType="java.lang.String" resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from CL_USR_LOAN
+		where USR_CDE = #{usrCde}
+	</select>
+	
+	
+	<select id="getByBeginDate" parameterType="java.lang.String" resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from CL_USR_LOAN
+		where DATE_FORMAT(BEGIN_DT, '%Y-%m-%d') = #{date}
+	</select>
+	
+	
+	<select id="getTels2SendBindBankCardRemind"  resultType="java.lang.String">
+		select DISTINCT c.USR_TEL from CL_USR_LOAN a,CL_BANKCARD b,CL_USR c where (a.ACC_FLAG='0' or a.ACC_FLAG='1') and a.USR_CDE = b.USR_CDE and b.IS_BIND ='0' and b.IS_BINDFOTIC != '2', and a.USR_CDE = c.USR_CDE  
+	</select>
+	
+	
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+		delete from CL_USR_LOAN
+		where LOAN_SEQ = #{loanSeq,jdbcType=INTEGER}
+	</delete>
+	<insert id="insert" parameterType="com.jeeplus.modules.app.entity.ClUsrLoan">
+		insert into CL_USR_LOAN (LOAN_SEQ, USR_CDE, APPL_CDE,
+		POLICY_NO, LOAN_ACNO, LOAN_AMT,
+		LOAN_TERM, RETU_KIND, BEGIN_DT,
+		END_DT, S_TERM, S_DATE,
+		BAL, ACC_FLAG, MDF_DT
+		)
+		values (#{loanSeq,jdbcType=INTEGER}, #{usrCde,jdbcType=VARCHAR},
+		#{applCde,jdbcType=VARCHAR},
+		#{policyNo,jdbcType=VARCHAR}, #{loanAcno,jdbcType=VARCHAR}, #{loanAmt,jdbcType=DECIMAL},
+		#{loanTerm,jdbcType=VARCHAR}, #{retuKind,jdbcType=VARCHAR},
+		#{beginDt,jdbcType=TIMESTAMP},
+		#{endDt,jdbcType=TIMESTAMP}, #{sTerm,jdbcType=VARCHAR}, #{sDate,jdbcType=TIMESTAMP},
+		#{bal,jdbcType=VARCHAR}, #{accFlag,jdbcType=VARCHAR},
+		#{mdfDt,jdbcType=TIMESTAMP}
+		)
+	</insert>
+	
+	<update id="updateByPrimaryKeySelective" parameterType="com.jeeplus.modules.app.entity.ClUsrLoan">
+    update CL_USR_LOAN
+    <set>
+      <if test="sTerm != null and sTerm != ''">
+        S_TERM = #{sTerm,jdbcType=VARCHAR},
+      </if>
+      <if test="sDate != null">
+        S_DATE = #{sDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="bal != null and bal != ''">
+        BAL = #{bal,jdbcType=VARCHAR},
+      </if>
+      <if test="accFlag != null and accFlag != ''">
+        ACC_FLAG = #{accFlag,jdbcType=VARCHAR},
+      </if>
+      <if test="mdfDt != null">
+        MDF_DT = #{mdfDt,jdbcType=TIMESTAMP},
+      </if>
+  
+    </set>
+    where POLICY_NO = #{policyNo,jdbcType=VARCHAR}
+  </update>
+  
+    <select id="getSingleApply" resultType="int" parameterType="java.lang.String">
+	SELECT
+	  SUM( cout ) AS cnt 
+      FROM
+	(
+	    SELECT
+		COUNT( 1 ) AS cout 
+	  FROM
+		cl_usr_loan a
+		JOIN cl_with_recover b ON a.`POLICY_NO` = b.`POLICY_NO` 
+	  WHERE
+		a.USR_CDE = #{usrCde} 
+		AND a.ACC_FLAG = '4' 
+		AND b.SETLIND != 'Y' 
+		AND b.DIFFTYPE = 'SUBROGATION' 
+		UNION ALL
+	  SELECT
+		COUNT( 1 ) AS cout 
+	  FROM
+		cl_usr_loan a 
+	  WHERE
+		a.USR_CDE = #{usrCde}
+		AND a.ACC_FLAG IN ( 0, 1, 3 ) 
+	) a
+	</select>
+	
+	<select id="getUsrLoanFotic"  parameterType="java.lang.String"
+		resultType="int">
+		select
+		COUNT(a.`POLICY_NO`)
+		FROM CL_USR_LOAN a,cl_usr_apply b
+		where a.USR_CDE = #{USR_CDE} AND a.ACC_FLAG != '2' AND a.`POLICY_NO` = b.`POLICY_NO` AND b.PAY_CHANNEL = 'FOTIC'
+	</select>
+	 
+</mapper>

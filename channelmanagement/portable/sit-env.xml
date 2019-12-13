@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<portable-config>
+	<config-file path="WEB-INF/classes/config.properties">
+		<replace key="env.flag">sit</replace>
+		<replace key="jdbc.type">mysql</replace>	
+		<replace key="jdbc.driver">com.mysql.jdbc.Driver</replace>
+		<replace key="jdbc.url">jdbc:mysql://10.7.133.100:3306/net_loans_sit?useUnicode=true&amp;autoReconnect=true&amp;characterEncoding=UTF-8</replace>
+		<replace key="jdbc.username">n_loan_user_sit</replace>
+		<replace key="jdbc.password">N_loan_user_sit1</replace>
+		<replace key="redis.host">10.7.133.100</replace>	
+		<replace key="redis.port">6380</replace>	
+		<replace key="redis.timeout">10000</replace>	
+		<replace key="redis.pwd">cashredispass</replace>
+		<replace key="isOnline">false</replace>
+		<replace key="isFPValidateSfzOn">false</replace>
+		<replace key="isFPChkPersonOn">false</replace>
+	</config-file>
+	
+	<config-file path="WEB-INF/classes/sysconfig.properties">
+		<replace key="policePrefix">WD</replace>
+		<replace key="prePoliceSuffix">Y</replace>	
+		<replace key="policeSuffix">W</replace>
+		<!-- 核算 -->
+		<replace key="accountapiurl">http://10.8.203.63:9001/ycloans/Cmis2YcloansHttpChannel</replace>
+		<!-- 新中间 -->
+		<replace key="loanapiurl">http://10.8.206.77/sit/Servlet/midLoanSerServlet</replace>
+		<!-- 催收 -->
+		<replace key="ipurl">10.8.199.231</replace>
+		<replace key="name">collectionuser</replace>	
+		<replace key="password">collectionuser</replace>	
+		<replace key="uplodfileurl">/foticdata/download/sd</replace>	
+		<replace key="baseurl">up2ftp/</replace>
+		<!-- 短信 -->
+		<replace key="smsurl">http://10.8.206.77/message-service/sit/sendSms</replace>
+		<!-- face++ -->
+		<replace key="bankcardUrl">https://api.megvii.com/faceid/v3/ocrbankcard</replace>	
+		<replace key="facecompareUrl">https://api.megvii.com/faceid/v2/verify</replace>
+		<replace key="idcardUrl">https://api.faceid.com/faceid/v1/ocridcard</replace>
+		<replace key="verifyUrl">https://api.megvii.com/faceid/v2/verify</replace>
+		<replace key="api_key">C0bl4hqXW3Q-RcTX4VKJoJ2eLbbXq5Bi</replace>
+		<replace key="api_secret">JiUMsHDp1RFidnucn6ArLz_2eAANPzca</replace>
+		<replace key="getToken">https://api.megvii.com/faceid/lite/get_token</replace>
+		<replace key="getResult">https://api.megvii.com/faceid/lite/get_result</replace>
+		<!-- 产险 未生效保单 -->
+		<replace key="invalid_policy.url">http://10.8.199.119:7002/servicebus/services/TransPolicyService</replace>
+		<replace key="invalid_policy.namespace">http://webservice.transpolicy.servicebus.sinosig.com</replace>		
+		<!-- 集团电子保单 -->
+		<replace key="elec_policy">http://10.8.203.48:9000/risk/elepolicy/createPolicy</replace>
+		<replace key="elec_sendName">chanxianxinbao</replace>		
+		<replace key="elec_sendPwd">xinbaopro</replace>
+		<replace key="elec_sendType">1891</replace>		
+		<!-- PM -->
+		<replace key="pm.url">http://10.7.128.142/ProcessManager.WebService.Online.SIGCN/ProcessManager.asmx?wsdl</replace>
+		<replace key="pm.namespace">http://tempuri.org/</replace>		
+		<replace key="pm.actionUri">CallProcessManager</replace>
+		<replace key="pm.op">CallProcessManager</replace>
+		<replace key="pm.paramName">applicationXML</replace>
+		<!-- 决策 -->
+		<replace key="re.decision.url">http://10.7.128.35:8084/engine/service/decision/v1</replace>
+		<replace key="re.derived.url">http://10.7.128.35:8081/decision/result/takeWDResultData</replace>		
+		<replace key="re.white.url">http://10.7.128.35:8081/decision/result/takeWhiteData</replace>
+		<!-- 事件上报  -->
+		<replace key="er.url">https://10.7.128.7/data_wd/rest/app_push</replace>
+		<!-- 定时任务 -->
+		<!-- <replace key="task.url">http://10.8.206.77/midmanagerser/uat/jobres</replace> -->
+		<!-- 法大大 -->
+		<replace key="fadada.url">https://testapi.fadada.com:8443/api/</replace>
+		<replace key="fadada.appid">401168</replace>		
+		<replace key="fadada.appsecret">iHw7RjgNcQoXtHQxWomKPplb</replace>
+		<replace key="fadada.customerid">EC65027FB9444333ABA554AC25377DB1</replace>
+		<replace key="fadada.uploadurl">upload_fdd/</replace>
+		<!-- 征信上报 -->
+		<replace key="fadada.url">https://testapi.fadada.com:8443/api/</replace>
+		<replace key="fadada.appid">401168</replace>		
+		<replace key="fadada.appsecret">iHw7RjgNcQoXtHQxWomKPplb</replace>
+		<replace key="fadada.customerid">EC65027FB9444333ABA554AC25377DB1</replace>
+		<replace key="fadada.uploadurl">upload_fdd/</replace>
+		<!-- 征信上报 -->
+		<replace key="cre.ip">10.8.203.47</replace>
+		<replace key="cre.name">sftp_zx</replace>	
+		<replace key="cre.password">sftp_zx</replace>
+		<replace key="cre.url">/sftp_zx</replace>
+		<replace key="cre.baseurl">D://</replace>
+		<replace key="cre.legalperson">\u738B\u51E4\u53EC</replace>
+		<replace key="cre.legalpersonidcard">11111111111111</replace>
+		<replace key="cre.deptcode">K10155840H0001</replace>
+	</config-file>	
+	
+	<config-file path="WEB-INF/classes/Id5.properties">
+		<replace key="userName">guozhengtongapi</replace>
+		<replace key="password">guozhengtongapi_L6y(_4@d</replace>	
+		<replace key="desKey">12345678</replace>
+		<replace key="dataType">3Y010101</replace>
+		<replace key="isBaffleFlgOn">N</replace>
+	</config-file>
+	
+	<config-file path="WEB-INF/classes/upyun.properties">
+		<replace key="BUCKET_NAME">sunshinecredit</replace>
+		<replace key="OPERATOR_NAME">shandai</replace>	
+		<replace key="OPERATOR_PWD">shandai123</replace>
+		<replace key="apiurl">http://10.8.199.188:8001/attachment-tools/AppImageResultServlet</replace>
+		<replace key="apiDomain">http://v0.api.upyun.com</replace>
+		<replace key="downloadurl">tmp_download</replace>
+	</config-file>
+	
+		
+</portable-config>

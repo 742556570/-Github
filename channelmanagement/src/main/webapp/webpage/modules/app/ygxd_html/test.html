@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0,user-scalable=no" name="viewport" />
+    <meta name="format-detection" content="telephone=no"/>
+    <meta name="apple-mobile-web-app-status-bar-style"  />
+	<link rel="stylesheet" type="text/css" href="css/common.css">
+	<script src="js\jquery.min.js"></script>
+
+<script type="text/javascript">
+$(document).ready(function(){
+	
+	$("#title1").click(function(){
+		$("#yc").animate({
+			height: 'toggle'
+		});
+		
+	});
+
+	$("#show").click(function(){
+		$("p").show(1000);
+	});
+
+});
+</script>
+</head>
+<body>
+	<div class="padding10">
+        <div style="width: 0.2rem; height: 1rem; background: #ff0000; float: left"></div>
+			<p id="xx" class="font10 color666 bgf5 padding10">关于阳光现贷</p>
+		</div>
+		<div id="title1" class="bgfff underLine">
+			<img style="float: right; padding-right: 1rem; width: 0.5rem; height: 1rem; margin-top: 1rem" src="img\arrow_detail.png">
+			<p class="font10 padding10 color666">"阳光现贷"是什么</p>
+		</div>
+		<div id="yc" class="underLine" style="position: relative;">
+			<p class="font10 color666 questionPadding10">"阳光现贷"折这是的发生的范德萨发的是什么</p>
+			<img style="width: 0.5rem; height: 1rem; position: absolute; right: 0%; top: 50%; margin-top: -0.5rem; margin-right: 1rem;" src="img\arrow_detail.png">
+		</div>
+	</div>
+	<button id="hide" type="button">Click me</button>
+	<button id="show" type="button">show</button>
+</body>
+</html>

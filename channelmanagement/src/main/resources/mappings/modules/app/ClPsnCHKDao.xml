@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jeeplus.modules.app.dao.ClPsnCHKDao">
+  <resultMap id="BaseResultMap" type="ClPsnCHK">
+    <id column="MEDIA_SEQ"  property="mediaSeq" />
+    <result column="USR_CDE"  property="usrCde" />
+    <result column="TRD_NO"  property="trdNo" />
+    <result column="MEDIA_PATH"  property="mediaPath" />
+    <result column="MEDIA_PATH_LC"  property="mediaPathLc" />
+    <result column="SCORES"  property="scores" />
+    <result column="MEDIA_DESC"  property="mediaDesc" />
+    <result column="CRT_DT"  property="crtDt" />
+    <result column="CKINFO"  property="ckinfo" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    MEDIA_SEQ, USR_CDE, TRD_NO, MEDIA_PATH, MEDIA_PATH_LC,SCORES, MEDIA_DESC, CRT_DT, CKINFO
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from CL_PSN_CHK
+    where MEDIA_SEQ = #{mediaSeq}
+  </select>
+  
+   <select id="selectByUsrCde" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from CL_PSN_CHK
+    where USR_CDE = #{usrCde} order by CRT_DT desc
+  </select>
+  
+  <select id="selectByUsrCdeAndStatus" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from CL_PSN_CHK
+    where USR_CDE = #{usrCde}  and CKINFO = 'true' order by CRT_DT desc
+  </select>
+  
+  <select id="selectByUsrCdeAndTrdNo" parameterType="java.util.HashMap" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from CL_PSN_CHK
+    where USR_CDE = #{usrCde} and TRD_NO = #{trdNo} 
+  </select>
+  
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from CL_PSN_CHK
+    where MEDIA_SEQ = #{mediaSeq}
+  </delete>
+  <insert id="insert" parameterType="ClPsnCHK">
+    insert into CL_PSN_CHK (MEDIA_SEQ, USR_CDE, TRD_NO, 
+      MEDIA_PATH, MEDIA_PATH_LC,SCORES, MEDIA_DESC, 
+      CRT_DT, CKINFO)
+    values (#{mediaSeq}, #{usrCde}, #{trdNo}, 
+      #{mediaPath}, #{mediaPathLc},#{scores}, #{mediaDesc}, 
+      #{crtDt}, #{ckinfo})
+  </insert>
+  <insert id="insertSelective" parameterType="ClPsnCHK">
+    insert into CL_PSN_CHK
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="mediaSeq != null">
+        MEDIA_SEQ,
+      </if>
+      <if test="usrCde != null">
+        USR_CDE,
+      </if>
+      <if test="trdNo != null">
+        TRD_NO,
+      </if>
+      <if test="mediaPath != null">
+        MEDIA_PATH,
+      </if>
+      <if test="mediaPathLc != null">
+        MEDIA_PATH_LC,
+      </if>
+      <if test="mediaDesc != null">
+        MEDIA_DESC,
+      </if>
+      <if test="crtDt != null">
+        CRT_DT,
+      </if>
+      <if test="ckinfo != null">
+        CKINFO,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="mediaSeq != null">
+        #{mediaSeq},
+      </if>
+      <if test="usrCde != null">
+        #{usrCde},
+      </if>
+      <if test="trdNo != null">
+        #{trdNo},
+      </if>
+      <if test="mediaPath != null">
+        #{mediaPath},
+      </if>
+      <if test="mediaPathLc != null">
+        #{mediaPathLc},
+      </if>
+      <if test="mediaDesc != null">
+        #{mediaDesc},
+      </if>
+      <if test="crtDt != null">
+        #{crtDt},
+      </if>
+      <if test="ckinfo != null">
+        #{ckinfo},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="ClPsnCHK">
+    update CL_PSN_CHK
+    <set>
+      <if test="usrCde != null">
+        USR_CDE = #{usrCde},
+      </if>
+      <if test="trdNo != null">
+        TRD_NO = #{trdNo},
+      </if>
+      <if test="mediaPath != null">
+        MEDIA_PATH = #{mediaPath},
+      </if>
+      <if test="mediaPathLc != null">
+        MEDIA_PATH_LC = #{mediaPathLc},
+      </if>
+      <if test="mediaDesc != null">
+        MEDIA_DESC = #{mediaDesc},
+      </if>
+      <if test="crtDt != null">
+        CRT_DT = #{crtDt},
+      </if>
+      <if test="ckinfo != null">
+        CKINFO = #{ckinfo},
+      </if>
+    </set>
+    where MEDIA_SEQ = #{mediaSeq}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="ClPsnCHK">
+    update CL_PSN_CHK
+    set USR_CDE = #{usrCde},
+      TRD_NO = #{trdNo},
+      MEDIA_PATH = #{mediaPath},
+      MEDIA_PATH_LC = #{mediaPathLc},
+      MEDIA_DESC = #{mediaDesc},
+      CRT_DT = #{crtDt},
+      CKINFO = #{ckinfo}
+    where MEDIA_SEQ = #{mediaSeq}
+  </update>
+</mapper>

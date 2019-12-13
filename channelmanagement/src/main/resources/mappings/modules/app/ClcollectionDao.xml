@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jeeplus.modules.app.dao.ClcollectionDao">
+
+	<resultMap id="ClCustomerDetailsResultMap" type="ClCustomerDetails">
+		<result property="CUST_ID" column="CUST_ID" />
+		<result property="POLICY_NO" column="POLICY_NO" />
+		<result property="ID_NO" column="ID_NO" />
+		<result property="ID_TYPE" column="ID_TYPE" />
+		<result property="TITLE" column="TITLE" />
+		<result property="NAME" column="NAME" />
+		<result property="GENDER" column="GENDER" />
+		<result property="BIRTHDAY" column="BIRTHDAY" />
+		<result property="OCCUPATION" column="OCCUPATION" />
+		<result property="BANKMEMBER_NO" column="BANKMEMBER_NO" />
+		<result property="MARITAL_STATUS" column="MARITAL_STATUS" />
+		<result property="QUALIFICATION" column="QUALIFICATION" />
+		<result property="HOUSE_OWNERSHIP" column="HOUSE_OWNERSHIP" />
+		<result property="HOUSE_TYPE" column="HOUSE_TYPE" />
+		<result property="LIQUID_ASSET" column="LIQUID_ASSET" />
+		<result property="MOBILE_NO" column="MOBILE_NO" />
+		<result property="EMAIL" column="EMAIL" />
+		<result property="EMP_STATUS" column="EMP_STATUS" />
+		<result property="NBR_OF_DEPENDENTS" column="NBR_OF_DEPENDENTS" />
+		<result property="SOCIAL_INS_AMT" column="SOCIAL_INS_AMT" />
+		<result property="CORP_NAME" column="CORP_NAME" />
+		<result property="FAMILY_KNOW" column="FAMILY_KNOW" />
+		<result property="HASCAR" column="HASCAR" />
+		<result property="HOMEADDRESS" column="HOMEADDRESS" />
+		<result property="BRANCH_ID" column="BRANCH_ID" />
+		<result property="BRANCH_CODE" column="BRANCH_CODE" />
+	</resultMap>
+
+
+	<resultMap id="ClAddressDetailsResultMap" type="ClAddressDetails">
+		<result property="ADDR_ID" column="ADDR_ID" />
+		<result property="CUST_ID" column="CUST_ID" />
+		<result property="RELATIONSHIP" column="RELATIONSHIP" />
+		<result property="NAME" column="NAME" />
+		<result property="GENDER" column="GENDER" />
+		<result property="POST" column="POST" />
+		<result property="ADDR_TYPE" column="ADDR_TYPE" />
+		<result property="IS_VALID" column="IS_VALID" />
+	</resultMap>
+
+	<resultMap id="ClMobileDetailsResultMap" type="ClMobileDetails">
+		<result property="CONTACT_ID" column="CONTACT_ID" />
+		<result property="CUST_ID" column="CUST_ID" />
+		<result property="RELATIONSHIP" column="RELATIONSHIP" />
+		<result property="NAME" column="NAME" />
+		<result property="GENDER" column="GENDER" />
+		<result property="TEL_TYPE" column="TEL_TYPE" />
+		<result property="PHONE" column="PHONE" />
+		<result property="IS_VALID" column="IS_VALID" />
+	</resultMap>
+
+	<resultMap id="ClPolicyDetailsResultMap" type="ClPolicyDetails">
+		<result property="ACCT_NO" column="ACCT_NO" />
+		<result property="CUST_ID" column="CUST_ID" />
+		<result property="POLICY_NO" column="POLICY_NO" />
+		<result property="PRO_NOTE_NO" column="PRO_NOTE_NO" />
+		<result property="APPLY_CODE" column="APPLY_CODE" />
+		<result property="CITY_CODE" column="CITY_CODE" />
+		<result property="BANK" column="BANK" />
+		<result property="BRANCHES_CODE" column="BRANCHES_CODE" />
+		<result property="BRANCHES_NAME" column="BRANCHES_NAME" />
+		<result property="PRODUCT_CODE" column="PRODUCT_CODE" />
+		<result property="LOAN_PURPOSE" column="LOAN_PURPOSE" />
+		<result property="PRODUCT_TYPE" column="PRODUCT_TYPE" />
+		<result property="LOAN_RATE" column="LOAN_RATE" />
+		<result property="PREMIUN_RATE" column="PREMIUN_RATE" />
+		<result property="RISK_CODE" column="RISK_CODE" />
+		<result property="COM_CODE" column="COM_CODE" />
+		<result property="BUSINESS_TYPE" column="BUSINESS_TYPE" />
+		<result property="SIGN_CUST_NAME" column="SIGN_CUST_NAME" />
+		<result property="PhPremiumRate" column="PhPremiumRate" />
+		<result property="POUNDAGE_RATE" column="POUNDAGE_RATE" />
+		<result property="MANAGEMENT_RATE" column="MANAGEMENT_RATE" />
+	</resultMap>
+
+
+	<select id="getCustomerDetails" resultMap="ClCustomerDetailsResultMap"
+		parameterType="java.lang.String">
+		SELECT
+		A.USR_CDE AS CUST_ID,
+		"" AS POLICY_NO,
+		C.ID_NO AS
+		ID_NO,
+		"I" AS ID_TYPE,
+		B.DUTY AS TITLE,
+		C.CUST_NAME AS NAME,
+		C.INDIV_SEX
+		AS GENDER,
+		C.BIRTHDAY_DATE AS BIRTHDAY,
+		"" AS OCCUPATION,
+		"" AS
+		MARITAL_STATUS,
+		"" AS MARITAL_STATUS,
+		"" AS QUALIFICATION,
+		"" AS
+		HOUSE_OWNERSHIP,
+		"" AS LIQUID_ASSET,
+		A.USR_TEL AS MOBILE_NO,
+		"" AS EMAIL,
+		"" AS EMP_STATUS,
+		"" AS NBR_OF_DEPENDENTS,
+		"" AS SOCIAL_INS_AMT,
+		B.INDIV_EMP_NAME AS CORP_NAME,
+		"" AS FAMILY_KNOW,
+		"" AS HASCAR,
+		B.LIVE_ADDR AS HOMEADDRESS,
+		"" AS BRANCH_ID,
+		"" AS BRANCH_CODE
+		FROM
+		CL_USR A,
+		CL_USR_INFO B,
+		CL_IDCARD_INFO C
+		WHERE
+		A.USR_CDE = B.USR_CDE
+		AND
+		B.USR_CDE = C.USR_CDE
+		AND A.USR_CDE = #{CUST_ID}
+	</select>
+
+</mapper>

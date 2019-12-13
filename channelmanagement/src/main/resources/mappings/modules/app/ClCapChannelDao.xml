@@ -1,0 +1,182 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jeeplus.modules.app.dao.ClCapChannelDao">
+
+	<resultMap id="ClCapChannelResultMap" type="ClCapChannel">
+		<result property="CAP_SEQ" column="CAP_SEQ" />
+		<result property="CAP_CDE" column="CAP_CDE" />
+		<result property="CAP_INSTU_CDE" column="CAP_INSTU_CDE" />
+		<result property="CAP_INSTU_NAME" column="CAP_INSTU_NAME" />
+		<result property="CAP_INSUR_CDE" column="CAP_INSUR_CDE" />
+		<result property="KIND_CDE" column="KIND_CDE" />
+		<result property="KIND_NAME" column="KIND_NAME" />
+		<result property="SUM_AMOUNT" column="SUM_AMOUNT" />
+		<result property="BUSINESS_NATURE" column="BUSINESS_NATURE" />
+		<result property="SECURE_CDE" column="SECURE_CDE" />
+		<result property="SECURE_NAME" column="SECURE_NAME" />
+		<result property="CHANNEL_CDE" column="CHANNEL_CDE" />
+		<result property="CHANNEL_NAM" column="CHANNEL_NAM" />
+		<result property="HANDLER1_CDE" column="HANDLER1_CDE" />
+		<result property="OPERATOR_CDE" column="OPERATOR_CDE" />
+		<result property="OPERATE_SITE" column="OPERATE_SITE" />
+		<result property="COM_CED" column="COM_CED" />
+		<result property="MAKE_COM" column="MAKE_COM" />
+		<result property="CRT_DT" column="CRT_DT" />
+		<result property="CRT_USR" column="CRT_USR" />
+		<result property="MDF_DT" column="MDF_DT" />
+		<result property="MDF_USR" column="MDF_USR" />
+	</resultMap>
+	
+	
+	
+	<sql id="ClCapChannelColumns">
+		a.CAP_SEQ,
+		a.CAP_CDE,
+		a.CAP_INSTU_CDE,
+		a.CAP_INSTU_NAME,
+		a.CAP_INSUR_CDE,
+		a.KIND_CDE,
+		a.KIND_NAME,
+		a.SUM_AMOUNT,
+		a.BUSINESS_NATURE,
+		a.SECURE_CDE,
+		a.SECURE_NAME,
+		a.CHANNEL_CDE,
+		a.CHANNEL_NAM,
+		a.HANDLER1_CDE,
+		a.OPERATOR_CDE,
+		a.OPERATE_SITE,
+		a.COM_CED,
+		a.MAKE_COM,
+		a.CRT_DT,
+		a.CRT_USR,
+		a.MDF_DT,
+		a.MDF_USR
+	</sql>
+
+	
+	<!-- 根据渠道id获取资金渠道信息  -->
+	<select id="getByCapSeq" resultMap="ClCapChannelResultMap" parameterType="java.lang.String">
+		SELECT
+		<include refid="ClCapChannelColumns" />
+		FROM CL_CAP_CHANNEL a
+		WHERE a.CAP_SEQ = #{CAP_SEQ}
+	</select>
+	
+	<!-- <select id="getByUsrSource" resultMap="ClCapChannelResultMap">
+		SELECT
+		<include refid="ClCapChannelColumns" />
+		FROM CL_CAP_CHANNEL a
+		WHERE  a.USR_SOURCE ='${usrSource}'
+	</select> -->
+	
+	<!-- 获取列表  -->
+	<select id="getAll" resultMap="ClCapChannelResultMap">
+		SELECT
+		<include refid="ClCapChannelColumns" />
+		FROM CL_CAP_CHANNEL a
+	</select>
+	
+
+	<!-- 新增资金渠道 -->
+	<insert id="insert">
+		INSERT INTO CL_CAP_CHANNEL(
+		CAP_SEQ,
+		CAP_CDE,
+		CAP_INSTU_CDE,
+		CAP_INSTU_NAME,
+		CAP_INSUR_CDE,
+		KIND_CDE,
+		KIND_NAME,
+		SUM_AMOUNT,
+		BUSINESS_NATURE,
+		SECURE_CDE,
+		SECURE_NAME,
+		CHANNEL_CDE,
+		CHANNEL_NAM,
+		HANDLER1_CDE,
+		OPERATOR_CDE,
+		OPERATE_SITE,
+		COM_CED,
+		MAKE_COM,
+		CRT_DT,
+		CRT_USR,
+		MDF_DT,
+		MDF_USR
+		) VALUES (
+		#{CAP_SEQ},
+		#{CAP_CDE},
+		#{CAP_INSTU_CDE},
+		#{CAP_INSTU_NAME},
+		#{CAP_INSUR_CDE},
+		#{KIND_CDE},
+		#{KIND_NAME},
+		#{SUM_AMOUNT},
+		#{BUSINESS_NATURE},
+		#{SECURE_CDE},
+		#{SECURE_NAME},
+		#{CHANNEL_CDE},
+		#{CHANNEL_NAM},
+		#{HANDLER1_CDE},
+		#{OPERATOR_CDE},
+		#{OPERATE_SITE},
+		#{COM_CED},
+		#{MAKE_COM},
+		#{CRT_DT},
+		#{CRT_USR},
+		#{MDF_DT},
+		#{MDF_USR}
+		)
+	</insert>
+
+	<update id="updateById">
+		UPDATE CL_CAP_CHANNEL SET CAP_CDE = CAP_CDE
+		<if test="KIND_CDE != null and KIND_CDE != ''">
+			,KIND_CDE = #{KIND_CDE}
+		</if>
+		<if test="KIND_NAME != null and KIND_NAME != ''">
+			,KIND_NAME = #{KIND_NAME}
+		</if>
+		<if test="SUM_AMOUNT != null">
+			,SUM_AMOUNT = #{SUM_AMOUNT}
+		</if>
+		<if test="BUSINESS_NATURE != null and BUSINESS_NATURE != ''">
+			,BUSINESS_NATURE = #{BUSINESS_NATURE}
+		</if>
+		<if test="SECURE_CDE != null and SECURE_CDE != ''">
+			,SECURE_CDE = #{SECURE_CDE}
+		</if>
+		<if test="SECURE_NAME != null and SECURE_NAME != ''">
+			,SECURE_NAME = #{SECURE_NAME}
+		</if>
+		<if test="CHANNEL_CDE != null and CHANNEL_CDE != ''">
+			,CHANNEL_CDE = #{CHANNEL_CDE}
+		</if>
+		<if test="CHANNEL_NAM != null and CHANNEL_NAM != ''">
+			,CHANNEL_NAM = #{CHANNEL_NAM}
+		</if>
+		<if test="HANDLER1_CDE != null and HANDLER1_CDE != ''">
+			,HANDLER1_CDE = #{HANDLER1_CDE}
+		</if>
+		<if test="OPERATOR_CDE != null and OPERATOR_CDE != ''">
+			,OPERATOR_CDE = #{OPERATOR_CDE}
+		</if>
+		<if test="OPERATE_SITE != null and OPERATE_SITE != ''">
+			,OPERATE_SITE = #{OPERATE_SITE}
+		</if>
+		<if test="COM_CED != null and COM_CED != ''">
+			,COM_CED = #{COM_CED}
+		</if>
+		<if test="MAKE_COM != null and MAKE_COM != ''">
+			,MAKE_COM = #{MAKE_COM}
+		</if>
+		<if test="MDF_DT != null and MDF_DT != ''">
+			,MDF_DT = #{MDF_DT}
+		</if>
+		<if test="MDF_USR != null and MDF_USR != ''">
+			,MDF_USR = #{MDF_USR}
+		</if>
+		WHERE CAP_SEQ = #{CAP_SEQ}
+	</update>
+
+</mapper>

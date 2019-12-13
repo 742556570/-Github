@@ -1,0 +1,471 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jeeplus.modules.app.dao.ClUsrApplyDao">
+  <resultMap id="BaseResultMap" type="com.jeeplus.modules.app.entity.ClUsrApply">
+    <id column="APPL_SEQ"  property="applSeq" />
+    <result column="APPL_CDE"  property="applCde" />
+    <result column="POLICY_NO"  property="policyNo" />
+    <result column="PRD_CDE"  property="prdCde" />
+    <result column="USR_CDE"  property="usrCde" />
+    <result column="LOAN_ACNO"  property="loanAcno" />
+    <result column="APPLY_AMT"  property="applyAmt" />
+    <result column="APPLY_TNR"  property="applyTnr" />
+    <result column="INT_RATE"  property="intRate" />
+    <result column="PREMIUM_RATE"  property="premiumRate" />
+    <result column="APPLY_FOR"  property="applyFor" />
+    <result column="CRT_DT"  property="crtDt" />
+    <result column="TRD_RESULT"  property="trdResult" />
+    <result column="ST_CDE"  property="stCde" />
+    <result column="TRD_DETAIL"  property="trdDetail" />
+    <result column="APPRV_AMT"  property="apprvAmt" />
+    <result column="APPRV_TNR"  property="apprvTnr" />
+    <result column="DEBT_STATUS"  property="debtStatus" />
+    <result column="MDF_DT"  property="mdfDt" />
+    <result column="ADM_USR"  property="admUsr" />
+    <result column="ADM_DETAIL"  property="admDetail" />
+    <result column="LOAN_ACNO"  property="loanAcno" />
+    <result column="CREDIT_NO"  property="creditNo" />
+    <result column="BANKCARD_NO"  property="bankCardNo" />
+    <result column="PM_DT"  property="pmDt" />
+    <result column="PAY_CHANNEL"  property="payChannel" />
+  </resultMap>
+  
+  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.jeeplus.modules.app.entity.ClUsrApply">
+    <result column="RMK" jdbcType="LONGVARCHAR" property="rmk" />
+  </resultMap>
+  <sql id="Base_Column_List">
+
+    APPL_SEQ, APPL_CDE, POLICY_NO, PRD_CDE, USR_CDE,LOAN_ACNO, APPLY_AMT, APPLY_TNR,INT_RATE,PREMIUM_RATE,APPLY_FOR,CRT_DT, TRD_RESULT, 
+    ST_CDE, TRD_DETAIL, APPRV_AMT, APPRV_TNR, DEBT_STATUS,MDF_DT, ADM_USR, ADM_DETAIL,LOAN_ACNO,CREDIT_NO,BANKCARD_NO,PM_DT,PAY_CHANNEL
+
+  </sql>
+  <sql id="Blob_Column_List">
+    RMK
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="ResultMapWithBLOBs">
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from CL_USR_APPLY
+    where APPL_SEQ = #{applSeq}
+  </select>
+  
+  <select id="getByUsrCde" parameterType="java.lang.String" resultMap="ResultMapWithBLOBs">
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from CL_USR_APPLY
+    where USR_CDE = #{usrCde}
+  </select>
+  
+  <select id="getPassedByUsrCde" parameterType="java.lang.String" resultMap="ResultMapWithBLOBs">
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from CL_USR_APPLY
+    where USR_CDE = #{usrCde} and ST_CDE = '11' 
+  </select>
+  
+  
+  <select id="getUnPassedApplies" parameterType="java.lang.String" resultMap="ResultMapWithBLOBs">
+   select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from CL_USR_APPLY
+    where USR_CDE = #{usrCde} and ST_CDE != '11'
+  
+  </select>
+  
+  <select id="getAllUsrApply"  parameterType="java.lang.String" resultMap="ResultMapWithBLOBs">
+   select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from CL_USR_APPLY
+    where DATE_FORMAT(CRT_DT, '%Y-%m-%d') = #{date} and  ST_CDE = '11'
+  
+  </select>
+  
+  <select id="getByPolicyNo" parameterType="java.lang.String" resultMap="ResultMapWithBLOBs">
+   select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from CL_USR_APPLY
+    where POLICY_NO = #{policyNo}
+  
+  </select>
+  
+   <select id="getApdAndNotLoaned" resultMap="ResultMapWithBLOBs">
+   select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from CL_USR_APPLY
+    where ST_CDE = '12'
+  
+  </select>
+  
+     <select id="getUsrApplyLoaned" resultMap="ResultMapWithBLOBs">
+   select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from CL_USR_APPLY
+    where ST_CDE = '11'
+  
+  </select>
+  
+  <select id="getUsrApplyLoanedByUsrCde" parameterType="java.lang.String" resultMap="ResultMapWithBLOBs">
+   select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from CL_USR_APPLY
+    where ST_CDE = '11' and USR_CDE = #{usrCde} 
+  
+  </select>
+  
+  
+  
+  <select id="getByStCde" parameterType="java.lang.String" resultMap="ResultMapWithBLOBs">
+   select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from CL_USR_APPLY
+    where ST_CDE = #{ST_CDE}
+  
+  </select>
+  
+  
+  <select id="getUsrApplyLoanedByUsrCdeAndBankCard" parameterType="java.util.HashMap" resultMap="ResultMapWithBLOBs">
+   select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from CL_USR_APPLY
+    where ST_CDE = '11' and USR_CDE = #{usrCde} and BANKCARD_NO = #{bankCardNo}
+  
+  </select>
+  
+  
+  
+  <select id="getNeedReGenContractByStep" parameterType="java.util.HashMap" resultMap="ResultMapWithBLOBs">
+   select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from CL_USR_APPLY
+    where 1=1
+    <if test="isApplySuccess == 'true'">
+    	and (ST_CDE = '11' or ST_CDE = '13')
+    </if>
+    and POLICY_NO not in (select b.POLICY_NO from CL_USR_CONTRACT b where b.STEP = #{STEP})
+  
+  </select>
+  
+  
+  
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from CL_USR_APPLY
+    where APPL_SEQ = #{applSeq}
+  </delete>
+  <insert id="insert" parameterType="com.jeeplus.modules.app.entity.ClUsrApply">
+    insert into CL_USR_APPLY ( APPL_CDE, POLICY_NO, 
+      PRD_CDE, USR_CDE,LOAN_ACNO, APPLY_AMT, 
+      APPLY_TNR,APPLY_FOR, CRT_DT, TRD_RESULT, 
+      ST_CDE, TRD_DETAIL, APPRV_AMT, 
+      APPRV_TNR,DEBT_STATUS, MDF_DT, ADM_USR, 
+      ADM_DETAIL, RMK,CREDIT_NO,INT_RATE,PREMIUM_RATE,BANKCARD_NO,PM_DT)
+    values ( #{applCde,jdbcType=VARCHAR}, #{policyNo,jdbcType=VARCHAR}, 
+      #{prdCde,jdbcType=VARCHAR}, #{usrCde,jdbcType=VARCHAR},#{loanAcno,jdbcType=VARCHAR}, #{applyAmt,jdbcType=VARCHAR}, 
+      #{applyTnr,jdbcType=VARCHAR},#{applyFor,jdbcType=VARCHAR}, #{crtDt,jdbcType=TIMESTAMP}, #{trdResult,jdbcType=VARCHAR}, 
+      #{stCde,jdbcType=VARCHAR}, #{trdDetail,jdbcType=VARCHAR}, #{apprvAmt,jdbcType=VARCHAR}, #{debtStatus,jdbcType=VARCHAR}, 
+      #{apprvTnr,jdbcType=VARCHAR}, #{mdfDt,jdbcType=TIMESTAMP}, #{admUsr,jdbcType=VARCHAR}, 
+      #{admDetail,jdbcType=VARCHAR}, #{rmk,jdbcType=LONGVARCHAR},#{creditNo,jdbcType=VARCHAR},
+      #{intRate,jdbcType=VARCHAR},#{premiumRate,jdbcType=VARCHAR},#{bankCardNo,jdbcType=VARCHAR},#{pmDt,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.jeeplus.modules.app.entity.ClUsrApply">
+    insert into CL_USR_APPLY
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="applSeq != null">
+        APPL_SEQ,
+      </if>
+      <if test="applCde != null">
+        APPL_CDE,
+      </if>
+      <if test="policyNo != null">
+        POLICY_NO,
+      </if>
+      <if test="prdCde != null">
+        PRD_CDE,
+      </if>
+      <if test="usrCde != null">
+        USR_CDE,
+      </if>
+      <if test="loanAcno != null">
+      	LOAN_ACNO,
+      </if>
+      <if test="applyAmt != null">
+        APPLY_AMT,
+      </if>
+      <if test="applyTnr != null">
+        APPLY_TNR,
+      </if>
+      <if test="applyFor != null">
+        APPLY_FOR,
+      </if>
+      <if test="crtDt != null">
+        CRT_DT,
+      </if>
+      <if test="trdResult != null">
+        TRD_RESULT,
+      </if>
+      <if test="stCde != null">
+        ST_CDE,
+      </if>
+      <if test="trdDetail != null">
+        TRD_DETAIL,
+      </if>
+      <if test="apprvAmt != null">
+        APPRV_AMT,
+      </if>
+      <if test="apprvTnr != null">
+        APPRV_TNR,
+      </if>
+      <if test="debtStatus != null">
+        DEBT_STATUS,
+      </if>
+      <if test="mdfDt != null">
+        MDF_DT,
+      </if>
+      <if test="admUsr != null">
+        ADM_USR,
+      </if>
+      <if test="admDetail != null">
+        ADM_DETAIL,
+      </if>
+      <if test="rmk != null">
+        RMK,
+      </if>
+      <if test="intRate != null">
+        INT_RATE,
+      </if>
+      <if test="premiumRate != null">
+        PREMIUM_RATE,
+      </if>
+      <if test="bankCardNo != null">
+        BANKCARD_NO,
+      </if>
+      <if test="pmDt != null">
+        PM_DT,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="applSeq != null">
+        #{applSeq,jdbcType=INTEGER},
+      </if>
+      <if test="applCde != null">
+        #{applCde,jdbcType=VARCHAR},
+      </if>
+      <if test="policyNo != null">
+        #{policyNo,jdbcType=VARCHAR},
+      </if>
+      <if test="prdCde != null">
+        #{prdCde,jdbcType=VARCHAR},
+      </if>
+      <if test="usrCde != null">
+        #{usrCde,jdbcType=VARCHAR},
+      </if>
+      <if test="loanAcno != null">
+      	#{loanAcno,jdbcType=VARCHAR},
+      </if>
+      <if test="applyAmt != null">
+        #{applyAmt,jdbcType=VARCHAR},
+      </if>
+      <if test="applyTnr != null">
+        #{applyTnr,jdbcType=VARCHAR},
+      </if>
+      <if test="applyFor != null">
+         #{applyFor,jdbcType=VARCHAR},
+      </if>
+      <if test="crtDt != null">
+        #{crtDt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="trdResult != null">
+        #{trdResult,jdbcType=VARCHAR},
+      </if>
+      <if test="stCde != null">
+        #{stCde,jdbcType=VARCHAR},
+      </if>
+      <if test="trdDetail != null">
+        #{trdDetail,jdbcType=VARCHAR},
+      </if>
+      <if test="apprvAmt != null">
+        #{apprvAmt,jdbcType=VARCHAR},
+      </if>
+      <if test="apprvTnr != null">
+        #{apprvTnr,jdbcType=VARCHAR},
+      </if>
+      <if test="debtStatus != null">
+        #{debtStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="mdfDt != null">
+        #{mdfDt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="admUsr != null">
+        #{admUsr,jdbcType=VARCHAR},
+      </if>
+      <if test="admDetail != null">
+        #{admDetail,jdbcType=VARCHAR},
+      </if>
+      <if test="rmk != null">
+        #{rmk,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="intRate != null">
+        #{intRate,jdbcType=VARCHAR},
+      </if>
+      <if test="premiumRate != null">
+         #{premiumRate,jdbcType=VARCHAR},
+      </if>
+      <if test="bankCardNo != null">
+         #{bankCardNo,jdbcType=VARCHAR},
+      </if>
+      <if test="pmDt != null">
+         #{pmDt,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.jeeplus.modules.app.entity.ClUsrApply">
+    update CL_USR_APPLY
+    <set>
+      <if test="applCde != null">
+        APPL_CDE = #{applCde,jdbcType=VARCHAR},
+      </if>
+      <if test="policyNo != null">
+        POLICY_NO = #{policyNo,jdbcType=VARCHAR},
+      </if>
+      <if test="prdCde != null">
+        PRD_CDE = #{prdCde,jdbcType=VARCHAR},
+      </if>
+      <if test="usrCde != null">
+        USR_CDE = #{usrCde,jdbcType=VARCHAR},
+      </if>
+       <if test="loanAcno != null">
+      	LOAN_ACNO = #{loanAcno,jdbcType=VARCHAR},
+      </if>
+      <if test="applyAmt != null">
+        APPLY_AMT = #{applyAmt,jdbcType=VARCHAR},
+      </if>
+      <if test="applyTnr != null">
+        APPLY_TNR = #{applyTnr,jdbcType=VARCHAR},
+      </if>
+      <if test="crtDt != null">
+        CRT_DT = #{crtDt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="trdResult != null">
+        TRD_RESULT = #{trdResult,jdbcType=VARCHAR},
+      </if>
+      <if test="stCde != null">
+        ST_CDE = #{stCde,jdbcType=VARCHAR},
+      </if>
+      <if test="trdDetail != null">
+        TRD_DETAIL = #{trdDetail,jdbcType=VARCHAR},
+      </if>
+      <if test="apprvAmt != null">
+        APPRV_AMT = #{apprvAmt,jdbcType=VARCHAR},
+      </if>
+      <if test="apprvTnr != null">
+        APPRV_TNR = #{apprvTnr,jdbcType=VARCHAR},
+      </if>
+      <if test="debtStatus != null">
+        DEBT_STATUS = #{debtStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="mdfDt != null">
+        MDF_DT = #{mdfDt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="admUsr != null">
+        ADM_USR = #{admUsr,jdbcType=VARCHAR},
+      </if>
+      <if test="admDetail != null">
+        ADM_DETAIL = #{admDetail,jdbcType=VARCHAR},
+      </if>
+      <if test="rmk != null">
+        RMK = #{rmk,jdbcType=LONGVARCHAR},
+      </if>
+      
+      <if test="creditNo != null">
+        CREDIT_NO = #{creditNo,jdbcType=VARCHAR},
+      </if>
+      <if test="bankCardNo != null">
+        BANKCARD_NO = #{bankCardNo,jdbcType=VARCHAR},
+      </if>
+      <if test="pmDt != null">
+        PM_DT = #{pmDt,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where APPL_SEQ = #{applSeq,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.jeeplus.modules.app.entity.ClUsrApply">
+    update CL_USR_APPLY
+    set APPL_CDE = #{applCde,jdbcType=VARCHAR},
+      POLICY_NO = #{policyNo,jdbcType=VARCHAR},
+      PRD_CDE = #{prdCde,jdbcType=VARCHAR},
+      USR_CDE = #{usrCde,jdbcType=VARCHAR},
+      LOAN_ACNO = #{loanAcno,jdbcType=VARCHAR},
+      APPLY_AMT = #{applyAmt,jdbcType=VARCHAR},
+      APPLY_TNR = #{applyTnr,jdbcType=VARCHAR},
+      CRT_DT = #{crtDt,jdbcType=TIMESTAMP},
+      TRD_RESULT = #{trdResult,jdbcType=VARCHAR},
+      ST_CDE = #{stCde,jdbcType=VARCHAR},
+      TRD_DETAIL = #{trdDetail,jdbcType=VARCHAR},
+      APPRV_AMT = #{apprvAmt,jdbcType=VARCHAR},
+      APPRV_TNR = #{apprvTnr,jdbcType=VARCHAR},
+      DEBT_STATUS = #{debtStatus,jdbcType=VARCHAR},
+      MDF_DT = #{mdfDt,jdbcType=TIMESTAMP},
+      ADM_USR = #{admUsr,jdbcType=VARCHAR},
+      ADM_DETAIL = #{admDetail,jdbcType=VARCHAR},
+      RMK = #{rmk,jdbcType=LONGVARCHAR}
+    where APPL_SEQ = #{applSeq,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.jeeplus.modules.app.entity.ClUsrApply">
+    update CL_USR_APPLY
+    set APPL_CDE = #{applCde,jdbcType=VARCHAR},
+      POLICY_NO = #{policyNo,jdbcType=VARCHAR},
+      PRD_CDE = #{prdCde,jdbcType=VARCHAR},
+      USR_CDE = #{usrCde,jdbcType=VARCHAR},
+      LOAN_ACNO = #{loanAcno,jdbcType=VARCHAR},
+      APPLY_AMT = #{applyAmt,jdbcType=VARCHAR},
+      APPLY_TNR = #{applyTnr,jdbcType=VARCHAR},
+      CRT_DT = #{crtDt,jdbcType=TIMESTAMP},
+      TRD_RESULT = #{trdResult,jdbcType=VARCHAR},
+      ST_CDE = #{stCde,jdbcType=VARCHAR},
+      TRD_DETAIL = #{trdDetail,jdbcType=VARCHAR},
+      APPRV_AMT = #{apprvAmt,jdbcType=VARCHAR},
+      APPRV_TNR = #{apprvTnr,jdbcType=VARCHAR},
+      DEBT_STATUS = #{debtStatus,jdbcType=VARCHAR},
+      MDF_DT = #{mdfDt,jdbcType=TIMESTAMP},
+      ADM_USR = #{admUsr,jdbcType=VARCHAR},
+      ADM_DETAIL = #{admDetail,jdbcType=VARCHAR}
+    where APPL_SEQ = #{applSeq,jdbcType=INTEGER}
+  </update>
+  
+  <update id="updateStatusByPolicyNo" parameterType="java.lang.String">
+  	 update CL_USR_APPLY set DEBT_STATUS = '51' where POLICY_NO = #{policyNo}
+  </update>
+  
+  
+  <update id="updateDebtByPolicyNo" parameterType="java.util.HashMap">
+  	 update CL_USR_APPLY set DEBT_STATUS = #{debtStatus}, MDF_DT = #{mdfDt} where POLICY_NO = #{policyNo}
+  </update>
+  
+  <update id="updateCardNoByPolicyNo" parameterType="java.util.HashMap">
+  	 update CL_USR_APPLY set BANKCARD_NO = #{bankCardNo}, MDF_DT = #{mdfDt} where POLICY_NO = #{policyNo}
+  </update>
+  
+</mapper>

@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jeeplus.modules.app.dao.ChChannelInfoDao">
+
+	<resultMap id="ChChannelInfoResultMap" type="ChChannelInfo">
+		<result property="CH_SEQ" column="CH_SEQ" />
+		<result property="CH_CDE" column="CH_CDE" />
+		<result property="CH_NAME" column="CH_NAME" />
+		<result property="FA_CH_CDE" column="FA_CH_CDE" />
+		<result property="FA_CH_NAME" column="FA_CH_NAME" />
+		<result property="CH_LINK" column="CH_LINK" />
+		<result property="CH_DAY_LIMIT" column="CH_DAY_LIMIT" />
+		<result property="CH_STATUS" column="CH_STATUS" />
+		<result property="RMK" column="RMK" />		
+		<result property="VERSION" column="VERSION" />
+	</resultMap>
+
+	
+	<sql id="ChChannelInfoColumns">
+		a.CH_SEQ,
+		a.CH_CDE,
+		a.CH_NAME,
+		a.FA_CH_CDE,
+		a.FA_CH_NAME,
+		a.CH_LINK,
+		a.CH_DAY_LIMIT,
+		a.CH_STATUS,
+		a.RMK,
+		a.VERSION
+	</sql>
+
+
+	<!-- 获取渠道信息-->
+	<select id="getAllChannelInfo" resultMap="ChChannelInfoResultMap" >
+		SELECT
+		<include refid="ChChannelInfoColumns" />
+		FROM CH_CHANNEL_INFO a
+	</select>
+	
+	<!-- 获取渠道信息-->
+	<select id="getAllSecChannelInfo" resultMap="ChChannelInfoResultMap" >
+		SELECT
+		<include refid="ChChannelInfoColumns" />
+		FROM CH_CHANNEL_INFO a 
+		where FA_CH_CDE != '-1'
+	</select>
+	
+		<!-- 根据渠道编号获取渠道信息-->
+	<select id="getChannelInfoByChCde" resultMap="ChChannelInfoResultMap" parameterType="java.util.HashMap">
+		SELECT
+		<include refid="ChChannelInfoColumns" />
+		FROM CH_CHANNEL_INFO a 
+		WHERE a.CH_CDE = #{CH_CDE} and a.CH_STATUS = 0
+	</select>
+	
+	<!-- 根据渠道编号获取渠道信息-->
+	<select id="getChannelStatusByChCde" resultMap="ChChannelInfoResultMap" parameterType="java.util.HashMap">
+		SELECT
+		<include refid="ChChannelInfoColumns" />
+		FROM CH_CHANNEL_INFO a 
+		WHERE a.CH_CDE = #{CH_CDE}
+	</select>
+
+    <select id="getAllChannelDayCount" resultType="int" parameterType="java.util.HashMap">
+		SELECT 
+		COUNT(b.APPL_SEQ) todayCnt
+		FROM CH_CHANNEL_INFO a,CH_USR_APPLY b 
+		WHERE a.CH_CDE = b.CUST_SEC_CHANNEL_CDE and a.CH_CDE = #{CH_SEC_CDE} 
+		and a.CH_STATUS = 0 and STR_TO_DATE(b.CRT_DT,'%Y-%m-%d') = #{DAY_TIME} 
+	</select>
+	
+
+	<!-- 插入渠道信息 -->
+	<insert id="insert">
+		INSERT INTO CH_CHANNEL_INFO(
+		a.CH_SEQ,
+		a.CH_CDE,
+		a.CH_NAME,
+		a.FA_CH_CDE,
+		a.FA_CH_NAME,
+		a.CH_LINK,
+		a.CH_DAY_LIMIT,
+		a.CH_STATUS,
+		a.RMK
+		)
+	</insert>
+	
+	<!-- 根据渠道编号获取渠道信息-->
+	<select id="getAllChannelInfoByChCde" resultMap="ChChannelInfoResultMap" parameterType="java.util.HashMap">
+		SELECT
+		<include refid="ChChannelInfoColumns" />
+		FROM CH_CHANNEL_INFO a 
+		WHERE a.CH_CDE = #{CH_CDE} or FA_CH_CDE = #{CH_CDE}
+	</select>
+</mapper>

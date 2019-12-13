@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jeeplus.modules.app.dao.ClWithRecoverDao">
+  <resultMap id="BaseResultMap" type="com.jeeplus.modules.app.entity.ClWithRecover">
+    <id column="LOAN_SEQ" jdbcType="INTEGER" property="loanSeq" />
+    <result column="POLICY_COUNT" jdbcType="VARCHAR" property="policyCount" />
+    <result column="POLICY_NO" jdbcType="VARCHAR" property="policyNo" />
+    <result column="BANK_CODE" jdbcType="VARCHAR" property="bankCode" />
+    <result column="CHECK_DATE" jdbcType="VARCHAR" property="checkDate" />
+    <result column="PLAN_FEE" jdbcType="VARCHAR" property="planFee" />
+    <result column="CAPITAL" jdbcType="VARCHAR" property="capital" />
+    <result column="INTAMT" jdbcType="VARCHAR" property="intamt" />
+    <result column="PREMIUM" jdbcType="VARCHAR" property="premium" />
+    <result column="PENALSUM" jdbcType="VARCHAR" property="penalsum" />
+    <result column="SYSSTATE" jdbcType="VARCHAR" property="sysstate" />
+    <result column="SETLIND" jdbcType="VARCHAR" property="setlInd" />
+    <result column="DIFFTYPE" jdbcType="VARCHAR" property="diffType" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    LOAN_SEQ, POLICY_COUNT, POLICY_NO, BANK_CODE, CHECK_DATE, PLAN_FEE, CAPITAL, INTAMT, 
+    PREMIUM, PENALSUM,SYSSTATE
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from CL_WITH_RECOVER
+    where LOAN_SEQ = #{loanSeq,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from CL_WITH_RECOVER
+    where LOAN_SEQ = #{loanSeq,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.jeeplus.modules.app.entity.ClWithRecover">
+    insert into CL_WITH_RECOVER (LOAN_SEQ, POLICY_COUNT, POLICY_NO, 
+      BANK_CODE, CHECK_DATE, PLAN_FEE, 
+      CAPITAL, INTAMT, PREMIUM, 
+      PENALSUM,SYSSTATE,SETLIND,DIFFTYPE)
+    values (#{loanSeq,jdbcType=INTEGER}, #{policyCount,jdbcType=VARCHAR}, #{policyNo,jdbcType=VARCHAR}, 
+      #{bankCode,jdbcType=VARCHAR}, #{checkDate,jdbcType=VARCHAR}, #{planFee,jdbcType=VARCHAR}, 
+      #{capital,jdbcType=VARCHAR}, #{intamt,jdbcType=VARCHAR}, #{premium,jdbcType=VARCHAR}, 
+      #{penalsum,jdbcType=VARCHAR} , #{sysstate,jdbcType=VARCHAR}, #{setlInd,jdbcType=VARCHAR}, #{diffType,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.jeeplus.modules.app.entity.ClWithRecover">
+    insert into CL_WITH_RECOVER
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="loanSeq != null">
+        LOAN_SEQ,
+      </if>
+      <if test="policyCount != null">
+        POLICY_COUNT,
+      </if>
+      <if test="policyNo != null">
+        POLICY_NO,
+      </if>
+      <if test="bankCode != null">
+        BANK_CODE,
+      </if>
+      <if test="checkDate != null">
+        CHECK_DATE,
+      </if>
+      <if test="planFee != null">
+        PLAN_FEE,
+      </if>
+      <if test="capital != null">
+        CAPITAL,
+      </if>
+      <if test="intamt != null">
+        INTAMT,
+      </if>
+      <if test="premium != null">
+        PREMIUM,
+      </if>
+      <if test="penalsum != null">
+        PENALSUM,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="loanSeq != null">
+        #{loanSeq,jdbcType=INTEGER},
+      </if>
+      <if test="policyCount != null">
+        #{policyCount,jdbcType=VARCHAR},
+      </if>
+      <if test="policyNo != null">
+        #{policyNo,jdbcType=VARCHAR},
+      </if>
+      <if test="bankCode != null">
+        #{bankCode,jdbcType=VARCHAR},
+      </if>
+      <if test="checkDate != null">
+        #{checkDate,jdbcType=VARCHAR},
+      </if>
+      <if test="planFee != null">
+        #{planFee,jdbcType=VARCHAR},
+      </if>
+      <if test="capital != null">
+        #{capital,jdbcType=VARCHAR},
+      </if>
+      <if test="intamt != null">
+        #{intamt,jdbcType=VARCHAR},
+      </if>
+      <if test="premium != null">
+        #{premium,jdbcType=VARCHAR},
+      </if>
+      <if test="penalsum != null">
+        #{penalsum,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.jeeplus.modules.app.entity.ClWithRecover">
+    update CL_WITH_RECOVER
+    <set>
+      <if test="policyCount != null">
+        POLICY_COUNT = #{policyCount,jdbcType=VARCHAR},
+      </if>
+      <if test="policyNo != null">
+        POLICY_NO = #{policyNo,jdbcType=VARCHAR},
+      </if>
+      <if test="bankCode != null">
+        BANK_CODE = #{bankCode,jdbcType=VARCHAR},
+      </if>
+      <if test="checkDate != null">
+        CHECK_DATE = #{checkDate,jdbcType=VARCHAR},
+      </if>
+      <if test="planFee != null">
+        PLAN_FEE = #{planFee,jdbcType=VARCHAR},
+      </if>
+      <if test="capital != null">
+        CAPITAL = #{capital,jdbcType=VARCHAR},
+      </if>
+      <if test="intamt != null">
+        INTAMT = #{intamt,jdbcType=VARCHAR},
+      </if>
+      <if test="premium != null">
+        PREMIUM = #{premium,jdbcType=VARCHAR},
+      </if>
+      <if test="penalsum != null">
+        PENALSUM = #{penalsum,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where LOAN_SEQ = #{loanSeq,jdbcType=INTEGER}
+  </update>
+  <update id="updateSysStatebyPoliyNo" parameterType="java.lang.String">
+    update CL_WITH_RECOVER
+    set SYSSTATE = 1
+    where POLICY_NO = #{POLICY_NO}
+  </update>
+  
+    <select id="selectByPoliyNo" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from CL_WITH_RECOVER
+    where POLICY_NO = #{POLICY_NO} and SYSSTATE=0
+     </select>
+     
+   <select id="selectByPoliyNoToSetLind" parameterType="java.lang.String" resultType="int">
+	    select count(1)
+	    from CL_WITH_RECOVER
+	    where POLICY_NO = #{POLICY_NO} and SETLIND='Y' and DIFFTYPE ='SUBROGATION'
+   </select>
+   <select id="selectByPoliyNoWithoutStatus" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from CL_WITH_RECOVER
+    where POLICY_NO = #{POLICY_NO} and SETLIND='Y' and DIFFTYPE ='SUBROGATION'
+     </select>
+</mapper>

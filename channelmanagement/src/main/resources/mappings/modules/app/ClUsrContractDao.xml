@@ -1,0 +1,171 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jeeplus.modules.app.dao.ClUsrContractDao">
+  <resultMap id="BaseResultMap" type="com.jeeplus.modules.app.entity.ClUsrContract">
+    <result column="CONTRACT_CDE" jdbcType="VARCHAR" property="contractCde" />
+    <result column="USR_CDE" jdbcType="VARCHAR" property="usrCde" />
+    <result column="STEP" jdbcType="VARCHAR" property="step" />
+    <result column="TEMPLATE_ID" jdbcType="VARCHAR" property="templateId" />
+    <result column="POLICY_NO" jdbcType="VARCHAR" property="policyNo" />
+    <result column="CUSTOMER_ID" jdbcType="VARCHAR" property="customerId" />
+    <result column="ST_CDE" jdbcType="VARCHAR" property="stCde" />
+    <result column="IS_UPYUN" jdbcType="VARCHAR" property="isUpyun" />
+    <result column="CRT_DT" jdbcType="TIMESTAMP" property="crtDt" />
+    <result column="MDF_DT" jdbcType="TIMESTAMP" property="mdfDt" />
+    <result column="DL_URL" jdbcType="LONGVARCHAR" property="dlUrl" />
+    <result column="V_URL" jdbcType="LONGVARCHAR" property="vUrl" />
+    <result column="UPYUN_URL" jdbcType="LONGVARCHAR" property="upyunUrl" />
+    <result column="IMG_DIC" jdbcType="VARCHAR" property="imgDic" />
+    <result column="DOC_TITLE" jdbcType="VARCHAR" property="docTitle" />
+    <result column="CON_VER" jdbcType="VARCHAR" property="conVer" />
+  </resultMap>
+  <sql id="Blob_Column_List">
+   USR_CDE,CONTRACT_CDE, DL_URL, V_URL, UPYUN_URL,IMG_DIC,DOC_TITLE,CON_VER
+  </sql>
+  
+   <select id="getUsrContractByDate"  parameterType="java.lang.String" resultMap="BaseResultMap">
+   select 
+    <include refid="Blob_Column_List" />
+    from CL_USR_CONTRACT
+    where DATE_FORMAT(CRT_DT, '%Y-%m-%d') = #{date}
+  
+  </select>
+  
+  <select id="getLatestContractByUsrAndStep"  parameterType="java.util.Map" resultMap="BaseResultMap">
+  
+   select 
+    <include refid="Blob_Column_List" />
+    from CL_USR_CONTRACT
+    where USR_CDE = #{USR_CDE} and STEP = #{STEP} 
+    <if test="POLICY_NO != null and POLICY_NO != ''">
+  		and POLICY_NO = #{POLICY_NO}  
+    </if>
+    <if test="CRT_DT != null and CRT_DT != ''">
+  		and CRT_DT like #{CRT_DT}  
+    </if>
+    order by CRT_DT DESC limit 1
+  
+  </select>
+  
+  
+  
+  <select id="isExistByPolicyNo"  parameterType="java.util.Map" resultType="int">
+   select 
+    count(1)
+    from CL_USR_CONTRACT
+    where POLICY_NO = #{POLICY_NO} and TEMPLATE_ID = #{TEMPLATE_ID}
+  
+  </select>
+  
+   <update id="updateByusrCde" parameterType="java.util.HashMap">
+    update CL_USR_CONTRACT
+    set ST_CDE = '1',
+      IS_UPYUN = '1',
+      UPYUN_URL = #{upyunUrl,jdbcType=VARCHAR},
+      DOC_TITLE = #{docTitle,jdbcType=VARCHAR}
+    where CONTRACT_CDE = #{contractCde,jdbcType=VARCHAR}
+  </update>
+  <insert id="insert" parameterType="com.jeeplus.modules.app.entity.ClUsrContract">
+    insert into CL_USR_CONTRACT (CONTRACT_CDE, USR_CDE, STEP, 
+      TEMPLATE_ID, POLICY_NO, CUSTOMER_ID, 
+      ST_CDE, IS_UPYUN, CRT_DT, 
+      MDF_DT, DL_URL, V_URL, 
+      UPYUN_URL,IMG_DIC,DOC_TITLE,CON_VER)
+    values (#{contractCde,jdbcType=VARCHAR}, #{usrCde,jdbcType=VARCHAR}, #{step,jdbcType=VARCHAR}, 
+      #{templateId,jdbcType=VARCHAR}, #{policyNo,jdbcType=VARCHAR}, #{customerId,jdbcType=VARCHAR}, 
+      #{stCde,jdbcType=VARCHAR}, #{isUpyun,jdbcType=VARCHAR}, #{crtDt,jdbcType=TIMESTAMP}, 
+      #{mdfDt,jdbcType=TIMESTAMP}, #{dlUrl,jdbcType=LONGVARCHAR}, #{vUrl,jdbcType=LONGVARCHAR}, 
+      #{upyunUrl,jdbcType=LONGVARCHAR}, #{imgDic,jdbcType=VARCHAR}, #{docTitle,jdbcType=VARCHAR}, #{conVer,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.jeeplus.modules.app.entity.ClUsrContract">
+    insert into CL_USR_CONTRACT
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="contractCde != null">
+        CONTRACT_CDE,
+      </if>
+      <if test="usrCde != null">
+        USR_CDE,
+      </if>
+      <if test="step != null">
+        STEP,
+      </if>
+      <if test="templateId != null">
+        TEMPLATE_ID,
+      </if>
+      <if test="policyNo != null">
+        POLICY_NO,
+      </if>
+      <if test="customerId != null">
+        CUSTOMER_ID,
+      </if>
+      <if test="stCde != null">
+        ST_CDE,
+      </if>
+      <if test="isUpyun != null">
+        IS_UPYUN,
+      </if>
+      <if test="crtDt != null">
+        CRT_DT,
+      </if>
+      <if test="mdfDt != null">
+        MDF_DT,
+      </if>
+      <if test="dlUrl != null">
+        DL_URL,
+      </if>
+      <if test="vUrl != null">
+        V_URL,
+      </if>
+      <if test="upyunUrl != null">
+        UPYUN_URL,
+      </if>
+      <if test="conVer != null">
+        CON_VER,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="contractCde != null">
+        #{contractCde,jdbcType=VARCHAR},
+      </if>
+      <if test="usrCde != null">
+        #{usrCde,jdbcType=VARCHAR},
+      </if>
+      <if test="step != null">
+        #{step,jdbcType=VARCHAR},
+      </if>
+      <if test="templateId != null">
+        #{templateId,jdbcType=VARCHAR},
+      </if>
+      <if test="policyNo != null">
+        #{policyNo,jdbcType=VARCHAR},
+      </if>
+      <if test="customerId != null">
+        #{customerId,jdbcType=VARCHAR},
+      </if>
+      <if test="stCde != null">
+        #{stCde,jdbcType=VARCHAR},
+      </if>
+      <if test="isUpyun != null">
+        #{isUpyun,jdbcType=VARCHAR},
+      </if>
+      <if test="crtDt != null">
+        #{crtDt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="mdfDt != null">
+        #{mdfDt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="dlUrl != null">
+        #{dlUrl,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="vUrl != null">
+        #{vUrl,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="upyunUrl != null">
+        #{upyunUrl,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="conVer != null">
+        #{conVer,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+</mapper>

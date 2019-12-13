@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<portable-config>
+	<config-file path="WEB-INF/classes/config.properties">
+		<replace key="env.flag">online</replace>
+		<replace key="jdbc.type">mysql</replace>	
+		<replace key="jdbc.driver">com.mysql.jdbc.Driver</replace>
+		<replace key="jdbc.url">jdbc:mysql://10.9.5.83:3306/net_loans_db?useUnicode=true&amp;autoReconnect=true&amp;characterEncoding=UTF-8</replace>
+		<replace key="jdbc.username">net_loan_user</replace>
+		<replace key="jdbc.password">Net_loan_user123</replace>
+		<replace key="redis.host">10.9.5.82</replace>	
+		<replace key="redis.port">6379</replace>	
+		<replace key="redis.timeout">10000</replace>	
+		<replace key="redis.pwd">CashdyW6Z</replace>
+		<replace key="isOnline">true</replace>
+		<replace key="isFPValidateSfzOn">true</replace>
+		<replace key="isFPChkPersonOn">true</replace>			
+	</config-file>
+	
+	<config-file path="WEB-INF/classes/sysconfig.properties">
+		<replace key="policePrefix">WD</replace>
+		<replace key="prePoliceSuffix">Y</replace>	
+		<replace key="policeSuffix">W</replace>
+		<!-- 核算 -->
+		<replace key="accountapiurl">http://10.10.101.214:7001/ycloans/Cmis2YcloansHttpChannel</replace>
+		<!-- 新中间 -->
+		<replace key="loanapiurl">http://10.10.237.18/midloanser/Servlet/midLoanSerServlet</replace>
+		<!-- 催收 -->
+		<replace key="ipurl">10.10.56.164</replace>
+		<replace key="name">collectionuser</replace>	
+		<replace key="password">collectionuser</replace>	
+		<replace key="uplodfileurl">/foticdata/download/sd</replace>	
+		<replace key="baseurl">up2ftp/</replace>
+		<!-- 短信 -->
+		<replace key="smsurl">http://10.10.237.18/message-service/sendSms</replace>
+		<!-- face++ -->
+		<replace key="bankcardUrl">https://api.megvii.com/faceid/v3/ocrbankcard</replace>	
+		<replace key="facecompareUrl">https://api.megvii.com/faceid/v2/verify</replace>
+		<replace key="idcardUrl">https://api.faceid.com/faceid/v1/ocridcard</replace>
+		<replace key="verifyUrl">https://api.megvii.com/faceid/v2/verify</replace>
+		<replace key="api_key">ISpB_BitSp2JNmmLMKtxdy-UItpYOgT6</replace>
+		<replace key="api_secret">gJXwocIAgxnXDcCHEFiJLcamVT_j_bFL</replace>
+		<!-- 产险 未生效保单 -->
+		<replace key="invalid_policy.url">http://10.10.0.60:80/servicebus/services/TransPolicyService</replace>
+		<replace key="invalid_policy.namespace">http://webservice.transpolicy.servicebus.sinosig.com</replace>		
+		<!-- 集团电子保单 -->
+		<replace key="elec_policy">http://10.10.101.23/risk/elepolicy/createPolicy</replace>
+		<replace key="elec_sendName">chanxianxinbao</replace>		
+		<replace key="elec_sendPwd">xinbaopro</replace>
+		<replace key="elec_sendType">1891</replace>		
+		<!-- PM -->
+		<replace key="pm.url">http://10.10.56.201/ProcessManager.WebService.Online.SIGCN/ProcessManager.asmx?op=CallProcessManager</replace>
+		<replace key="pm.namespace">http://tempuri.org/</replace>		
+		<replace key="pm.actionUri">CallProcessManager</replace>
+		<replace key="pm.op">CallProcessManager</replace>
+		<replace key="pm.paramName">applicationXML</replace>
+		<!-- 决策 -->
+		<replace key="re.decision.url">http://10.10.19.16:8084/engine/service/decision/v1</replace>
+		<replace key="re.derived.url">http://10.10.19.12:8081/decision/result/takeWDResultData</replace>		
+		<replace key="re.white.url">http://10.10.19.12:8081/decision/result/takeWhiteData</replace>
+		<!-- 事件上报  -->
+		<replace key="er.url">https://finai-wd.sinosig.com/data_wd/rest/app_push</replace>
+		<!-- 定时任务 -->
+		<!-- <replace key="task.url">http://10.8.206.77/midmanagerser/uat/jobres</replace> -->
+		<!-- 法大大 -->
+		<replace key="fadada.url">https://extapi.fadada.com/api2/</replace>
+		<replace key="fadada.appid">000778</replace>		
+		<replace key="fadada.appsecret">nqC9iKaqUyTabk96VZU5dRfh</replace>
+		<replace key="fadada.customerid">D8C6A07A9C794FEDFB2B8AE66D4475EE</replace>
+		<replace key="fadada.uploadurl">upload_fdd/</replace>
+		<!-- 征信上报 -->
+		<!-- <replace key="cre.ip">10.8.203.47</replace>
+		<replace key="cre.name">sftp_zx</replace>	
+		<replace key="cre.password">sftp_zx</replace>
+		<replace key="cre.url">/sftp_zx</replace>
+		<replace key="cre.baseurl">D://</replace>
+		<replace key="cre.legalperson">\u738B\u51E4\u53EC</replace>
+		<replace key="cre.legalpersonidcard">11111111111111</replace>
+		<replace key="cre.deptcode">K10155840H0001</replace> -->
+	</config-file>	
+	
+	<config-file path="WEB-INF/classes/Id5.properties">
+		<replace key="userName">guozhengtongapi</replace>
+		<replace key="password">guozhengtongapi_L6y(_4@d</replace>	
+		<replace key="desKey">12345678</replace>
+		<replace key="dataType">3Y010101</replace>
+		<replace key="isBaffleFlgOn">N</replace>
+	</config-file>
+	
+	<config-file path="WEB-INF/classes/upyun.properties">
+		<replace key="BUCKET_NAME">ygbxsinosig</replace>
+		<replace key="OPERATOR_NAME">shandai</replace>	
+		<replace key="OPERATOR_PWD">shandai123</replace>
+		<replace key="apiurl">http://10.10.0.69:7001/attachment-tools/AppImageResultServlet</replace>
+		<replace key="apiDomain">http://v0.api.upyun.com</replace>
+		<replace key="downloadurl">tmp_download</replace>
+	</config-file>
+</portable-config>

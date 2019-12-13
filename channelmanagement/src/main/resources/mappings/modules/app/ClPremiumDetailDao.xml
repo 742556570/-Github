@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jeeplus.modules.app.dao.ClPremiumDetailDao">
+
+	<resultMap id="ClPremiumDetailResultMap" type="ClPremiumDetail">
+		<result property="PRD_CDE" column="PRD_CDE" />
+		<result property="PAY_TERM" column="PAY_TERM" />
+		<result property="PREMIUM_RATE" column="PREMIUM_RATE" />
+	</resultMap>
+	
+	<sql id="ClPremiumDetailColumns">
+		a.PRD_CDE,
+		a.PAY_TERM,
+		PREMIUM_RATE
+	</sql>
+
+
+	<select id="getAllPremInfo" resultMap="ClPremiumDetailResultMap" >
+		SELECT
+		<include refid="ClPremiumDetailColumns" />
+		FROM CL_PREMIUM_DETAIL a
+	</select>
+
+
+	<select id="getByPrdAndTrem" resultMap="ClPremiumDetailResultMap" parameterType="java.util.Map">
+		SELECT
+		<include refid="ClPremiumDetailColumns" />
+		FROM CL_PREMIUM_DETAIL a
+		WHERE a.PRD_CDE = #{PRD_CDE} and a.PAY_TERM = #{PAY_TERM}
+	</select>
+	
+	<select id="getByPrdCde" resultMap="ClPremiumDetailResultMap" parameterType="java.util.Map">
+		SELECT
+		<include refid="ClPremiumDetailColumns" />
+		FROM CL_PREMIUM_DETAIL a
+		WHERE a.PRD_CDE = #{PRD_CDE} 
+	</select>
+	
+
+	<!-- 插入用户 -->
+	<insert id="insert">
+		INSERT INTO CL_PREMIUM_DETAIL(
+		PRD_CDE,
+		PAY_TERM,
+		PREMIUM_RATE
+		) VALUES (
+		#{PRD_CDE},
+		#{PAY_TERM},
+		#{PREMIUM_RATE}
+		)
+	</insert>
+</mapper>

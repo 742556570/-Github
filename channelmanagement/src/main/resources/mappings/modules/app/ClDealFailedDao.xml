@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jeeplus.modules.app.dao.ClDealFailedDao">
+
+	<resultMap id="ClDealFailedResultMap" type="ClDealFailed">
+		<result property="USR_CDE" column="USR_CDE" />
+		<result property="POLICY_NO" column="POLICY_NO" />
+		<result property="FAIL_STEP" column="FAIL_STEP" />
+		<result property="CRT_DT" column="CRT_DT" />
+		<result property="ISRETRY" column="ISRETRY" />
+		<result property="RETRY_DT" column="RETRY_DT" />
+		<result property="RETRY_TIMES" column="RETRY_TIMES" />
+		<result property="ISDONE" column="ISDONE" />
+	</resultMap>
+	
+	<sql id="ClDealFailedColumns">
+		a.USR_CDE,
+		a.POLICY_NO,
+		a.FAIL_STEP,
+		a.CRT_DT,
+		a.ISRETRY,
+		a.RETRY_DT,
+		a.RETRY_TIMES,
+		a.ISDONE
+	</sql>
+
+	<select id="getALL" resultMap="ClDealFailedResultMap" >
+		SELECT
+		<include refid="ClDealFailedColumns" />
+		FROM CL_DEAL_FAILED a
+	</select>
+	
+	<select id="getNotDone" resultMap="ClDealFailedResultMap" >
+		SELECT
+		<include refid="ClDealFailedColumns" />
+		FROM CL_DEAL_FAILED a
+		where a.ISDONE != 'true'
+	</select>
+
+	
+	<select id="getByUsrCode" resultMap="ClDealFailedResultMap" parameterType="java.lang.String">
+		SELECT
+		<include refid="ClDealFailedColumns" />
+		FROM CL_DEAL_FAILED a
+		WHERE a.USR_CDE = #{USR_CDE}
+	</select>
+	
+	<select id="getByUsrPolicyNO" resultMap="ClDealFailedResultMap" parameterType="java.lang.String">
+		SELECT
+		<include refid="ClDealFailedColumns" />
+		FROM CL_DEAL_FAILED a
+		WHERE a.POLICY_NO = #{POLICY_NO}
+	</select>
+	
+	<select id="getByUsrAndPolicyNo" resultMap="ClDealFailedResultMap" parameterType="java.util.HashMap">
+		SELECT
+		<include refid="ClDealFailedColumns" />
+		FROM CL_DEAL_FAILED a
+		WHERE a.USR_CDE = #{USR_CDE} and a.POLICY_NO = #{POLICY_NO} 
+	</select>
+	
+	
+
+	<!-- 插入用户 -->
+	<insert id="insert">
+		INSERT INTO CL_DEAL_FAILED(
+		USR_CDE,
+		POLICY_NO,
+		FAIL_STEP,
+		CRT_DT,
+		ISRETRY,
+		RETRY_DT,
+		RETRY_TIMES,
+		ISDONE
+		) VALUES (
+		#{USR_CDE},
+		#{POLICY_NO},
+		#{FAIL_STEP},
+		#{CRT_DT},
+		#{ISRETRY},
+		#{RETRY_DT},
+		#{RETRY_TIMES},
+		#{ISDONE}
+		)
+	</insert>
+	
+	
+	<update id="update">
+		UPDATE CL_DEAL_FAILED SET USR_CDE = USR_CDE
+		<if test="FAIL_STEP != null and FAIL_STEP != ''">
+			,FAIL_STEP = #{FAIL_STEP}
+		</if>
+		<if test="ISRETRY != null and ISRETRY != ''">
+			,ISRETRY = #{ISRETRY}
+		</if>
+		<if test="RETRY_DT != null and RETRY_DT != ''">
+			,RETRY_DT = #{RETRY_DT}
+		</if>
+		<if test="RETRY_TIMES != null">
+			,RETRY_TIMES = #{RETRY_TIMES}
+		</if>
+		<if test="ISDONE != null and ISDONE != ''">
+			,ISDONE = #{ISDONE}
+		</if>
+		WHERE POLICY_NO = #{POLICY_NO}
+	</update>
+
+
+</mapper>

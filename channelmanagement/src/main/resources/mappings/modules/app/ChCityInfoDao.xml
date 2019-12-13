@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jeeplus.modules.app.dao.ChCityInfoDao">
+
+	<resultMap id="ChCityInfoResultMap" type="ChCityInfo">
+		<result property="CITY_SEQ" column="CITY_SEQ" />
+		<result property="CITY_CDE" column="CITY_CDE" />
+		<result property="CITY_NAME" column="CITY_NAME" />
+		<result property="CITY_TYPE" column="CITY_TYPE" />
+		<result property="CITY_PINYIN" column="CITY_PINYIN" />
+	</resultMap>
+	
+	<sql id="ChCityInfoColumns">
+		a.CITY_SEQ,
+		a.CITY_CDE,
+		a.CITY_NAME,
+		a.CITY_TYPE,
+		a.CITY_PINYIN
+	</sql>
+
+
+	<!-- 根据用户标识获得用户 对象-->
+	<select id="getAllCityInfo" resultMap="ChCityInfoResultMap" >
+		SELECT
+		<include refid="ChCityInfoColumns" />
+		FROM CH_CITY_INFO a  ORDER BY CITY_TYPE
+	</select>
+	
+	<!-- 根据城市名称获取城市对象-->
+	<select id="getCityInfoByCityName" resultMap="ChCityInfoResultMap" >
+		SELECT
+		<include refid="ChCityInfoColumns" />
+		FROM CH_CITY_INFO a  WHERE CITY_NAME = #{CITY_NAME}
+	</select>
+
+
+	
+
+	<!-- 插入用户 -->
+	<insert id="insert">
+		INSERT INTO CH_CITY_INFO(
+		CITY_SEQ,
+		CITY_CDE,
+		CITY_NAME,
+		CITY_TYPE,
+		CITY_PINYIN
+		)
+	</insert>
+</mapper>

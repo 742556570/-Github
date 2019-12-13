@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>个人信息授权书</title>
+	<meta content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0,user-scalable=no" name="viewport" />
+    <meta name="format-detection" content="telephone=no"/>
+    <meta name="apple-mobile-web-app-status-bar-style"  />
+	<link rel="stylesheet" type="text/css" href="../css/common.css">
+	<script src="../js/jquery.min.js"></script>
+	<script type="text/javascript" src="../js/appPublic.js"></script>
+
+	<style type="text/css">
+		.lh16{
+			line-height: 1.6rem;
+		}
+		.underLine666{
+			color: #666;
+			text-decoration: underline;
+		}
+		.tdStyle{
+			line-height: 1.6rem;
+			font: 0.8rem;
+		}
+	</style>
+
+	<script type="text/javascript">
+
+		$(document).ready(function(){
+			setTimeout("getInfo()",500);
+			
+		});
+
+		//获取用户的个人信息 以及 借款情况
+    	function getInfo(){
+    		window.WebViewJavascriptBridge.callHandler(
+    			'YGH5CallNative',
+    			{'pageName': '投保单',
+    			 'func': 'getUserInfo',
+    			 'params': null},
+    			 function(responseData){
+
+    		 		window.sessionStorage.setItem(userInfoKey, responseData);
+
+    		 		var proInfoObj = window.JSON.parse(responseData);
+					$('#loanName2, #loanSign2').text(proInfoObj.name);
+					$('#loanNum2').text(proInfoObj.idNum);
+					$('#signY').text(getYear());
+					$('#signM').text(getMonth());
+					$('#signD').text(getDay());
+    		 	}
+    		);
+    	}
+
+	</script>
+</head>
+<body>
+	<div class="font8 padding10">
+		<p class="indent"><b>附件一： </b></p>
+		<p class="lh16" style="width: 100%; text-align: center;">《个人信息授权书》</p>
+		<p class="indent" style="margin-top: 1rem"><b>致：中国对外经济贸易信托有限公司、其他被授权人</b>（其他被授权人明细详见本授权书第五条）</p>
+		<p class="indent">一、因本人（姓名：<span id="loanName2" class="underLine666">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>身份证号：<span id="loanNum2" class="underLine666">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>）存在借款需求，通过被授权人申请贷款相关业务（包括不限于贷款、贷款咨询与服务、贷款担保等业务，下同），<b>故本人不可撤销地授权被授权人：</b></p>
+		<p class="indent">1、有权向中国人民银行个人信用信息基础数据库（以下简称“人行数据库”）查询及使用授权人（暨本人）的个人信息，包括基本信息和信用报告，并将本人之基本信息和信用记录报送给人行数据库。</p>
+		<p class="indent"><b>2、有权向依法设立的征信机构、资信评估机构、身份信息验证机构、数据分析处理机构、或有关法律、监管机构许可的类似机构（以下统称“信用机构”，包括不限于前海征信、百度征信、芝麻信用、鹏元征信等机构）、以及为本人申请的业务和产品提供必要技术和服务的被授权人或被授权人的合作机构（简称“被授权机构及其合作机构”，包括不限于中国对外经济贸易信托有限公司之FOTIC 小微数据库）查询本人在信用机构、被授权机构及其合作机构的个人信息，包括基本信息和信用信息，并有权采集、保存以及向信用机构、被授权机构及其合作机构提供本人与被授权人之业务往来中提供或产生的个人信息;并同意授权信用机构、被授权机构及其合作机构采集前述信息后，可依法保存、整理、加工、使用本人个人信息,包括将本人不良信息向信用机构、被授权机构及其合作机构提供，且不再另行告知本人。</b></p>
+		<p class="indent"><b>3、授权人同意授权信用机构向信息提供者采集本人收入、存款、有价证券、商业保险、不动产的信息和纳税数额信息。本人已被明确告知提供上述信息可能会给本人带来财产或信用损失，以及其他可能的不利后果，包括但不限于：将上述信息应用于对本人的信用评估或出具信用报告后，可能导致本人在申请某项业务时（如信贷业务），提供该等业务的机构因参考上述信用评估或信用报告而最终拒绝或终止向本人提供该等业务；以及该等信息被信息使用者依法提供给第三方后被他人不当利用的风险，以及虽采取了严格的符合国家认证标准的安全保护措施对所采集的上述信息实施了安全保护，但仍可能存在的因不可抗力或高科技本身所不可克服的漏洞或意外的恶意黑客攻击导致部分信息泄露的风险。但本人仍然同意授权依法成立的征信机构采集这些信息。</b></p>
+		<p class="indent">二、为使被授权人能够履行上述授权事宜，授权人同意向被授权人提交本人有效身份证明文件以及被授权人要求的其他证明材料。</p>
+		<p class="indent">三、本人同意信用机构、被授权机构及其合作机构将合法获取的本人个人信息用于下述范围：</p>
+		<p class="indent">1、受理、审批、办理贷款相关业务，贷后服务和管理，以及在该业务存续期间监控本人的信用变化；</p>
+		<p class="indent">2、向本人推荐产品及服务、开展市场调查与信息数据分析；</p>
+		<p class="indent">3、其他经过本人同意的合法用途。</p>
+		<p class="indent">四、本授权书自本人签字之日起生效，至本人通过被授权人办理的所有贷款相关业务之应付款项完全结清后30个工作日终止。</p>
+		<p class="indent"><b>五、本人同意：本次授权的被授权人包括下列主体中的一个或者多个：</b></p>
+		<p class="indent">中国对外经济贸易信托有限公司</p>
+		<p class="indent">其他被授权人名称:阳光财产保险股份有限公司</p>
+		<p class="indent"><b>本人已知晓并认可：上述被授权人可能会因为本人所办理贷款之实际情况而不时更改或增加，无需本人另行签署授权书。若因为本人所办理贷款之实际情况而需由上述被授权人之关联企业提供相关服务的，则亦视为本人通过签署本授权书已授权该等关联企业，无需本人另行签署授权书。</b></p>
+		<p class="indent marginTop10"><b>授权人：</b><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><b>（签章处）<span id="loanSign2"></span></b></p>
+		<p class="indent marginTop10" style="margin-bottom: 4rem"><b>签署时间：<span id="signY">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>年<span id="signM">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>月<span id="signD">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>日</b></p>
+	</div>
+
+
+
+</body>
+
+<script type="text/javascript">
+	function connectWebViewJavascriptBridge(callback) {
+            //android使用
+            if (window.WebViewJavascriptBridge) {
+                callback(WebViewJavascriptBridge)
+            } else {
+                document.addEventListener(
+                    'WebViewJavascriptBridgeReady'
+                    , function() {
+                        callback(WebViewJavascriptBridge)
+                    },
+                    false
+                );
+            }
+
+            //iOS使用
+            if (window.WebViewJavascriptBridge) { return callback(WebViewJavascriptBridge); }
+            if (window.WVJBCallbacks) { return window.WVJBCallbacks.push(callback); }
+            window.WVJBCallbacks = [callback];
+            var WVJBIframe = document.createElement('iframe');
+            WVJBIframe.style.display = 'none';
+            WVJBIframe.src = 'wvjbscheme://__BRIDGE_LOADED__';
+            document.documentElement.appendChild(WVJBIframe);
+            setTimeout(function() { document.documentElement.removeChild(WVJBIframe) }, 0)
+
+        }
+
+    //必须要用，在里面register事件
+    connectWebViewJavascriptBridge(function(bridge) {
+		bridge.registerHandler("YGNativeCallH5", function(data, responseCallback) {
+			data.replace('YGNativeCallH5:', '');
+			window.sessionStorage.setItem(userInfoKey, data);
+
+    		var proInfoObj1 = window.JSON.parse(data);
+			$('#loanName2, #loanSign2').text(proInfoObj1.name);
+			$('#loanNum2').text(proInfoObj1.idNum);
+			$('#signY').text(getYear());
+			$('#signM').text(getMonth());
+			$('#signD').text(getDay());
+    	});
+    });
+
+
+
+</script>
+</html>

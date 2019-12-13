@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jeeplus.modules.app.dao.ClUsrLoanDetailDao">
+	<resultMap id="BaseResultMap"
+		type="com.jeeplus.modules.app.entity.ClUsrLoanDetail">
+		<id column="LD_SEQ" jdbcType="INTEGER" property="ldSeq" />
+		<result column="USR_CDE" jdbcType="VARCHAR" property="usrCde" />
+		<result column="APPL_CDE" jdbcType="VARCHAR" property="applCde" />
+		<result column="LOAN_ACNO" jdbcType="VARCHAR" property="loanAcno" />
+		<result column="POLICY_NO" jdbcType="VARCHAR" property="policyNo" />
+		<result column="S_TERM" jdbcType="VARCHAR" property="sTerm" />
+		<result column="S_DATE" jdbcType="TIMESTAMP" property="sDate" />
+		<result column="S_CAPI" jdbcType="DECIMAL" property="sCapi" />
+		<result column="S_INTE" jdbcType="DECIMAL" property="sInte" />
+		<result column="S_FINE" jdbcType="DECIMAL" property="sFine" />
+		<result column="S_INSUAMT" jdbcType="DECIMAL" property="sInsuamt" />
+		<result column="S_CONTAMT" jdbcType="DECIMAL" property="sContamt" />
+		<result column="R_CAPI" jdbcType="DECIMAL" property="rCapi" />
+		<result column="R_INTE" jdbcType="DECIMAL" property="rInte" />
+		<result column="R_FINE" jdbcType="DECIMAL" property="rFine" />
+		<result column="R_INSUAMT" jdbcType="DECIMAL" property="rInsuamt" />
+		<result column="R_CONTAMT" jdbcType="DECIMAL" property="rContamt" />
+		<result column="OVER_FLAG" jdbcType="VARCHAR" property="overFlag" />
+		<result column="PAY_OFF_FLAG" jdbcType="VARCHAR" property="payOffFlag" />
+		<result column="PAY_OFF_DATE" jdbcType="TIMESTAMP" property="payOffDate" />
+		<result column="MDF_DT" jdbcType="TIMESTAMP" property="mdfDt" />
+		<result column="S_PENALTY" jdbcType="DECIMAL" property="sPenalty" />
+		<result column="R_PENALTY" jdbcType="DECIMAL" property="rPenalty" />
+		<result column="S_PAYLIQDAM" jdbcType="VARCHAR" property="sPayLiqDam" />
+		<result column="R_PAYLIQDAM" jdbcType="VARCHAR" property="rPayLiqDam" />
+		<result column="S_RECPAYLIQDAM" jdbcType="VARCHAR" property="sRecPayLiqDam" />
+		<result column="R_RECPAYLIQDAM" jdbcType="VARCHAR" property="rRecPayLiqDam" />
+	</resultMap>
+	<sql id="Base_Column_List">
+		LD_SEQ, USR_CDE, APPL_CDE, LOAN_ACNO, POLICY_NO, S_TERM, S_DATE, S_CAPI,
+		S_INTE,
+		S_FINE, S_INSUAMT, S_CONTAMT, R_CAPI, R_INTE, R_FINE, R_INSUAMT, R_CONTAMT,
+		OVER_FLAG,
+		PAY_OFF_FLAG, PAY_OFF_DATE, MDF_DT,S_PENALTY,R_PENALTY,S_PAYLIQDAM,R_PAYLIQDAM,S_RECPAYLIQDAM,R_RECPAYLIQDAM
+	</sql>
+
+	<insert id="insert" parameterType="com.jeeplus.modules.app.entity.ClUsrLoanDetail">
+		insert into CL_USR_LOAN_DETAIL (LD_SEQ, USR_CDE, APPL_CDE,
+		LOAN_ACNO, POLICY_NO, S_TERM,
+		S_DATE, S_CAPI, S_INTE,
+		S_FINE, S_INSUAMT, S_CONTAMT,
+		R_CAPI, R_INTE, R_FINE,
+		R_INSUAMT, R_CONTAMT, OVER_FLAG,
+		PAY_OFF_FLAG, PAY_OFF_DATE, MDF_DT,S_PENALTY,R_PENALTY,
+		S_PAYLIQDAM,R_PAYLIQDAM,S_RECPAYLIQDAM,R_RECPAYLIQDAM
+		)
+		values (#{ldSeq,jdbcType=INTEGER}, #{usrCde,jdbcType=VARCHAR},
+		#{applCde,jdbcType=VARCHAR},
+		#{loanAcno,jdbcType=VARCHAR}, #{policyNo,jdbcType=VARCHAR}, #{sTerm,jdbcType=VARCHAR},
+		#{sDate,jdbcType=TIMESTAMP}, #{sCapi,jdbcType=DECIMAL},
+		#{sInte,jdbcType=DECIMAL},
+		#{sFine,jdbcType=DECIMAL}, #{sInsuamt,jdbcType=DECIMAL}, #{sContamt,jdbcType=DECIMAL},
+		#{rCapi,jdbcType=DECIMAL}, #{rInte,jdbcType=DECIMAL},
+		#{rFine,jdbcType=DECIMAL},
+		#{rInsuamt,jdbcType=DECIMAL}, #{rContamt,jdbcType=DECIMAL}, #{overFlag,jdbcType=VARCHAR},
+		#{payOffFlag,jdbcType=VARCHAR}, #{payOffDate,jdbcType=TIMESTAMP},
+		#{mdfDt,jdbcType=TIMESTAMP},#{sPenalty,jdbcType=DECIMAL},#{rPenalty,jdbcType=DECIMAL},
+		#{sPayLiqDam,jdbcType=VARCHAR}, 
+		#{rPayLiqDam,jdbcType=VARCHAR}, 
+		#{sRecPayLiqDam,jdbcType=VARCHAR},
+		#{rRecPayLiqDam,jdbcType=VARCHAR}
+		)
+	</insert>
+
+	<select id="getLoanOrderPolicy" parameterType="java.lang.String"
+		resultType="int">
+		select
+		count(1)
+		from CL_USR_LOAN_DETAIL
+		where POLICY_NO =
+		#{POLICY_NO}
+	</select>
+
+	<select id="getByUsrCde" parameterType="java.lang.String"
+		resultMap="BaseResultMap">
+		select
+		*
+		from CL_USR_LOAN_DETAIL
+		where USR_CDE =
+		#{usrCde}
+	</select>
+	
+	
+	<select id="getByPolicy" parameterType="java.lang.String"
+		resultMap="BaseResultMap">
+		select
+		*
+		from CL_USR_LOAN_DETAIL
+		where POLICY_NO =
+		#{POLICY_NO}
+	</select>
+	
+	<select id="getByStartAndEndDate" parameterType="java.util.HashMap" resultMap="BaseResultMap">
+		select * from CL_USR_LOAN_DETAIL 
+		where <![CDATA[S_DATE>=#{startDt} and S_DATE<=#{endDt}]]> and PAY_OFF_FLAG = '0'
+	</select>
+
+
+	<delete id="deleteLoanOrderPolicy" parameterType="java.lang.String">
+		delete from CL_USR_LOAN_DETAIL
+		where POLICY_NO = #{POLICY_NO}
+	</delete>
+</mapper>

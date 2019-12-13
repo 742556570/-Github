@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jeeplus.modules.app.dao.ClUsrCntsDao">
+
+	<resultMap id="ClUsrCntsResultMap" type="ClUsrCnts">
+		<result property="CNTS_SEQ" column="CNTS_SEQ" />
+		<result property="USR_CDE" column="USR_CDE" />
+		<result property="REL_RELATION" column="REL_RELATION" />
+		<result property="REL_NAME" column="REL_NAME" />
+		<result property="REL_MOBILE" column="REL_MOBILE" />
+		<result property="LST_MDF_DAT" column="LST_MDF_DAT" />
+		<result property="CRT_DT" column="CRT_DT" />
+		<result property="MDF_DT" column="MDF_DT" />
+		<result property="IS_DSPL" column="IS_DSPL" />
+		<result property="LVL" column="LVL" />
+		<result property="RMK" column="RMK" />
+	</resultMap>
+	
+	<sql id="ClUsrCntsColumns">
+		a.CNTS_SEQ,
+		a.USR_CDE,
+		a.REL_RELATION,
+		a.REL_NAME,
+		a.REL_MOBILE,
+		a.LST_MDF_DAT,
+		a.CRT_DT,
+		a.MDF_DT,
+		a.IS_DSPL,
+		a.LVL,
+		a.RMK
+	</sql>
+
+
+	<!-- 根据用户标识获得用户 对象-->
+	<select id="getByUsrCode" resultMap="ClUsrCntsResultMap" parameterType="java.lang.String">
+		SELECT
+		<include refid="ClUsrCntsColumns" />
+		FROM CL_USR_CNTS a
+		WHERE a.USR_CDE = #{USR_CDE}
+	</select>
+	
+	
+	<!-- 根据用户标识获得用户 对象-->
+	<select id="cntUsrRelMob" resultType="int" parameterType="java.util.HashMap">
+		SELECT
+		count(1)
+		FROM CL_USR_CNTS a
+		WHERE a.USR_CDE = #{USR_CDE} and a.IS_DSPL = '1' and a.REL_MOBILE = #{REL_MOBILE}
+	</select>
+	
+	
+	<!-- 根据用户标识获得用户 对象-->
+	<select id="getByUsrCodeDisplay" resultMap="ClUsrCntsResultMap" parameterType="java.lang.String">
+		SELECT
+		<include refid="ClUsrCntsColumns" />
+		FROM CL_USR_CNTS a
+		WHERE a.USR_CDE = #{USR_CDE} and a.IS_DSPL = '1'
+	</select>
+
+
+
+	<!-- 插入用户 -->
+	<insert id="insert">
+		INSERT INTO CL_USR_CNTS(
+		USR_CDE,
+		REL_RELATION,
+		REL_NAME,
+		REL_MOBILE,
+		LST_MDF_DAT,
+		CRT_DT,
+		MDF_DT,
+		IS_DSPL,
+		LVL,
+		RMK
+		) VALUES (
+		#{USR_CDE},
+		#{REL_RELATION},
+		#{REL_NAME},
+		#{REL_MOBILE},
+		#{LST_MDF_DAT},
+		#{CRT_DT},
+		#{MDF_DT},
+		#{IS_DSPL},
+		#{LVL},
+		#{RMK}
+		)
+	</insert>
+
+
+
+
+
+
+</mapper>

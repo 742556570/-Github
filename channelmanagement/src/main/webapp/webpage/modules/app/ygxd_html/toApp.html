@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>阳光保呗</title>
+	<meta content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0,user-scalable=no" name="viewport" />
+    <meta name="format-detection" content="telephone=no"/>
+    <meta name="apple-mobile-web-app-status-bar-style"  />
+	<link rel="stylesheet" type="text/css" href="css/common.css">
+	<script src="js/jquery.min.js"></script>
+	<script type="text/javascript" src="js/appPublic.js"></script>
+	
+	<script type="text/javascript">
+		var url = {
+			openAndroid: 'ygbbapp://ygbb/main/home',
+			openIos: '',
+			down: 'http://10.7.128.33:9080/manhattan/apk/ygxd_debug.apk'
+		};
+
+		var isAndroid = !!navigator.userAgent.match(/android/ig),
+        	isIos = !!navigator.userAgent.match(/iphone|ipod/ig);
+
+
+		$(document).ready(function(){
+			// $("#to_app").click(function(){
+			// 	openApp();
+			// });
+
+			$("#download_app").click(function(){
+				downloadApp();
+			});
+		});
+
+		//跳转app
+		function openApp(){
+			if(isAndroid){
+				iframe.src = url.openAndroid;
+			}else{
+				//ios的跳转
+			}
+		}
+
+		//下载app
+		function downloadApp(){
+			if(isAndroid){
+				$(location).attr('href', downloadApp);
+			}else{
+				//ios
+			}
+		}
+
+	</script>
+
+
+</head>
+<body>
+	<div>
+		<img id="to_app" style="width: 100%; display: block;" src="img/download1.png">
+		<img style="width: 100%; display: block;" src="img/download2.png">
+		<img style="width: 100%; display: block;" src="img/download3.png">
+	</div>
+	<div style="float: left; position: relative; width: 100%">
+		<img style="width: 100%; display: block;" src="img/download4.png">
+		<img id="download_app" style="display: block; position: absolute; display: flex; width: 90%; margin-left: 3.5%; top: 30%" src="img/download_button.png">
+	</div>
+
+	<script type="text/javascript">
+		var iframe = document.createElement('iframe');
+		iframe.style.cssText='display:none;width=0;height=0';
+		document.body.appendChild(iframe);
+		// alert("isAndroid:" + isAndroid);
+		//进入页面后直接判断跳转app
+		if(isAndroid){
+			// alert("打开安卓:" + isAndroid);
+			iframe.src = url.openAndroid;
+		}
+		
+	</script>
+</body>
+</html>

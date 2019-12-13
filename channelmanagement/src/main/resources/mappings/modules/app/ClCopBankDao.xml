@@ -1,0 +1,284 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jeeplus.modules.app.dao.ClCopBankDao">
+  <resultMap id="ClCopBankResultMap" type="ClCopBank">
+    <id column="COP_BANK_NO" jdbcType="VARCHAR" property="copBankNo" />
+    <result column="COP_BANK_NAME" jdbcType="VARCHAR" property="copBankName" />
+    <result column="COP_BANK_STATUS" jdbcType="VARCHAR" property="copBankStatus" />
+    <result column="COP_CODE_TYPE" jdbcType="VARCHAR" property="copCodeType" />
+    <result column="COP_CODE_NO" jdbcType="VARCHAR" property="copCodeNo" />
+    <result column="COP_ACCOUNT_NO" jdbcType="VARCHAR" property="copAccountNo" />
+    <result column="COP_ACCOUNT_NAME" jdbcType="VARCHAR" property="copAccountName" />
+    <result column="COP_OPEN_ID" jdbcType="VARCHAR" property="copOpenId" />
+    <result column="COP_OPEN_NAME" jdbcType="VARCHAR" property="copOpenName" />
+    <result column="COP_REPAY_DAY" jdbcType="DECIMAL" property="copRepayDay" />
+    <result column="COP_PAY_DAY" jdbcType="DECIMAL" property="copPayDay" />
+    <result column="COP_ALLOW_DAY" jdbcType="DECIMAL" property="copAllowDay" />
+    <result column="COP_TYPE" jdbcType="VARCHAR" property="copType" />
+    <result column="COP_RELA_BANK" jdbcType="VARCHAR" property="copRelaBank" />
+    <result column="COP_SCOPE_DESC" jdbcType="VARCHAR" property="copScopeDesc" />
+    <result column="COP_SCOPE_ID" jdbcType="VARCHAR" property="copScopeId" />
+    <result column="LAST_CHG_DT" jdbcType="VARCHAR" property="lastChgDt" />
+    <result column="LAST_CHG_USR" jdbcType="VARCHAR" property="lastChgUsr" />
+    <result column="COP_ADDR" jdbcType="VARCHAR" property="copAddr" />
+    <result column="COP_ADDR_CODE" jdbcType="VARCHAR" property="copAddrCode" />
+    <result column="CONT_OR_POLICY" jdbcType="VARCHAR" property="contOrPolicy" />
+  </resultMap>
+  <sql id="ClCopBankColumns">
+    COP_BANK_NO, COP_BANK_NAME, COP_BANK_STATUS, COP_CODE_TYPE, COP_CODE_NO, COP_ACCOUNT_NO, 
+    COP_ACCOUNT_NAME, COP_OPEN_ID, COP_OPEN_NAME, COP_REPAY_DAY, COP_PAY_DAY, COP_ALLOW_DAY, 
+    COP_TYPE, COP_RELA_BANK, COP_SCOPE_DESC, COP_SCOPE_ID, LAST_CHG_DT, LAST_CHG_USR, 
+    COP_ADDR, COP_ADDR_CODE, CONT_OR_POLICY
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="ClCopBankResultMap">
+    select 
+    <include refid="ClCopBankColumns" />
+    from cl_cop_bank
+    where COP_BANK_NO = #{copBankNo,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from cl_cop_bank
+    where COP_BANK_NO = #{copBankNo,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="ClCopBank">
+    insert into cl_cop_bank (COP_BANK_NO, COP_BANK_NAME, COP_BANK_STATUS, 
+      COP_CODE_TYPE, COP_CODE_NO, COP_ACCOUNT_NO, 
+      COP_ACCOUNT_NAME, COP_OPEN_ID, COP_OPEN_NAME, 
+      COP_REPAY_DAY, COP_PAY_DAY, COP_ALLOW_DAY, 
+      COP_TYPE, COP_RELA_BANK, COP_SCOPE_DESC, 
+      COP_SCOPE_ID, LAST_CHG_DT, LAST_CHG_USR, 
+      COP_ADDR, COP_ADDR_CODE, CONT_OR_POLICY
+      )
+    values (#{copBankNo,jdbcType=VARCHAR}, #{copBankName,jdbcType=VARCHAR}, #{copBankStatus,jdbcType=VARCHAR}, 
+      #{copCodeType,jdbcType=VARCHAR}, #{copCodeNo,jdbcType=VARCHAR}, #{copAccountNo,jdbcType=VARCHAR}, 
+      #{copAccountName,jdbcType=VARCHAR}, #{copOpenId,jdbcType=VARCHAR}, #{copOpenName,jdbcType=VARCHAR}, 
+      #{copRepayDay,jdbcType=DECIMAL}, #{copPayDay,jdbcType=DECIMAL}, #{copAllowDay,jdbcType=DECIMAL}, 
+      #{copType,jdbcType=VARCHAR}, #{copRelaBank,jdbcType=VARCHAR}, #{copScopeDesc,jdbcType=VARCHAR}, 
+      #{copScopeId,jdbcType=VARCHAR}, #{lastChgDt,jdbcType=VARCHAR}, #{lastChgUsr,jdbcType=VARCHAR}, 
+      #{copAddr,jdbcType=VARCHAR}, #{copAddrCode,jdbcType=VARCHAR}, #{contOrPolicy,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="ClCopBank">
+    insert into cl_cop_bank
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="copBankNo != null">
+        COP_BANK_NO,
+      </if>
+      <if test="copBankName != null">
+        COP_BANK_NAME,
+      </if>
+      <if test="copBankStatus != null">
+        COP_BANK_STATUS,
+      </if>
+      <if test="copCodeType != null">
+        COP_CODE_TYPE,
+      </if>
+      <if test="copCodeNo != null">
+        COP_CODE_NO,
+      </if>
+      <if test="copAccountNo != null">
+        COP_ACCOUNT_NO,
+      </if>
+      <if test="copAccountName != null">
+        COP_ACCOUNT_NAME,
+      </if>
+      <if test="copOpenId != null">
+        COP_OPEN_ID,
+      </if>
+      <if test="copOpenName != null">
+        COP_OPEN_NAME,
+      </if>
+      <if test="copRepayDay != null">
+        COP_REPAY_DAY,
+      </if>
+      <if test="copPayDay != null">
+        COP_PAY_DAY,
+      </if>
+      <if test="copAllowDay != null">
+        COP_ALLOW_DAY,
+      </if>
+      <if test="copType != null">
+        COP_TYPE,
+      </if>
+      <if test="copRelaBank != null">
+        COP_RELA_BANK,
+      </if>
+      <if test="copScopeDesc != null">
+        COP_SCOPE_DESC,
+      </if>
+      <if test="copScopeId != null">
+        COP_SCOPE_ID,
+      </if>
+      <if test="lastChgDt != null">
+        LAST_CHG_DT,
+      </if>
+      <if test="lastChgUsr != null">
+        LAST_CHG_USR,
+      </if>
+      <if test="copAddr != null">
+        COP_ADDR,
+      </if>
+      <if test="copAddrCode != null">
+        COP_ADDR_CODE,
+      </if>
+      <if test="contOrPolicy != null">
+        CONT_OR_POLICY,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="copBankNo != null">
+        #{copBankNo,jdbcType=VARCHAR},
+      </if>
+      <if test="copBankName != null">
+        #{copBankName,jdbcType=VARCHAR},
+      </if>
+      <if test="copBankStatus != null">
+        #{copBankStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="copCodeType != null">
+        #{copCodeType,jdbcType=VARCHAR},
+      </if>
+      <if test="copCodeNo != null">
+        #{copCodeNo,jdbcType=VARCHAR},
+      </if>
+      <if test="copAccountNo != null">
+        #{copAccountNo,jdbcType=VARCHAR},
+      </if>
+      <if test="copAccountName != null">
+        #{copAccountName,jdbcType=VARCHAR},
+      </if>
+      <if test="copOpenId != null">
+        #{copOpenId,jdbcType=VARCHAR},
+      </if>
+      <if test="copOpenName != null">
+        #{copOpenName,jdbcType=VARCHAR},
+      </if>
+      <if test="copRepayDay != null">
+        #{copRepayDay,jdbcType=DECIMAL},
+      </if>
+      <if test="copPayDay != null">
+        #{copPayDay,jdbcType=DECIMAL},
+      </if>
+      <if test="copAllowDay != null">
+        #{copAllowDay,jdbcType=DECIMAL},
+      </if>
+      <if test="copType != null">
+        #{copType,jdbcType=VARCHAR},
+      </if>
+      <if test="copRelaBank != null">
+        #{copRelaBank,jdbcType=VARCHAR},
+      </if>
+      <if test="copScopeDesc != null">
+        #{copScopeDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="copScopeId != null">
+        #{copScopeId,jdbcType=VARCHAR},
+      </if>
+      <if test="lastChgDt != null">
+        #{lastChgDt,jdbcType=VARCHAR},
+      </if>
+      <if test="lastChgUsr != null">
+        #{lastChgUsr,jdbcType=VARCHAR},
+      </if>
+      <if test="copAddr != null">
+        #{copAddr,jdbcType=VARCHAR},
+      </if>
+      <if test="copAddrCode != null">
+        #{copAddrCode,jdbcType=VARCHAR},
+      </if>
+      <if test="contOrPolicy != null">
+        #{contOrPolicy,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="ClCopBank">
+    update cl_cop_bank
+    <set>
+      <if test="copBankName != null">
+        COP_BANK_NAME = #{copBankName,jdbcType=VARCHAR},
+      </if>
+      <if test="copBankStatus != null">
+        COP_BANK_STATUS = #{copBankStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="copCodeType != null">
+        COP_CODE_TYPE = #{copCodeType,jdbcType=VARCHAR},
+      </if>
+      <if test="copCodeNo != null">
+        COP_CODE_NO = #{copCodeNo,jdbcType=VARCHAR},
+      </if>
+      <if test="copAccountNo != null">
+        COP_ACCOUNT_NO = #{copAccountNo,jdbcType=VARCHAR},
+      </if>
+      <if test="copAccountName != null">
+        COP_ACCOUNT_NAME = #{copAccountName,jdbcType=VARCHAR},
+      </if>
+      <if test="copOpenId != null">
+        COP_OPEN_ID = #{copOpenId,jdbcType=VARCHAR},
+      </if>
+      <if test="copOpenName != null">
+        COP_OPEN_NAME = #{copOpenName,jdbcType=VARCHAR},
+      </if>
+      <if test="copRepayDay != null">
+        COP_REPAY_DAY = #{copRepayDay,jdbcType=DECIMAL},
+      </if>
+      <if test="copPayDay != null">
+        COP_PAY_DAY = #{copPayDay,jdbcType=DECIMAL},
+      </if>
+      <if test="copAllowDay != null">
+        COP_ALLOW_DAY = #{copAllowDay,jdbcType=DECIMAL},
+      </if>
+      <if test="copType != null">
+        COP_TYPE = #{copType,jdbcType=VARCHAR},
+      </if>
+      <if test="copRelaBank != null">
+        COP_RELA_BANK = #{copRelaBank,jdbcType=VARCHAR},
+      </if>
+      <if test="copScopeDesc != null">
+        COP_SCOPE_DESC = #{copScopeDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="copScopeId != null">
+        COP_SCOPE_ID = #{copScopeId,jdbcType=VARCHAR},
+      </if>
+      <if test="lastChgDt != null">
+        LAST_CHG_DT = #{lastChgDt,jdbcType=VARCHAR},
+      </if>
+      <if test="lastChgUsr != null">
+        LAST_CHG_USR = #{lastChgUsr,jdbcType=VARCHAR},
+      </if>
+      <if test="copAddr != null">
+        COP_ADDR = #{copAddr,jdbcType=VARCHAR},
+      </if>
+      <if test="copAddrCode != null">
+        COP_ADDR_CODE = #{copAddrCode,jdbcType=VARCHAR},
+      </if>
+      <if test="contOrPolicy != null">
+        CONT_OR_POLICY = #{contOrPolicy,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where COP_BANK_NO = #{copBankNo,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="ClCopBank">
+    update cl_cop_bank
+    set COP_BANK_NAME = #{copBankName,jdbcType=VARCHAR},
+      COP_BANK_STATUS = #{copBankStatus,jdbcType=VARCHAR},
+      COP_CODE_TYPE = #{copCodeType,jdbcType=VARCHAR},
+      COP_CODE_NO = #{copCodeNo,jdbcType=VARCHAR},
+      COP_ACCOUNT_NO = #{copAccountNo,jdbcType=VARCHAR},
+      COP_ACCOUNT_NAME = #{copAccountName,jdbcType=VARCHAR},
+      COP_OPEN_ID = #{copOpenId,jdbcType=VARCHAR},
+      COP_OPEN_NAME = #{copOpenName,jdbcType=VARCHAR},
+      COP_REPAY_DAY = #{copRepayDay,jdbcType=DECIMAL},
+      COP_PAY_DAY = #{copPayDay,jdbcType=DECIMAL},
+      COP_ALLOW_DAY = #{copAllowDay,jdbcType=DECIMAL},
+      COP_TYPE = #{copType,jdbcType=VARCHAR},
+      COP_RELA_BANK = #{copRelaBank,jdbcType=VARCHAR},
+      COP_SCOPE_DESC = #{copScopeDesc,jdbcType=VARCHAR},
+      COP_SCOPE_ID = #{copScopeId,jdbcType=VARCHAR},
+      LAST_CHG_DT = #{lastChgDt,jdbcType=VARCHAR},
+      LAST_CHG_USR = #{lastChgUsr,jdbcType=VARCHAR},
+      COP_ADDR = #{copAddr,jdbcType=VARCHAR},
+      COP_ADDR_CODE = #{copAddrCode,jdbcType=VARCHAR},
+      CONT_OR_POLICY = #{contOrPolicy,jdbcType=VARCHAR}
+    where COP_BANK_NO = #{copBankNo,jdbcType=VARCHAR}
+  </update>
+</mapper>

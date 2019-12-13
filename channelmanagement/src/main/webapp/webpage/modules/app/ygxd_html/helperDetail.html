@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>帮助中心</title>
+	<meta content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0,user-scalable=no" name="viewport" />
+	<meta name="format-detection" content="telephone=no"/>
+	<meta name="apple-mobile-web-app-status-bar-style"  />
+	<link rel="stylesheet" type="text/css" href="css/common.css">
+	<script src="js\jquery.min.js"></script>
+
+	<script type="text/javascript">
+		
+		$(document).ready(function(){
+			$("#question").text(decodeURI(getQueryStr("question")));
+			$("#answer").text(decodeURI(getQueryStr("answer")));
+		});
+
+		var LocString = String(window.document.location.href); 
+		function getQueryStr(str) { 
+			var rs = new RegExp("(^|)" + str + "=([^&]*)(&|$)", "gi").exec(LocString), tmp; 
+			if (tmp = rs) { 
+				return tmp[2]; 
+			} 
+			return ""; 
+		} 
+	</script>
+</head>
+<body class="bgf5">
+	<div>
+		<P id="question" class="font10 color666 question padding10 bgfff" style="margin-top: 1rem">“阳光现贷”是什么</P>
+		<P id="answer" class="font10 color666 question padding10 bgfff" style="margin-top: 1px">“阳光现贷”是什么</P>
+	</div>
+</body>
+</html>

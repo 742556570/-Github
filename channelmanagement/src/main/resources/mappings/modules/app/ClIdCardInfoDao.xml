@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jeeplus.modules.app.dao.ClIdCardInfoDao">
+
+	<resultMap id="ClIdCardInfoResultMap" type="ClIdCardInfo">
+		<result property="TRD_NO" column="TRD_NO" />
+		<result property="USR_CDE" column="USR_CDE" />
+		<result property="USR_TEL" column="USR_TEL" />
+		<result property="CUST_NAME" column="CUST_NAME" />
+		<result property="ID_NO" column="ID_NO" />
+		<result property="INDIV_SEX" column="INDIV_SEX" />
+		<result property="BIRTHDAY_DATE" column="BIRTHDAY_DATE" />
+		<result property="INDIV_NATION" column="INDIV_NATION" />
+		<result property="LIVE_ADDR" column="LIVE_ADDR" />
+		<result property="VALID_DATE1" column="VALID_DATE1" />
+		<result property="VALID_DATE2" column="VALID_DATE2" />
+		<result property="SIGN_DEPT" column="SIGN_DEPT" />
+		<result property="FORNT_IMGPTH" column="FORNT_IMGPTH" />
+		<result property="BACK_IMGPTH" column="BACK_IMGPTH" />
+		<result property="FORNT_IMGPTH_LC" column="FORNT_IMGPTH_LC" />
+		<result property="BACK_IMGPTH_LC" column="BACK_IMGPTH_LC" />
+		<result property="CRT_DT" column="CRT_DT" />
+		<result property="MDF_DT" column="MDF_DT" />
+		<result property="ISVALIDATE" column="ISVALIDATE" />
+		<result property="DETAIL" column="DETAIL" />
+	</resultMap>
+	
+	<sql id="ClIdCardInfoColumns">
+		a.TRD_NO,
+		a.USR_CDE,
+		a.USR_TEL,
+		a.CUST_NAME,
+		a.ID_NO,
+		a.INDIV_SEX,
+		a.BIRTHDAY_DATE,
+		a.INDIV_NATION,
+		a.LIVE_ADDR,
+		a.VALID_DATE1,
+		a.VALID_DATE2,
+		a.SIGN_DEPT,
+		a.FORNT_IMGPTH,
+		a.BACK_IMGPTH,
+		a.FORNT_IMGPTH_LC,
+		a.BACK_IMGPTH_LC,
+		a.CRT_DT,
+		a.MDF_DT,
+		a.ISVALIDATE,
+		a.DETAIL
+	</sql>
+
+	
+	<select id="getAllIdCardInfo" resultMap="ClIdCardInfoResultMap">
+		SELECT
+		<include refid="ClIdCardInfoColumns" />
+		FROM CL_IDCARD_INFO a
+	</select>
+
+	<!-- 根据用户标识获得用户 对象-->
+	<select id="getByUsrCode" resultMap="ClIdCardInfoResultMap" parameterType="java.lang.String">
+		SELECT
+		<include refid="ClIdCardInfoColumns" />
+		FROM CL_IDCARD_INFO a
+		WHERE a.USR_CDE = #{USR_CDE}
+	</select>
+	
+	<select id="getByIdNo" resultMap="ClIdCardInfoResultMap" parameterType="java.lang.String">
+		SELECT
+		<include refid="ClIdCardInfoColumns" />
+		FROM CL_IDCARD_INFO a
+		WHERE a.ID_NO = #{ID_NO}
+	</select>
+	
+	<select id="cntByUsrCode" resultType="int" parameterType="java.lang.String">
+		select count(1) as cnt from CL_IDCARD_INFO a WHERE a.USR_CDE = #{USR_CDE}
+	</select>
+	
+	<select id="getValidByUsrCode" resultMap="ClIdCardInfoResultMap" parameterType="java.lang.String">
+		SELECT
+		<include refid="ClIdCardInfoColumns" />
+		FROM CL_IDCARD_INFO a
+		WHERE a.USR_CDE = #{USR_CDE}
+	</select>
+
+
+	<!-- 插入用户 -->
+	<insert id="insert">
+		INSERT INTO CL_IDCARD_INFO(
+		USR_CDE,
+		USR_TEL,
+		CUST_NAME,
+		ID_NO,
+		INDIV_SEX,
+		BIRTHDAY_DATE,
+		INDIV_NATION,
+		LIVE_ADDR,
+		VALID_DATE1,
+		VALID_DATE2,
+		SIGN_DEPT,
+		FORNT_IMGPTH,
+		BACK_IMGPTH,
+		FORNT_IMGPTH_LC,
+		BACK_IMGPTH_LC,
+		CRT_DT,
+		MDF_DT,
+		ISVALIDATE,
+		DETAIL
+		) VALUES (
+		#{USR_CDE},
+		#{USR_TEL},
+		#{CUST_NAME},
+		#{ID_NO},
+		#{INDIV_SEX},
+		#{BIRTHDAY_DATE},
+		#{INDIV_NATION},
+		#{LIVE_ADDR},
+		#{VALID_DATE1},
+		#{VALID_DATE2},
+		#{SIGN_DEPT},
+		#{FORNT_IMGPTH},
+		#{BACK_IMGPTH},
+		#{FORNT_IMGPTH_LC},
+		#{BACK_IMGPTH_LC},
+		#{CRT_DT},
+		#{MDF_DT},
+		#{ISVALIDATE},
+		#{DETAIL}
+		)
+	</insert>
+
+
+</mapper>

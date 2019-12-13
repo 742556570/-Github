@@ -1,0 +1,419 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jeeplus.modules.app.dao.ClPrdBasicInfoDao">
+  <resultMap id="ClPrdBasicInfoResultMap" type="ClPrdBasicInfo">
+    <result column="prd_cde" jdbcType="VARCHAR" property="prdCde" />
+    <result column="prd_name" jdbcType="VARCHAR" property="prdName" />
+    <result column="prd_type" jdbcType="VARCHAR" property="prdType" />
+    <result column="doc_id" jdbcType="VARCHAR" property="docId" />
+    <result column="wfi_sign" jdbcType="VARCHAR" property="wfiSign" />
+    <result column="pay_term" jdbcType="DECIMAL" property="payTerm" />
+    <result column="cont_model" jdbcType="VARCHAR" property="contModel" />
+    <result column="guar_model" jdbcType="VARCHAR" property="guarModel" />
+    <result column="pay_mode" jdbcType="VARCHAR" property="payMode" />
+    <result column="wfi_auth" jdbcType="VARCHAR" property="wfiAuth" />
+    <result column="max_loan_amt" jdbcType="DECIMAL" property="maxLoanAmt" />
+    <result column="min_loan_amt" jdbcType="DECIMAL" property="minLoanAmt" />
+    <result column="repay_mode" jdbcType="VARCHAR" property="repayMode" />
+    <result column="valid_date" jdbcType="VARCHAR" property="validDate" />
+    <result column="valid_time" jdbcType="VARCHAR" property="validTime" />
+    <result column="prd_status" jdbcType="VARCHAR" property="prdStatus" />
+    <result column="invalid_date" jdbcType="VARCHAR" property="invalidDate" />
+    <result column="invalid_time" jdbcType="VARCHAR" property="invalidTime" />
+    <result column="prd_memo" jdbcType="VARCHAR" property="prdMemo" />
+    <result column="input_id" jdbcType="VARCHAR" property="inputId" />
+    <result column="input_date" jdbcType="VARCHAR" property="inputDate" />
+    <result column="last_input_id" jdbcType="VARCHAR" property="lastInputId" />
+    <result column="last_modify_date" jdbcType="VARCHAR" property="lastModifyDate" />
+    <result column="prd_seq" jdbcType="VARCHAR" property="prdSeq" />
+    <result column="max_loan_rate" jdbcType="DECIMAL" property="maxLoanRate" />
+    <result column="min_loan_rate" jdbcType="DECIMAL" property="minLoanRate" />
+    <result column="pt_status" jdbcType="VARCHAR" property="ptStatus" />
+    <result column="lt_status" jdbcType="VARCHAR" property="ltStatus" />
+    <result column="lst_status" jdbcType="VARCHAR" property="lstStatus" />
+    <result column="zy_status" jdbcType="VARCHAR" property="zyStatus" />
+    <result column="sd_status" jdbcType="VARCHAR" property="sdStatus" />
+    <result column="gw_status" jdbcType="VARCHAR" property="gwStatus" />
+    <result column="lsd_status" jdbcType="VARCHAR" property="lsdStatus" />
+    <result column="bel_type" jdbcType="VARCHAR" property="belType" />
+    <result column="fir_service_rate" jdbcType="DECIMAL" property="firServiceRate" />
+    <result column="pay_service_rate" jdbcType="DECIMAL" property="payServiceRate" />
+    <result column="guar_cate" jdbcType="VARCHAR" property="guarCate" />
+    <result column="guar_emp_max_amt" jdbcType="DECIMAL" property="guarEmpMaxAmt" />
+    <result column="guar_emp_min_amt" jdbcType="DECIMAL" property="guarEmpMinAmt" />
+    <result column="guar_society_max_amt" jdbcType="DECIMAL" property="guarSocietyMaxAmt" />
+    <result column="guar_society_min_amt" jdbcType="DECIMAL" property="guarSocietyMinAmt" />
+    <result column="grt_maxamt_year" jdbcType="DECIMAL" property="grtMaxamtYear" />
+    <result column="white_min_loan_rate" jdbcType="DECIMAL" property="whiteMinLoanRate" />
+    <result column="bank_id" jdbcType="LONGVARCHAR" property="bankId" />
+    <result column="suitable_store" jdbcType="LONGVARCHAR" property="suitableStore" />
+    <result column="support_channel" jdbcType="LONGVARCHAR" property="supportChannel" />
+    <result column="syn_sys" jdbcType="LONGVARCHAR" property="synSys" />
+    <result column="suitable_store_id" jdbcType="LONGVARCHAR" property="suitableStoreId" />
+    <result column="support_channel_id" jdbcType="LONGVARCHAR" property="supportChannelId" />
+    <result column="syn_sys_id" jdbcType="LONGVARCHAR" property="synSysId" />
+    <result column="src_sys" jdbcType="LONGVARCHAR" property="srcSys" />
+  </resultMap>
+  <sql id="ClPrdBasicInfoColumns">
+    bank_id, suitable_store, support_channel, syn_sys, suitable_store_id, support_channel_id, 
+    syn_sys_id, src_sys
+  </sql>
+  <insert id="insert" parameterType="ClPrdBasicInfo">
+    insert into cl_prd_basic_info (prd_cde, prd_name, prd_type, 
+      doc_id, wfi_sign, pay_term, 
+      cont_model, guar_model, pay_mode, 
+      wfi_auth, max_loan_amt, min_loan_amt, 
+      repay_mode, valid_date, valid_time, 
+      prd_status, invalid_date, invalid_time, 
+      prd_memo, input_id, input_date, 
+      last_input_id, last_modify_date, prd_seq, 
+      max_loan_rate, min_loan_rate, pt_status, 
+      lt_status, lst_status, zy_status, 
+      sd_status, gw_status, lsd_status, 
+      bel_type, fir_service_rate, pay_service_rate, 
+      guar_cate, guar_emp_max_amt, guar_emp_min_amt, 
+      guar_society_max_amt, guar_society_min_amt, grt_maxamt_year, 
+      white_min_loan_rate, bank_id, suitable_store, 
+      support_channel, syn_sys, suitable_store_id, 
+      support_channel_id, syn_sys_id, src_sys
+      )
+    values (#{prdCde,jdbcType=VARCHAR}, #{prdName,jdbcType=VARCHAR}, #{prdType,jdbcType=VARCHAR}, 
+      #{docId,jdbcType=VARCHAR}, #{wfiSign,jdbcType=VARCHAR}, #{payTerm,jdbcType=DECIMAL}, 
+      #{contModel,jdbcType=VARCHAR}, #{guarModel,jdbcType=VARCHAR}, #{payMode,jdbcType=VARCHAR}, 
+      #{wfiAuth,jdbcType=VARCHAR}, #{maxLoanAmt,jdbcType=DECIMAL}, #{minLoanAmt,jdbcType=DECIMAL}, 
+      #{repayMode,jdbcType=VARCHAR}, #{validDate,jdbcType=VARCHAR}, #{validTime,jdbcType=VARCHAR}, 
+      #{prdStatus,jdbcType=VARCHAR}, #{invalidDate,jdbcType=VARCHAR}, #{invalidTime,jdbcType=VARCHAR}, 
+      #{prdMemo,jdbcType=VARCHAR}, #{inputId,jdbcType=VARCHAR}, #{inputDate,jdbcType=VARCHAR}, 
+      #{lastInputId,jdbcType=VARCHAR}, #{lastModifyDate,jdbcType=VARCHAR}, #{prdSeq,jdbcType=VARCHAR}, 
+      #{maxLoanRate,jdbcType=DECIMAL}, #{minLoanRate,jdbcType=DECIMAL}, #{ptStatus,jdbcType=VARCHAR}, 
+      #{ltStatus,jdbcType=VARCHAR}, #{lstStatus,jdbcType=VARCHAR}, #{zyStatus,jdbcType=VARCHAR}, 
+      #{sdStatus,jdbcType=VARCHAR}, #{gwStatus,jdbcType=VARCHAR}, #{lsdStatus,jdbcType=VARCHAR}, 
+      #{belType,jdbcType=VARCHAR}, #{firServiceRate,jdbcType=DECIMAL}, #{payServiceRate,jdbcType=DECIMAL}, 
+      #{guarCate,jdbcType=VARCHAR}, #{guarEmpMaxAmt,jdbcType=DECIMAL}, #{guarEmpMinAmt,jdbcType=DECIMAL}, 
+      #{guarSocietyMaxAmt,jdbcType=DECIMAL}, #{guarSocietyMinAmt,jdbcType=DECIMAL}, #{grtMaxamtYear,jdbcType=DECIMAL}, 
+      #{whiteMinLoanRate,jdbcType=DECIMAL}, #{bankId,jdbcType=LONGVARCHAR}, #{suitableStore,jdbcType=LONGVARCHAR}, 
+      #{supportChannel,jdbcType=LONGVARCHAR}, #{synSys,jdbcType=LONGVARCHAR}, #{suitableStoreId,jdbcType=LONGVARCHAR}, 
+      #{supportChannelId,jdbcType=LONGVARCHAR}, #{synSysId,jdbcType=LONGVARCHAR}, #{srcSys,jdbcType=LONGVARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" >
+    insert into cl_prd_basic_info
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="prdCde != null">
+        prd_cde,
+      </if>
+      <if test="prdName != null">
+        prd_name,
+      </if>
+      <if test="prdType != null">
+        prd_type,
+      </if>
+      <if test="docId != null">
+        doc_id,
+      </if>
+      <if test="wfiSign != null">
+        wfi_sign,
+      </if>
+      <if test="payTerm != null">
+        pay_term,
+      </if>
+      <if test="contModel != null">
+        cont_model,
+      </if>
+      <if test="guarModel != null">
+        guar_model,
+      </if>
+      <if test="payMode != null">
+        pay_mode,
+      </if>
+      <if test="wfiAuth != null">
+        wfi_auth,
+      </if>
+      <if test="maxLoanAmt != null">
+        max_loan_amt,
+      </if>
+      <if test="minLoanAmt != null">
+        min_loan_amt,
+      </if>
+      <if test="repayMode != null">
+        repay_mode,
+      </if>
+      <if test="validDate != null">
+        valid_date,
+      </if>
+      <if test="validTime != null">
+        valid_time,
+      </if>
+      <if test="prdStatus != null">
+        prd_status,
+      </if>
+      <if test="invalidDate != null">
+        invalid_date,
+      </if>
+      <if test="invalidTime != null">
+        invalid_time,
+      </if>
+      <if test="prdMemo != null">
+        prd_memo,
+      </if>
+      <if test="inputId != null">
+        input_id,
+      </if>
+      <if test="inputDate != null">
+        input_date,
+      </if>
+      <if test="lastInputId != null">
+        last_input_id,
+      </if>
+      <if test="lastModifyDate != null">
+        last_modify_date,
+      </if>
+      <if test="prdSeq != null">
+        prd_seq,
+      </if>
+      <if test="maxLoanRate != null">
+        max_loan_rate,
+      </if>
+      <if test="minLoanRate != null">
+        min_loan_rate,
+      </if>
+      <if test="ptStatus != null">
+        pt_status,
+      </if>
+      <if test="ltStatus != null">
+        lt_status,
+      </if>
+      <if test="lstStatus != null">
+        lst_status,
+      </if>
+      <if test="zyStatus != null">
+        zy_status,
+      </if>
+      <if test="sdStatus != null">
+        sd_status,
+      </if>
+      <if test="gwStatus != null">
+        gw_status,
+      </if>
+      <if test="lsdStatus != null">
+        lsd_status,
+      </if>
+      <if test="belType != null">
+        bel_type,
+      </if>
+      <if test="firServiceRate != null">
+        fir_service_rate,
+      </if>
+      <if test="payServiceRate != null">
+        pay_service_rate,
+      </if>
+      <if test="guarCate != null">
+        guar_cate,
+      </if>
+      <if test="guarEmpMaxAmt != null">
+        guar_emp_max_amt,
+      </if>
+      <if test="guarEmpMinAmt != null">
+        guar_emp_min_amt,
+      </if>
+      <if test="guarSocietyMaxAmt != null">
+        guar_society_max_amt,
+      </if>
+      <if test="guarSocietyMinAmt != null">
+        guar_society_min_amt,
+      </if>
+      <if test="grtMaxamtYear != null">
+        grt_maxamt_year,
+      </if>
+      <if test="whiteMinLoanRate != null">
+        white_min_loan_rate,
+      </if>
+      <if test="bankId != null">
+        bank_id,
+      </if>
+      <if test="suitableStore != null">
+        suitable_store,
+      </if>
+      <if test="supportChannel != null">
+        support_channel,
+      </if>
+      <if test="synSys != null">
+        syn_sys,
+      </if>
+      <if test="suitableStoreId != null">
+        suitable_store_id,
+      </if>
+      <if test="supportChannelId != null">
+        support_channel_id,
+      </if>
+      <if test="synSysId != null">
+        syn_sys_id,
+      </if>
+      <if test="srcSys != null">
+        src_sys,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="prdCde != null">
+        #{prdCde,jdbcType=VARCHAR},
+      </if>
+      <if test="prdName != null">
+        #{prdName,jdbcType=VARCHAR},
+      </if>
+      <if test="prdType != null">
+        #{prdType,jdbcType=VARCHAR},
+      </if>
+      <if test="docId != null">
+        #{docId,jdbcType=VARCHAR},
+      </if>
+      <if test="wfiSign != null">
+        #{wfiSign,jdbcType=VARCHAR},
+      </if>
+      <if test="payTerm != null">
+        #{payTerm,jdbcType=DECIMAL},
+      </if>
+      <if test="contModel != null">
+        #{contModel,jdbcType=VARCHAR},
+      </if>
+      <if test="guarModel != null">
+        #{guarModel,jdbcType=VARCHAR},
+      </if>
+      <if test="payMode != null">
+        #{payMode,jdbcType=VARCHAR},
+      </if>
+      <if test="wfiAuth != null">
+        #{wfiAuth,jdbcType=VARCHAR},
+      </if>
+      <if test="maxLoanAmt != null">
+        #{maxLoanAmt,jdbcType=DECIMAL},
+      </if>
+      <if test="minLoanAmt != null">
+        #{minLoanAmt,jdbcType=DECIMAL},
+      </if>
+      <if test="repayMode != null">
+        #{repayMode,jdbcType=VARCHAR},
+      </if>
+      <if test="validDate != null">
+        #{validDate,jdbcType=VARCHAR},
+      </if>
+      <if test="validTime != null">
+        #{validTime,jdbcType=VARCHAR},
+      </if>
+      <if test="prdStatus != null">
+        #{prdStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="invalidDate != null">
+        #{invalidDate,jdbcType=VARCHAR},
+      </if>
+      <if test="invalidTime != null">
+        #{invalidTime,jdbcType=VARCHAR},
+      </if>
+      <if test="prdMemo != null">
+        #{prdMemo,jdbcType=VARCHAR},
+      </if>
+      <if test="inputId != null">
+        #{inputId,jdbcType=VARCHAR},
+      </if>
+      <if test="inputDate != null">
+        #{inputDate,jdbcType=VARCHAR},
+      </if>
+      <if test="lastInputId != null">
+        #{lastInputId,jdbcType=VARCHAR},
+      </if>
+      <if test="lastModifyDate != null">
+        #{lastModifyDate,jdbcType=VARCHAR},
+      </if>
+      <if test="prdSeq != null">
+        #{prdSeq,jdbcType=VARCHAR},
+      </if>
+      <if test="maxLoanRate != null">
+        #{maxLoanRate,jdbcType=DECIMAL},
+      </if>
+      <if test="minLoanRate != null">
+        #{minLoanRate,jdbcType=DECIMAL},
+      </if>
+      <if test="ptStatus != null">
+        #{ptStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="ltStatus != null">
+        #{ltStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="lstStatus != null">
+        #{lstStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="zyStatus != null">
+        #{zyStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="sdStatus != null">
+        #{sdStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="gwStatus != null">
+        #{gwStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="lsdStatus != null">
+        #{lsdStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="belType != null">
+        #{belType,jdbcType=VARCHAR},
+      </if>
+      <if test="firServiceRate != null">
+        #{firServiceRate,jdbcType=DECIMAL},
+      </if>
+      <if test="payServiceRate != null">
+        #{payServiceRate,jdbcType=DECIMAL},
+      </if>
+      <if test="guarCate != null">
+        #{guarCate,jdbcType=VARCHAR},
+      </if>
+      <if test="guarEmpMaxAmt != null">
+        #{guarEmpMaxAmt,jdbcType=DECIMAL},
+      </if>
+      <if test="guarEmpMinAmt != null">
+        #{guarEmpMinAmt,jdbcType=DECIMAL},
+      </if>
+      <if test="guarSocietyMaxAmt != null">
+        #{guarSocietyMaxAmt,jdbcType=DECIMAL},
+      </if>
+      <if test="guarSocietyMinAmt != null">
+        #{guarSocietyMinAmt,jdbcType=DECIMAL},
+      </if>
+      <if test="grtMaxamtYear != null">
+        #{grtMaxamtYear,jdbcType=DECIMAL},
+      </if>
+      <if test="whiteMinLoanRate != null">
+        #{whiteMinLoanRate,jdbcType=DECIMAL},
+      </if>
+      <if test="bankId != null">
+        #{bankId,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="suitableStore != null">
+        #{suitableStore,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="supportChannel != null">
+        #{supportChannel,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="synSys != null">
+        #{synSys,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="suitableStoreId != null">
+        #{suitableStoreId,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="supportChannelId != null">
+        #{supportChannelId,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="synSysId != null">
+        #{synSysId,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="srcSys != null">
+        #{srcSys,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  
+  <select id="getBasicInfoByPrdCde" parameterType="java.lang.String" resultMap="ClPrdBasicInfoResultMap">
+    select 
+    <include refid="ClPrdBasicInfoColumns" />
+    from CL_PRD_BASIC_INFO
+    where PRD_CDE = #{prdCde,jdbcType=VARCHAR}
+  </select>
+</mapper>

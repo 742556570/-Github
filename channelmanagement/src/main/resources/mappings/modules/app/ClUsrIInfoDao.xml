@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jeeplus.modules.app.dao.ClUsrInfoDao">
+
+	<resultMap id="ClUsrInfoResultMap" type="ClUsrInfo">
+		<result property="INFO_SEQ" column="INFO_SEQ" />
+		<result property="USR_CDE" column="USR_CDE" />
+		<result property="LIVE_PROVINCE" column="LIVE_PROVINCE" />
+		<result property="LIVE_PROVINCE_CODE" column="LIVE_PROVINCE_CODE" />
+		<result property="LIVE_CITY" column="LIVE_CITY" />
+		<result property="LIVE_CITY_CODE" column="LIVE_CITY_CODE" />
+		<result property="LIVE_AREA" column="LIVE_AREA" />
+		<result property="LIVE_AREA_CODE" column="LIVE_AREA_CODE" />
+		<result property="LIVE_ADDR" column="LIVE_ADDR" />
+		<result property="INDIV_EMP_NAME" column="INDIV_EMP_NAME" />
+		<result property="INDIV_EMP_PROVINCE" column="INDIV_EMP_PROVINCE" />
+		<result property="INDIV_EMP_PROVINCE_CODE" column="INDIV_EMP_PROVINCE_CODE" />
+		<result property="INDIV_EMP_CITY" column="INDIV_EMP_CITY" />
+		<result property="INDIV_EMP_CITY_CODE" column="INDIV_EMP_CITY_CODE" />
+		<result property="INDIV_EMP_AREA" column="INDIV_EMP_AREA" />
+		<result property="INDIV_EMP_AREA_CODE" column="INDIV_EMP_AREA_CODE" />
+		<result property="INDIV_EMP_ADDR" column="INDIV_EMP_ADDR" />
+		<result property="DUTY" column="DUTY" />
+		<result property="DUTY_CODE" column="DUTY_CODE" />
+		<result property="INDIV_EMP_TEL" column="INDIV_EMP_TEL" />
+		<result property="CRT_DT" column="CRT_DT" />
+		<result property="MDF_DT" column="MDF_DT" />
+		<result property="RMK" column="RMK" />
+		<result property="MON_INCOME" column="MON_INCOME" />
+		<result property="HIGH_DEGREE" column="HIGH_DEGREE" />
+	</resultMap>
+	
+	<sql id="ClUsrInfoColumns">
+		a.INFO_SEQ,
+		a.USR_CDE,
+		a.LIVE_PROVINCE ,
+		a.LIVE_PROVINCE_CODE ,
+		a.LIVE_CITY ,
+		a.LIVE_CITY_CODE ,
+		a.LIVE_AREA, 
+		a.LIVE_AREA_CODE,
+		a.LIVE_ADDR, 
+		a.INDIV_EMP_NAME,
+		a.INDIV_EMP_PROVINCE ,
+		a.INDIV_EMP_PROVINCE_CODE ,
+		a.INDIV_EMP_CITY,
+		a.INDIV_EMP_CITY_CODE,
+		a.INDIV_EMP_AREA,
+		a.INDIV_EMP_AREA_CODE,
+		a.INDIV_EMP_ADDR, 
+		a.DUTY,
+		a.DUTY_CODE,
+		a.INDIV_EMP_TEL, 
+		a.CRT_DT,
+		a.MDF_DT,
+		a.RMK,
+		a.MON_INCOME,
+		a.HIGH_DEGREE
+	</sql>
+
+
+	<!-- 根据用户标识获得用户 对象-->
+	<select id="getByUsrCode" resultMap="ClUsrInfoResultMap" parameterType="java.lang.String">
+		SELECT
+		<include refid="ClUsrInfoColumns" />
+		FROM CL_USR_INFO a
+		WHERE a.USR_CDE = #{USR_CDE}
+	</select>
+	
+	<!-- 根据用户标识获得用户 对象-->
+	<select id="cntByUsrCode" resultType="int" parameterType="java.lang.String">
+		SELECT
+		count(1)
+		FROM CL_USR_INFO a
+		WHERE a.USR_CDE = #{USR_CDE}
+	</select>
+	
+
+
+	<!-- 插入用户信息 -->
+	<insert id="insert">
+		INSERT INTO CL_USR_INFO(
+		USR_CDE,
+		LIVE_PROVINCE ,
+		LIVE_PROVINCE_CODE ,
+		LIVE_CITY ,
+		LIVE_CITY_CODE ,
+		LIVE_AREA, 
+		LIVE_AREA_CODE, 
+		LIVE_ADDR, 
+		INDIV_EMP_NAME,
+		INDIV_EMP_PROVINCE ,
+		INDIV_EMP_PROVINCE_CODE ,
+		INDIV_EMP_CITY,
+		INDIV_EMP_CITY_CODE,
+		INDIV_EMP_AREA,
+		INDIV_EMP_AREA_CODE,
+		INDIV_EMP_ADDR, 
+		DUTY,
+		DUTY_CODE,
+		INDIV_EMP_TEL, 
+		CRT_DT,
+		MDF_DT,
+		RMK,
+		MON_INCOME,
+		HIGH_DEGREE
+		) VALUES (
+		#{USR_CDE},
+		#{LIVE_PROVINCE },
+		#{LIVE_PROVINCE_CODE },
+		#{LIVE_CITY },
+		#{LIVE_CITY_CODE },
+		#{LIVE_AREA}, 
+		#{LIVE_AREA_CODE}, 
+		#{LIVE_ADDR}, 
+		#{INDIV_EMP_NAME},
+		#{INDIV_EMP_PROVINCE },
+		#{INDIV_EMP_PROVINCE_CODE },
+		#{INDIV_EMP_CITY},
+		#{INDIV_EMP_CITY_CODE},
+		#{INDIV_EMP_AREA},
+		#{INDIV_EMP_AREA_CODE},
+		#{INDIV_EMP_ADDR}, 
+		#{DUTY},
+		#{DUTY_CODE},
+		#{INDIV_EMP_TEL}, 
+		#{CRT_DT},
+		#{MDF_DT},
+		#{RMK},
+		#{MON_INCOME},
+		#{HIGH_DEGREE}
+		)
+	</insert>
+	
+	
+	<update id="updateByusrcde" parameterType="java.util.HashMap">
+		UPDATE cl_usr_info SET
+		<if test="MON_INCOME != null and MON_INCOME != ''">
+			MON_INCOME = #{MON_INCOME}
+		</if>
+		<if test="HIGH_DEGREE != null and HIGH_DEGREE != ''">
+			,HIGH_DEGREE = #{HIGH_DEGREE}
+		</if>
+		WHERE USR_CDE = #{USR_CDE}
+	</update>
+
+
+</mapper>

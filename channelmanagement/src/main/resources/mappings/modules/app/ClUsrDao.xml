@@ -1,0 +1,260 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jeeplus.modules.app.dao.ClUsrDao">
+
+	<resultMap id="ClUsrResultMap" type="ClUsr">
+		<result property="USR_CDE" column="USR_CDE" />
+		<result property="USR_TEL" column="USR_TEL" />
+		<result property="USR_STS" column="USR_STS" />
+		<result property="CRT_DT" column="CRT_DT" />
+		<result property="USR_LAST_DT" column="USR_LAST_DT" />
+		<result property="USR_LAST_IP" column="USR_LAST_IP" />
+		<result property="USR_PLTFM" column="USR_PLTFM" />
+		<result property="USR_OS" column="USR_OS" />
+		<result property="USR_OSVER" column="USR_OSVER" />
+		<result property="USR_CLNTVER" column="USR_CLNTVER" />
+		<result property="USR_IMEI" column="USR_IMEI" />
+		<result property="USR_OPENID" column="USR_OPENID" />
+		<result property="USR_PROMOV" column="USR_PROMOV" />
+		<result property="USR_THRDID1" column="USR_THRDID1" />
+		<result property="USR_THRDID2" column="USR_THRDID2" />
+		<result property="USR_THRDID3" column="USR_THRDID3" />
+		<result property="USR_TOKEN" column="USR_TOKEN" />
+		<result property="USR_SOURCE" column="USR_SOURCE" />
+		<result property="USR_GRD" column="USR_GRD" />
+		<result property="USR_PPWD" column="USR_PPWD" />
+		<result property="PAY_PPWD" column="PAY_PPWD" />
+		<result property="APP_CHANNEL" column="APP_CHANNEL" />
+	</resultMap>
+	
+	<sql id="ClUsrColumns">
+		a.USR_CDE,
+		a.USR_TEL,
+		a.USR_STS,
+		a.CRT_DT,
+		a.USR_LAST_DT,
+		a.USR_LAST_IP,
+		a.USR_PLTFM,
+		a.USR_OS,
+		a.USR_OSVER,
+		a.USR_CLNTVER,
+		a.USR_IMEI,
+		a.USR_OPENID,
+		a.USR_PROMOV,
+		a.USR_THRDID1,
+		a.USR_THRDID2,
+		a.USR_THRDID3,
+		a.USR_TOKEN,
+		a.USR_SOURCE,
+		a.USR_GRD,
+		a.USR_PPWD,
+		a.PAY_PPWD,
+		a.APP_CHANNEL
+	</sql>
+
+
+	<!-- 根据用户标识获得用户 对象-->
+	<select id="getByUsrCode" resultMap="ClUsrResultMap" parameterType="java.lang.String">
+		SELECT
+		<include refid="ClUsrColumns" />
+		FROM CL_USR a
+		WHERE a.USR_CDE = #{USR_CDE}
+	</select>
+
+
+	<!-- 根据手机号获得用户 -->
+	<select id="getByUsrTel" resultMap="ClUsrResultMap" parameterType="java.lang.String">
+		SELECT
+		<include refid="ClUsrColumns" />
+		FROM CL_USR a
+		WHERE a.USR_TEL = #{USR_TEL}
+	</select>
+	
+	
+	<!-- 根据手机号获得用户 -->
+	<select id="getByToken" resultMap="ClUsrResultMap" parameterType="java.lang.String">
+		SELECT
+		<include refid="ClUsrColumns" />
+		FROM CL_USR a
+		WHERE a.USR_TOKEN = #{USR_TOKEN}
+	</select>
+
+	<select id="getAll" resultMap="ClUsrResultMap">
+		SELECT
+		<include refid="ClUsrColumns" />
+		FROM CL_USR a
+	</select>
+
+
+	<!-- 插入用户 -->
+	<insert id="insert">
+		INSERT INTO CL_USR(
+		USR_CDE,
+		USR_TEL,
+		USR_STS,
+		USR_LAST_DT,
+		USR_LAST_IP,
+		CRT_DT,
+		USR_PLTFM,
+		USR_OS,
+		USR_OSVER,
+		USR_CLNTVER,
+		USR_IMEI,
+		USR_OPENID,
+		USR_PROMOV,
+		USR_THRDID1,
+		USR_THRDID2,
+		USR_THRDID3,
+		USR_TOKEN,
+		USR_SOURCE,
+		USR_GRD,
+		USR_PPWD,
+		APP_CHANNEL
+		) VALUES (
+		#{USR_CDE},
+		#{USR_TEL},
+		#{USR_STS},
+		#{USR_LAST_DT},
+		#{USR_LAST_IP},
+		#{CRT_DT},
+		#{USR_PLTFM},
+		#{USR_OS},
+		#{USR_OSVER},
+		#{USR_CLNTVER},
+		#{USR_IMEI},
+		#{USR_OPENID},
+		#{USR_PROMOV},
+		#{USR_THRDID1},
+		#{USR_THRDID2},
+		#{USR_THRDID3},
+		#{USR_TOKEN},
+		#{USR_SOURCE},
+		#{USR_GRD},
+		#{USR_PPWD},
+		#{APP_CHANNEL}
+		)
+	</insert>
+
+
+		<!-- 更新用户 -->
+	<update id="update">
+		UPDATE CL_USR SET USR_CDE = #{USR_CDE}
+		<if test="USR_STS != null and USR_STS != ''">
+			,USR_STS = #{USR_STS}
+		</if>
+		<if test="USR_LAST_DT != null and USR_LAST_DT != ''">
+			,USR_LAST_DT = #{USR_LAST_DT}
+		</if>
+		<if test="USR_LAST_IP != null and USR_LAST_IP != ''">
+			,USR_LAST_IP = #{USR_LAST_IP}
+		</if>
+		<if test="USR_PLTFM != null and USR_PLTFM != ''">
+			,USR_PLTFM = #{USR_PLTFM}
+		</if>
+		<if test="USR_OS != null and USR_OS != ''">
+			,USR_OS = #{USR_OS}
+		</if>
+		<if test="USR_OSVER != null and USR_OSVER != ''">
+			,USR_OSVER = #{USR_OSVER}
+		</if>
+		<if test="USR_CLNTVER != null and USR_CLNTVER != ''">
+			,USR_CLNTVER = #{USR_CLNTVER}
+		</if>
+		<if test="USR_IMEI != null and USR_IMEI != ''">
+			,USR_IMEI = #{USR_IMEI}
+		</if>
+		<if test="USR_SOURCE != null and USR_SOURCE != ''">
+			,USR_SOURCE = #{USR_SOURCE}
+		</if>
+		<if test="USR_TOKEN != null and USR_TOKEN != ''">
+			,USR_TOKEN = #{USR_TOKEN}
+		</if>
+		<if test="APP_CHANNEL != null and APP_CHANNEL != ''">
+			,APP_CHANNEL = #{APP_CHANNEL}
+		</if>
+		WHERE USR_CDE = #{USR_CDE}
+	</update>
+	
+	
+	<update id="updateUsrGrd">
+		UPDATE CL_USR SET 
+			USR_GRD = #{USR_GRD}
+		WHERE USR_CDE = #{USR_CDE}
+	</update>
+	
+	<update id="updateByTel">
+		UPDATE CL_USR SET USR_CDE = #{USR_CDE}
+		<if test="USR_STS != null and USR_STS != ''">
+			,USR_STS = #{USR_STS}
+		</if>
+		<if test="USR_LAST_DT != null and USR_LAST_DT != ''">
+			,USR_LAST_DT = #{USR_LAST_DT}
+		</if>
+		<if test="USR_LAST_IP != null and USR_LAST_IP != ''">
+			,USR_LAST_IP = #{USR_LAST_IP}
+		</if>
+		<if test="USR_PLTFM != null and USR_PLTFM != ''">
+			,USR_PLTFM = #{USR_PLTFM}
+		</if>
+		<if test="USR_OS != null and USR_OS != ''">
+			,USR_OS = #{USR_OS}
+		</if>
+		<if test="USR_OSVER != null and USR_OSVER != ''">
+			,USR_OSVER = #{USR_OSVER}
+		</if>
+		<if test="USR_CLNTVER != null and USR_CLNTVER != ''">
+			,USR_CLNTVER = #{USR_CLNTVER}
+		</if>
+		<if test="USR_IMEI != null and USR_IMEI != ''">
+			,USR_IMEI = #{USR_IMEI}
+		</if>
+		<if test="USR_SOURCE != null and USR_SOURCE != ''">
+			,USR_SOURCE = #{USR_SOURCE}
+		</if>
+		<if test="USR_TOKEN != null and USR_TOKEN != ''">
+			,USR_TOKEN = #{USR_TOKEN}
+		</if>
+		<if test="APP_CHANNEL != null and APP_CHANNEL != ''">
+			,APP_CHANNEL = #{APP_CHANNEL}
+		</if>
+		WHERE USR_TEL = #{USR_TEL}
+	</update>
+
+
+	<!-- 检查手机号唯一 -->
+	<select id="countByUsrTel" resultType="int">
+		SELECT
+		COUNT(1)
+		FROM CL_USR a
+		WHERE a.USR_TEL = #{USR_TEL}
+	</select>
+	
+	<!-- 检查用户的支付密码是否为空-->
+	<select id="getByPayPwd" resultType="java.lang.String" parameterType="java.lang.String">
+		SELECT a.PAY_PPWD
+		FROM CL_USR a
+		WHERE a.USR_CDE = #{USR_CDE}
+	</select>
+	<!-- 设置支付密码-->
+	<update id="updateByPayPwd">
+		UPDATE CL_USR SET PAY_PPWD = #{PAY_PPWD}
+		WHERE USR_CDE = #{USR_CDE}
+	</update>
+
+	<!-- 24小时内同一IP地址提交申请次数-->
+	<select id="getDayIpCount" parameterType="java.lang.String" resultType="int">
+		SELECT COUNT(1) 
+		FROM CL_USR 
+		WHERE USR_LAST_DT >=(NOW() - INTERVAL 24 HOUR)  
+		AND USR_LAST_DT &lt;= NOW() 
+		AND USR_LAST_IP = #{USR_LAST_IP}
+	</select>
+	<!-- 30日内同一IP地址提交申请次数-->
+	<select id="getMonthIpCount" parameterType="java.lang.String" resultType="int">
+		SELECT COUNT(1) 
+		FROM CL_USR 
+		WHERE USR_LAST_DT >=(NOW() - INTERVAL 30 DAY)  
+		AND USR_LAST_DT &lt;= NOW() 
+		AND USR_LAST_IP = #{USR_LAST_IP}
+	</select>
+</mapper>
